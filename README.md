@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 # MediTrack
+=======
+
 
 **MediTrack** is a cutting-edge solution designed to enhance clinical and pharmaceutical collaboration by tracking the efficacy of medicines tested in the lab. This powerful tool enables seamless information sharing between clinics, labs, and pharmacies, ensuring that patients receive the most effective treatments available.
 
@@ -80,3 +83,4 @@ For more information or support, please contact us at [support@meditrack.com](ma
 ---
 
 Feel free to customize this README further based on your specific project details!
+>>>>>>> ab8f34c (Create README.md)

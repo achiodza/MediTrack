@@ -333,65 +333,106 @@
                   <div class="card">
                     <h5 class="card-header">Clinic</h5>
           <div class="card-body">
-                      <form>
+            <form id="clinicForm">
 
-
-                      <div class="mb-4 row">
-                        <label for="html5-datetime-local-input" class="col-md-2 col-form-label">Datetime</label>
-                        <div class="col-md-10">
-                          <input
-                            class="form-control"
-                            type="datetime-local"
-                            value="2021-06-18T12:30:00"
-                            id="html5-datetime-local-input" />
-                        </div>
-                      </div>
-
-                      <div class="mb-4 row">
-                        <label for="html5-text-input" class="col-md-2 col-form-label">Patient ID</label>
-                        <div class="col-md-10">
-                          <input class="form-control" type="text" placeholder="eg ... MN200-01" id="html5-text-input" />
-                        </div>
-                      </div>
-
-                      
-                  <div class="mb-4 row">
-                    <label for="html5-number-input" class="col-md-2 col-form-label">Age</label>
-                    <div class="col-md-10">
-                      <input class="form-control" type="number" placeholder="18" id="html5-number-input" />
-                    </div>
-                  </div>
-        
-                  <div class="mb-4 row">
-                    <label for="html5-text-input" class="col-md-2 col-form-label">Sex</label>
-                    <div class="col-md-10">
-                      <input class="form-control" type="text" placeholder="Female/Male" id="html5-text-input" />
-                    </div>
-                  </div>
-        
-                  <div class="mb-4 row">
-                    <label for="html5-text-input" class="col-md-2 col-form-label">Ward</label>
-                    <div class="col-md-10">
-                      <input class="form-control" type="text" placeholder="Ward" id="html5-text-input" />
-                    </div>
-                  </div>
-        
-                  <div class="mb-4 row">
-                    <label for="html5-text-input" class="col-md-2 col-form-label">Condition</label>
-                    <div class="col-md-10">
-                      <textarea class="form-control" id="Condition" placeholder="Enter Condition"  rows="3"></textarea>
-                    </div>
-                  </div>
-                  
-        
-                  
-                    <button type="submit" class="btn btn-primary">Send</button>
-                  
-        
-                  
-
-
-                </form>
+              <div class="mb-4 row">
+                <label for="datetime-input" class="col-md-2 col-form-label">Datetime</label>
+                <div class="col-md-10">
+                  <input class="form-control" type="datetime-local" value="2021-06-18T12:30:00" id="datetime-input" />
+                </div>
+              </div>
+            
+              <div class="mb-4 row">
+                <label for="patient-id-input" class="col-md-2 col-form-label">Patient ID</label>
+                <div class="col-md-10">
+                  <input class="form-control" type="text" placeholder="eg ... MN200-01" id="patient-id-input" />
+                </div>
+              </div>
+            
+              <div class="mb-4 row">
+                <label for="age-input" class="col-md-2 col-form-label">Age</label>
+                <div class="col-md-10">
+                  <input class="form-control" type="number" placeholder="18" id="age-input" />
+                </div>
+              </div>
+            
+              <div class="mb-4 row">
+                <label for="sex-input" class="col-md-2 col-form-label">Sex</label>
+                <div class="col-md-10">
+                  <select class="form-control" id="sex-input">
+                    <option value="">Select Sex</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+              </div>
+            
+              <div class="mb-4 row">
+                <label for="ward-input" class="col-md-2 col-form-label">Ward</label>
+                <div class="col-md-10">
+                  <input class="form-control" type="text" placeholder="Ward" id="ward-input" />
+                </div>
+              </div>
+            
+              <div class="mb-4 row">
+                <label for="condition-input" class="col-md-2 col-form-label">Condition</label>
+                <div class="col-md-10">
+                  <textarea class="form-control" id="condition-input" placeholder="Enter Condition" rows="3"></textarea>
+                </div>
+              </div>
+            
+              <button type="submit" class="btn btn-primary">Send</button>
+            
+            </form>
+            
+            <script>
+              document.getElementById('clinicForm').addEventListener('submit', async function(event) {
+                event.preventDefault();
+            
+                // Gather form data
+                const datetime = document.getElementById('datetime-input').value;
+                const patientId = document.getElementById('patient-id-input').value;
+                const age = document.getElementById('age-input').value;
+                const sex = document.getElementById('sex-input').value;
+                const ward = document.getElementById('ward-input').value;
+                const condition = document.getElementById('condition-input').value;
+            
+                // Create the data object
+                const data = {
+                  data: {
+                    datetime: datetime,
+                    patientid: patientId,
+                    age: parseInt(age, 10),
+                    sex: sex,
+                    ward: ward,
+                    condition: condition
+                  }
+                };
+            
+                // Send data to the API
+                try {
+                  const response = await fetch('http://198.177.123.228:1337/api/clinicreceives', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer 83fdd6ab07e87e390e9086df8edf28f77509b2a3fcc316bf471eb2b908e4e1eabc4a0ab9fdde97a7aff1c4afabb1c1697665185a0a00977659c9227010fcc95d18b5df85e7675c0f5b15c5b890542132fd6fb2c86ef2d0fb4b28e605d8761cdde07c3d16ea3b4072071ebabb6f76f0e10bf9864f2b53b082d776421348826677'
+                    },
+                    body: JSON.stringify(data)
+                  });
+            
+                  if (response.ok) {
+                    alert('Data submitted successfully');
+                  } else {
+                    alert('Failed to submit data');
+                  }
+                } catch (error) {
+                  console.error('Error:', error);
+                  alert('An error occurred while submitting data');
+                }
+              });
+            </script>
+            
              </div>
 
            </div>
