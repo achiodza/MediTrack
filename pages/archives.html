@@ -142,13 +142,18 @@
                       </a>
                     </li>
                     <li class="menu-item active">
-                      <a href="samples.html" class="menu-link">
-                        <div class="text-truncate" data-i18n="Samples">Samples</div>
+                      <a href="phamarcy-capturing-page.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Pharmacy">Pharmacy</div>
                       </a>
                     </li>
                     <li class="menu-item active">
                       <a href="processing-page.html" class="menu-link">
                         <div class="text-truncate" data-i18n="Clinic Processing">Clinic Processing</div>
+                      </a>
+                    </li>
+                    <li class="menu-item active">
+                      <a href="samples.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Samples">Samples</div>
                       </a>
                     </li>
                     <li class="menu-item active">
@@ -177,7 +182,7 @@
               <ul class="menu-sub">
                 
               <li class="menu-item active">
-                <a href="auth-login-basic.html" class="menu-link" target="_blank">
+                <a href="/MediTrack/index.html" class="menu-link" target="_blank">
                   <div class="text-truncate" data-i18n="Basic">Login</div>
                 </a>
               </li>
@@ -252,72 +257,26 @@
 
               <ul class="navbar-nav flex-row align-items-center ms-auto">
                 <!-- Place this tag where you want the button to render. -->
-                <li class="nav-item lh-1 me-4">
-                  <a
-                    class="github-button"
-                    href="#"
-                    data-icon="octicon-star"
-                    data-size="large"
-                    data-show-count="true"
-                    aria-label="Star MediTrack GitHub"
-                    >Star</a
-                  >
-                </li>
-
-                <!-- User -->
-                <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                  <a
-                    class="nav-link dropdown-toggle hide-arrow p-0"
-                    href="javascript:void(0);"
-                    data-bs-toggle="dropdown">
-                    <div class="avatar avatar-online">
-                      <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
-                    </div>
-                  </a>
-                  <ul class="dropdown-menu dropdown-menu-end">
-                    <li>
-                      <a class="dropdown-item" href="#">
-                        <div class="d-flex">
-                          <div class="flex-shrink-0 me-3">
-                            <div class="avatar avatar-online">
-                              <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
-                            </div>
-                          </div>
-                          <div class="flex-grow-1">
-                            <h6 class="mb-0">John Doe</h6>
-                            <small class="text-muted">Admin</small>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="dropdown-divider my-1"></div>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">
-                        <i class="bx bx-user bx-md me-3"></i><span>My Profile</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#"> <i class="bx bx-cog bx-md me-3"></i><span>Settings</span> </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">
-                        <span class="d-flex align-items-center align-middle">
-                          <i class="flex-shrink-0 bx bx-credit-card bx-md me-3"></i
-                          ><span class="flex-grow-1 align-middle">Billing Plan</span>
-                          <span class="flex-shrink-0 badge rounded-pill bg-danger">4</span>
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="dropdown-divider my-1"></div>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="javascript:void(0);">
-                        <i class="bx bx-power-off bx-md me-3"></i><span>Log Out</span>
-                      </a>
-                    </li>
+                <script>
+                  function updateClock() {
+                    const now = new Date();
+                    const hours = now.getHours().toString().padStart(2, '0');
+                    const minutes = now.getMinutes().toString().padStart(2, '0');
+                    const seconds = now.getSeconds().toString().padStart(2, '0');
+                    const timeString = `${hours}:${minutes}:${seconds}`;
+                    
+                    document.getElementById('clock').textContent = timeString;
+                  }
+                  
+                  // Update the clock every second
+                  setInterval(updateClock, 1000);
+                  
+                  // Initial call to display the clock immediately
+                  updateClock();
+                </script>
+                <div class="clock" id="clock" style="color: blue;"></div>
+               
+               
                   </ul>
                 </li>
                 <!--/ User -->
@@ -370,67 +329,77 @@
                                     <i class="bx bx-dots-vertical-rounded"></i>
                                   </button>
                                   <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="javascript:void(0);"
-                                      ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                                    >
-                                    <a class="dropdown-item" href="javascript:void(0);"
-                                      ><i class="bx bx-trash me-1"></i> Delete</a
-                                    >
+                                    <a class="dropdown-item" href="javascript:void(0);" onclick="editEntry('MN200-01')">
+                                      <i class="bx bx-edit-alt me-1"></i> Edit
+                                    </a>
+                                    <a class="dropdown-item" href="javascript:void(0);" onclick="deleteEntry('MN200-01')">
+                                      <i class="bx bx-trash me-1"></i> Delete
+                                    </a>
                                   </div>
                                 </div>
                               </td>
                             </tr>
                             <tr>
-                                <td>MN200-02</td>
-                                <td>A02</td>
-                                <td>002</td>
-                                <td>Dr Drake</td>
-                                <td>21/08/2024 1800hrs</td>
-                                <td>
-                                  <div class="dropdown">
-                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                      <i class="bx bx-dots-vertical-rounded"></i>
-                                    </button>
-                                    <div class="dropdown-menu">
-                                      <a class="dropdown-item" href="javascript:void(0);"
-                                        ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                                      >
-                                      <a class="dropdown-item" href="javascript:void(0);"
-                                        ><i class="bx bx-trash me-1"></i> Delete</a
-                                      >
-                                    </div>
+                              <td>MN200-02</td>
+                              <td>A02</td>
+                              <td>002</td>
+                              <td>Dr Drake</td>
+                              <td>21/08/2024 1800hrs</td>
+                              <td>
+                                <div class="dropdown">
+                                  <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                  </button>
+                                  <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="javascript:void(0);" onclick="editEntry('MN200-02')">
+                                      <i class="bx bx-edit-alt me-1"></i> Edit
+                                    </a>
+                                    <a class="dropdown-item" href="javascript:void(0);" onclick="deleteEntry('MN200-02')">
+                                      <i class="bx bx-trash me-1"></i> Delete
+                                    </a>
                                   </div>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>MN200-04</td>
-                                <td>A03</td>
-                                <td>003</td>
-                                <td>Dr Drake</td>
-                                <td>22/08/2024 1800hrs</td>
-                                <td>
-                                  <div class="dropdown">
-                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                      <i class="bx bx-dots-vertical-rounded"></i>
-                                    </button>
-                                    <div class="dropdown-menu">
-                                      <a class="dropdown-item" href="javascript:void(0);"
-                                        ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                                      >
-                                      <a class="dropdown-item" href="javascript:void(0);"
-                                        ><i class="bx bx-trash me-1"></i> Delete</a
-                                      >
-                                    </div>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>MN200-04</td>
+                              <td>A03</td>
+                              <td>003</td>
+                              <td>Dr Drake</td>
+                              <td>22/08/2024 1800hrs</td>
+                              <td>
+                                <div class="dropdown">
+                                  <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                  </button>
+                                  <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="javascript:void(0);" onclick="editEntry('MN200-04')">
+                                      <i class="bx bx-edit-alt me-1"></i> Edit
+                                    </a>
+                                    <a class="dropdown-item" href="javascript:void(0);" onclick="deleteEntry('MN200-04')">
+                                      <i class="bx bx-trash me-1"></i> Delete
+                                    </a>
                                   </div>
-                                </td>
-                              </tr>
-                            
-
-                           
-
-                          
+                                </div>
+                              </td>
+                            </tr>
                           </tbody>
                         </table>
+                        
+                        <script>
+                          function editEntry(patientId) {
+                            alert('Edit function called for Patient ID: ' + patientId);
+                            // Implement your editing logic here
+                          }
+                        
+                          function deleteEntry(patientId) {
+                            if (confirm('Are you sure you want to delete Patient ID: ' + patientId + '?')) {
+                              alert('Deleted Patient ID: ' + patientId);
+                              // Implement your deletion logic here
+                            }
+                          }
+                        </script>
+                        
 
 
                       </div>
