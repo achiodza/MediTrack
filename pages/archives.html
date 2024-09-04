@@ -14,7 +14,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>MediTrack | Clinic</title>
+    <title>MediTrack | Processing</title>
 
     <meta name="description" content="" />
 
@@ -255,11 +255,11 @@
                 <li class="nav-item lh-1 me-4">
                   <a
                     class="github-button"
-                    href="https://github.com/themeselection/sneat-html-admin-template-free"
+                    href="#"
                     data-icon="octicon-star"
                     data-size="large"
                     data-show-count="true"
-                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
+                    aria-label="Star MediTrack GitHub"
                     >Star</a
                   >
                 </li>
@@ -332,139 +332,114 @@
             <!-- Content -->
   
             <div class="container-xxl flex-grow-1 container-p-y">
-              <div class="row g-6">
-                <div class="col-md-8">
-                  <div class="card">
-                    <h5 class="card-header">Clinic</h5>
-          <div class="card-body">
-            <form id="clinicForm">
 
-              <div class="mb-4 row">
-                <label for="datetime-input" class="col-md-2 col-form-label">Datetime</label>
-                <div class="col-md-10">
-                  <input class="form-control" type="datetime-local" value="2021-06-18T12:30:00" id="datetime-input" />
-                </div>
-              </div>
-            
-              <div class="mb-4 row">
-                <label for="patient-id-input" class="col-md-2 col-form-label">Patient ID</label>
-                <div class="col-md-10">
-                  <input class="form-control" type="text" placeholder="eg ... MN200-01" id="patient-id-input" />
-                </div>
-              </div>
-            
-              <div class="mb-4 row">
-                <label for="age-input" class="col-md-2 col-form-label">Age</label>
-                <div class="col-md-10">
-                  <input class="form-control" type="number" placeholder="18" id="age-input" />
-                </div>
-              </div>
-            
-              <div class="mb-4 row">
-                <label for="sex-input" class="col-md-2 col-form-label">Sex</label>
-                <div class="col-md-10">
-                  <select class="form-control" id="sex-input">
-                    <option value="">Select Sex</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </div>
-              </div>
-            
-              <div class="mb-4 row">
-                <label for="ward-input" class="col-md-2 col-form-label">Ward</label>
-                <div class="col-md-10">
-                  <input class="form-control" type="text" placeholder="Ward" id="ward-input" />
-                </div>
-              </div>
-            
-              <div class="mb-4 row">
-                <label for="condition-input" class="col-md-2 col-form-label">Condition</label>
-                <div class="col-md-10">
-                  <textarea class="form-control" id="condition-input" placeholder="Enter Condition" rows="3"></textarea>
-                </div>
-              </div>
-            
-              <button type="submit" class="btn btn-primary">Send</button>
-            
-            </form>
-            
-            <script>
-              document.getElementById('clinicForm').addEventListener('submit', async function(event) {
-                event.preventDefault();
-            
-                // Gather form data
-                const datetime = document.getElementById('datetime-input').value;
-                const patientId = document.getElementById('patient-id-input').value;
-                const age = document.getElementById('age-input').value;
-                const sex = document.getElementById('sex-input').value;
-                const ward = document.getElementById('ward-input').value;
-                const condition = document.getElementById('condition-input').value;
-            
-                // Create the data object
-                const data = {
-                  data: {
-                    datetime: datetime,
-                    patientid: patientId,
-                    age: parseInt(age, 10),
-                    sex: sex,
-                    ward: ward,
-                    condition: condition
-                  }
-                };
-            
-                // Send data to the API
-                try {
-                  const response = await fetch('http://198.177.123.228:1337/api/clinicreceives', {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json',
-                      'Authorization': 'Bearer 83fdd6ab07e87e390e9086df8edf28f77509b2a3fcc316bf471eb2b908e4e1eabc4a0ab9fdde97a7aff1c4afabb1c1697665185a0a00977659c9227010fcc95d18b5df85e7675c0f5b15c5b890542132fd6fb2c86ef2d0fb4b28e605d8761cdde07c3d16ea3b4072071ebabb6f76f0e10bf9864f2b53b082d776421348826677'
-                    },
-                    body: JSON.stringify(data)
-                  });
-            
-                  if (response.ok) {
-                    alert('Data submitted successfully');
-                  } else {
-                    alert('Failed to submit data');
-                  }
-                } catch (error) {
-                  console.error('Error:', error);
-                  alert('An error occurred while submitting data');
-                }
-              });
-            </script>
-            
-             </div>
+              <div class="card">
+
+              <div class="row g-6">
+                <div class="col-md-12">
+                
+
+
+
+                    <div class="card">
+                      <h5 class="card-header">History</h5>
+                      <div class="table-responsive text-nowrap">
+
+
+                        <table class="table">
+                          <thead class="table-light">
+                            <tr>
+                              <th>Patient ID</th>
+                              <th>Sample ID</th>
+                              <th>Drug ID</th>
+                              <th>Lab Scientist</th>
+                              <th>Date</th>
+                              <th>Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody class="table-border-bottom-0">
+                            <tr>
+                              <td>MN200-01</td>
+                              <td>A01</td>
+                              <td>001</td>
+                              <td>Dr Drake</td>
+                              <td>20/08/2024 1800hrs</td>
+                              <td>
+                                <div class="dropdown">
+                                  <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                  </button>
+                                  <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="javascript:void(0);"
+                                      ><i class="bx bx-edit-alt me-1"></i> Edit</a
+                                    >
+                                    <a class="dropdown-item" href="javascript:void(0);"
+                                      ><i class="bx bx-trash me-1"></i> Delete</a
+                                    >
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                                <td>MN200-02</td>
+                                <td>A02</td>
+                                <td>002</td>
+                                <td>Dr Drake</td>
+                                <td>21/08/2024 1800hrs</td>
+                                <td>
+                                  <div class="dropdown">
+                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                      <i class="bx bx-dots-vertical-rounded"></i>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                      <a class="dropdown-item" href="javascript:void(0);"
+                                        ><i class="bx bx-edit-alt me-1"></i> Edit</a
+                                      >
+                                      <a class="dropdown-item" href="javascript:void(0);"
+                                        ><i class="bx bx-trash me-1"></i> Delete</a
+                                      >
+                                    </div>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>MN200-04</td>
+                                <td>A03</td>
+                                <td>003</td>
+                                <td>Dr Drake</td>
+                                <td>22/08/2024 1800hrs</td>
+                                <td>
+                                  <div class="dropdown">
+                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                      <i class="bx bx-dots-vertical-rounded"></i>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                      <a class="dropdown-item" href="javascript:void(0);"
+                                        ><i class="bx bx-edit-alt me-1"></i> Edit</a
+                                      >
+                                      <a class="dropdown-item" href="javascript:void(0);"
+                                        ><i class="bx bx-trash me-1"></i> Delete</a
+                                      >
+                                    </div>
+                                  </div>
+                                </td>
+                              </tr>
+                            
+
+                           
+
+                          
+                          </tbody>
+                        </table>
+
+
+                      </div>
+                    </div>
+
 
            </div>
          </div>
-  
-
-                <div class="col-md-4">
-                  <div class="card">
-                    <h5 class="card-header">Attachments</h5>
-                <div class="card-body">
-                      <form>
-                      <div class="mb-4">
-                        <label for="formFile" class="form-label">Upload Sample</label>
-                        <input class="form-control" type="file" id="formFile" />
-                      </div>
-
-                      <div class="mb-4">
-                        <label for="formFile" class="form-label">Upload Susceptability Profile</label>
-                        <input class="form-control" type="file" id="formFile" />
-                      </div>
-
-                      <button type="submit" class="btn btn-primary">Submit</button>
-                      </form>
-
-                    </div>
-                  </div>
-                </div>
-  
+    
                
               </div>
               </div>
@@ -482,10 +457,10 @@
                     <script>
                       document.write(new Date().getFullYear());
                     </script>
-                     MediTrack |
-                    <a href="https://themeselection.com" target="_blank" class="footer-link">Infinity Lines Of Code</a>
+                    MediTrack |
+                    <a href="https://themeselection.com" target="_blank" class="footer-link">Infinity Lines of Code</a>
                   </div>
-                  
+                 
                 </div>
               </div>
             </footer>
