@@ -285,134 +285,81 @@
 
           <!-- / Navbar -->
 
-          <!-- Content wrapper -->
           <div class="content-wrapper">
             <!-- Content -->
-  
             <div class="container-xxl flex-grow-1 container-p-y">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Support</h4>
+                        <p>If you have any issues or questions, we're here to help! Choose from the options below
+                            to get the assistance you need.</p>
 
-              <div class="card">
+                        <!-- Contact Form -->
+                        <h5>Contact Us</h5>
+                        <form>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Message</label>
+                                <textarea class="form-control" id="message" rows="5" placeholder="Type your message here" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
 
-              <div class="row g-6">
-                <div class="col-md-12">
-                
-
-
-
-                    <div class="card">
-                      <h5 class="card-header">History</h5>
-                      <div class="table-responsive text-nowrap">
-
-
-                        <table class="table">
-                          <thead class="table-light">
-                            <tr>
-                              <th>Patient ID</th>
-                              <th>Sample ID</th>
-                              <th>Drug ID</th>
-                              <th>Lab Scientist</th>
-                              <th>Date</th>
-                              <th>Actions</th>
-                            </tr>
-                          </thead>
-                          <tbody class="table-border-bottom-0">
-                            <tr>
-                              <td>MN200-01</td>
-                              <td>A01</td>
-                              <td>001</td>
-                              <td>Dr Drake</td>
-                              <td>20/08/2024 1800hrs</td>
-                              <td>
-                                <div class="dropdown">
-                                  <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                  </button>
-                                  <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="javascript:void(0);" onclick="editEntry('MN200-01')">
-                                      <i class="bx bx-edit-alt me-1"></i> Edit
-                                    </a>
-                                    <a class="dropdown-item" href="javascript:void(0);" onclick="deleteEntry('MN200-01')">
-                                      <i class="bx bx-trash me-1"></i> Delete
-                                    </a>
-                                  </div>
+                        <!-- FAQs -->
+                        <h5 class="mt-5">Frequently Asked Questions</h5>
+                        <div class="accordion" id="faqAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        How do I reset my password?
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse show"
+                                    aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        You can reset your password by clicking the "Forgot Password" link on the
+                                        login page and following the instructions.
+                                    </div>
                                 </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>MN200-02</td>
-                              <td>A02</td>
-                              <td>002</td>
-                              <td>Dr Drake</td>
-                              <td>21/08/2024 1800hrs</td>
-                              <td>
-                                <div class="dropdown">
-                                  <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                  </button>
-                                  <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="javascript:void(0);" onclick="editEntry('MN200-02')">
-                                      <i class="bx bx-edit-alt me-1"></i> Edit
-                                    </a>
-                                    <a class="dropdown-item" href="javascript:void(0);" onclick="deleteEntry('MN200-02')">
-                                      <i class="bx bx-trash me-1"></i> Delete
-                                    </a>
-                                  </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                        aria-expanded="false" aria-controls="collapseTwo">
+                                        How do I contact support?
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse"
+                                    aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        You can contact us via the contact form above or email us directly at
+                                        support@meditrack.com.
+                                    </div>
                                 </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>MN200-04</td>
-                              <td>A03</td>
-                              <td>003</td>
-                              <td>Dr Drake</td>
-                              <td>22/08/2024 1800hrs</td>
-                              <td>
-                                <div class="dropdown">
-                                  <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                  </button>
-                                  <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="javascript:void(0);" onclick="editEntry('MN200-04')">
-                                      <i class="bx bx-edit-alt me-1"></i> Edit
-                                    </a>
-                                    <a class="dropdown-item" href="javascript:void(0);" onclick="deleteEntry('MN200-04')">
-                                      <i class="bx bx-trash me-1"></i> Delete
-                                    </a>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                        
-                        <script>
-                          function editEntry(patientId) {
-                            alert('Edit function called for Patient ID: ' + patientId);
-                            // Implement your editing logic here
-                          }
-                        
-                          function deleteEntry(patientId) {
-                            if (confirm('Are you sure you want to delete Patient ID: ' + patientId + '?')) {
-                              alert('Deleted Patient ID: ' + patientId);
-                              // Implement your deletion logic here
-                            }
-                          }
-                        </script>
-                        
+                            </div>
+                            <!-- Add more FAQs as needed -->
+                        </div>
 
-
-                      </div>
+                        <!-- Other Resources -->
+                        <h5 class="mt-5">Other Resources</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="user-guide.html" class="link-primary">User Guide</a></li>
+                            <li><a href="troubleshooting.html" class="link-primary">Troubleshooting</a></li>
+                            <li><a href="privacy-policy.html" class="link-primary">Privacy Policy</a></li>
+                        </ul>
                     </div>
-
-
-           </div>
-         </div>
-    
-               
-              </div>
-              </div>
+                </div>
             </div>
-         
+            <!-- / Content -->
             <!-- / Content -->
   
             <!-- Footer -->
