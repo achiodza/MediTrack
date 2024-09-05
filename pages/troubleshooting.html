@@ -14,7 +14,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>MediTrack | Support</title>
+    <title>MediTrack | Troubleshooting</title>
 
     <meta name="description" content="" />
 
@@ -290,75 +290,100 @@
             <div class="container-xxl flex-grow-1 container-p-y">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Support</h4>
-                        <p>If you have any issues or questions, we're here to help! Choose from the options below
-                            to get the assistance you need.</p>
-
-                        <!-- Contact Form -->
-                        <h5>Contact Us</h5>
-                        <form>
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Name</label>
-                                <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="message" class="form-label">Message</label>
-                                <textarea class="form-control" id="message" rows="5" placeholder="Type your message here" required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
-
-                        <!-- FAQs -->
-                        <h5 class="mt-5">Frequently Asked Questions</h5>
-                        <div class="accordion" id="faqAccordion">
+                        <h4 class="card-title">Troubleshooting</h4>
+                        <p>If you're facing issues, please refer to the solutions below to help resolve them.</p>
+                        
+                        <!-- Common Issues Section -->
+                        <h5>Common Issues</h5>
+                        
+                        <div class="accordion" id="troubleshootingAccordion">
                             <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingOne">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        How do I reset my password?
+                                <h2 class="accordion-header" id="issueOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseIssueOne" aria-expanded="true" aria-controls="collapseIssueOne">
+                                        Unable to Login
                                     </button>
                                 </h2>
-                                <div id="collapseOne" class="accordion-collapse collapse show"
-                                    aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                                <div id="collapseIssueOne" class="accordion-collapse collapse show" aria-labelledby="issueOne" data-bs-parent="#troubleshootingAccordion">
                                     <div class="accordion-body">
-                                        You can reset your password by clicking the "Forgot Password" link on the
-                                        login page and following the instructions.
+                                        <p>If you're unable to login, follow these steps:</p>
+                                        <ol>
+                                            <li>Ensure that your email and password are correct.</li>
+                                            <li>If you've forgotten your password, use the <a href="forgotpassword.html">Forgot Password</a> link to reset it.</li>
+                                            <li>Check your internet connection.</li>
+                                            <li>Try clearing your browser cache and cookies.</li>
+                                        </ol>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingTwo">
-                                    <button class="accordion-button collapsed" type="button"
-                                        data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-                                        aria-expanded="false" aria-controls="collapseTwo">
-                                        How do I contact support?
+                                <h2 class="accordion-header" id="issueTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseIssueTwo" aria-expanded="false" aria-controls="collapseIssueTwo">
+                                        App is Running Slowly
                                     </button>
                                 </h2>
-                                <div id="collapseTwo" class="accordion-collapse collapse"
-                                    aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                                <div id="collapseIssueTwo" class="accordion-collapse collapse" aria-labelledby="issueTwo" data-bs-parent="#troubleshootingAccordion">
                                     <div class="accordion-body">
-                                        You can contact us via the contact form above or email us directly at
-                                        support@meditrack.com.
+                                        <p>If the application is running slowly, try the following:</p>
+                                        <ul>
+                                            <li>Ensure that your internet connection is stable.</li>
+                                            <li>Close any unused tabs or applications that might be consuming system resources.</li>
+                                            <li>Clear your browser's cache and cookies.</li>
+                                            <li>Restart your device if the issue persists.</li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
-                            <!-- Add more FAQs as needed -->
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="issueThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseIssueThree" aria-expanded="false" aria-controls="collapseIssueThree">
+                                        Error Messages During Checkout
+                                    </button>
+                                </h2>
+                                <div id="collapseIssueThree" class="accordion-collapse collapse" aria-labelledby="issueThree" data-bs-parent="#troubleshootingAccordion">
+                                    <div class="accordion-body">
+                                        <p>If you receive error messages during checkout:</p>
+                                        <ul>
+                                            <li>Double-check your payment details.</li>
+                                            <li>Ensure that your billing information matches your card.</li>
+                                            <li>Try using a different payment method if the issue continues.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="issueFour">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseIssueFour" aria-expanded="false" aria-controls="collapseIssueFour">
+                                        App Not Syncing Data
+                                    </button>
+                                </h2>
+                                <div id="collapseIssueFour" class="accordion-collapse collapse" aria-labelledby="issueFour" data-bs-parent="#troubleshootingAccordion">
+                                    <div class="accordion-body">
+                                        <p>If the app isn't syncing data, try the following:</p>
+                                        <ul>
+                                            <li>Check your internet connection.</li>
+                                            <li>Ensure that you are logged in with the correct account.</li>
+                                            <li>Log out and log back in to refresh the connection.</li>
+                                            <li>Ensure that syncing is enabled in the settings.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- Other Resources -->
-                        <h5 class="mt-5">Other Resources</h5>
-                        <ul class="list-unstyled">
-                            <li><a href="user-guide.html" class="link-primary">User Guide</a></li>
-                            <li><a href="troubleshooting.html" class="link-primary">Troubleshooting</a></li>
-                            <li><a href="privacy-policy.html" class="link-primary">Privacy Policy</a></li>
+                        <!-- Contact Support Section -->
+                        <h5 class="mt-5">Still Need Help?</h5>
+                        <p>If none of the above solutions work, you can contact our support team for further assistance.</p>
+                        <ul>
+                            <li>Email: <a href="mailto:support@meditrack.com">support@meditrack.com</a></li>
+                            <li>Phone: 1-800-123-4567</li>
                         </ul>
                     </div>
                 </div>
             </div>
+            
             <!-- / Content -->
             <!-- / Content -->
   
