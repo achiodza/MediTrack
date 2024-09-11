@@ -241,15 +241,56 @@
             <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
               <!-- Search -->
               <div class="navbar-nav align-items-center">
-                <div class="nav-item d-flex align-items-center">
-                  <i class="bx bx-search bx-md"></i>
-                  <input
-                    type="text"
-                    class="form-control border-0 shadow-none ps-1 ps-sm-2"
-                    placeholder="Search..."
-                    aria-label="Search..." />
+                <div class="nav-item d-flex align-items-center position-relative"> <!-- Added position-relative -->
+                    <i class="bx bx-search bx-md"></i>
+                    <input type="text" id="search-bar" class="form-control border-0 shadow-none ps-1 ps-sm-2" placeholder="Search..." aria-label="Search..." />
+                    <div id="search-results" class="search-results"></div> <!-- Added class for styling -->
                 </div>
-              </div>
+            </div>
+            <!-- /Search -->
+            <script>
+                const searchBar = document.getElementById('search-bar');
+                const searchResults = document.getElementById('search-results');
+                const index = [
+                    { title: 'Home', url: 'home.html', keywords: ['home', 'dashboard'] },
+                    { title: 'Support', url: 'support.html', keywords: ['support', 'help'] },
+                    { title: 'Clinic', url: 'clinic-page.html', keywords: ['clinic'] },
+                    { title: 'Archives', url: 'archives.html', keywords: ['archives'] },
+                    { title: 'Pharmacy', url: 'pharmacy-capturing-page.html', keywords: ['pharmacy'] },
+                    { title: 'Update Profile', url: 'update-profile.html', keywords: ['update profile', 'update', 'profile', 'account settings'] },
+                    { title: 'Samples', url: 'samples.html', keywords: ['samples', 'sample'] },
+                    { title: 'Clinic Processing', url: 'processing-page.html', keywords: ['processing', 'clinic', 'clinic processing'] },
+                    { title: 'Forgot Password', url: 'forgotpassword.html', keywords: ['forgot', 'password'] },
+                    { title: 'User Guide', url: 'user-guide.html', keywords: ['user', 'guide'] },
+                    { title: 'Privacy Policy', url: 'privacy-policy.html', keywords: ['privacy', 'policy'] },
+                    { title: 'Troubleshooting', url: 'troubleshooting.html', keywords: ['troubleshooting', 'help'] },
+                    { title: 'Analytics', url: 'home.html', keywords: ['analytics'] },
+                    // Add more pages and keywords to the index
+                ];
+            
+                searchBar.addEventListener('keyup', (event) => {
+                    const query = event.target.value.toLowerCase();
+                    // Clear results if the search bar is empty
+                    if (query === '') {
+                        searchResults.innerHTML = '';
+                        return; // Exit the function early
+                    }
+                    const results = index.filter(page => {
+                        const keywords = page.keywords.join(' ').toLowerCase();
+                        return keywords.includes(query);
+                    });
+                    searchResults.innerHTML = '';
+                    results.forEach(page => {
+                        const resultDiv = document.createElement('div'); // Create a new div for each result
+                        const link = document.createElement('a');
+                        link.href = page.url;
+                        link.textContent = page.title;
+                        resultDiv.appendChild(link); // Append the link to the div
+                        searchResults.appendChild(resultDiv); // Append the div to the search results
+                    });
+                });
+            </script>
+             
               <!-- /Search -->
 
               <ul class="navbar-nav flex-row align-items-center ms-auto">
