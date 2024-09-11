@@ -98,18 +98,56 @@
       
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
-      
-      // Dummy credentials for demo purposes
-      const validEmail = "meditrack.com";
-      const validPassword = "password123";
-      
-      if (email === validEmail && password === validPassword) {
-        // Redirect to home page if credentials are valid
-        window.location.href = "/Meditrack/pages/home.html";
-      } else {
-        alert("Invalid email or password. Please try again.");
-      }
+      const errorMessage = document.getElementById('error-message');
+      const loader = document.getElementById('loader');
+  
+      loader.style.display = 'block'; // Show loader
+  
+      // Send the email as a query parameter
+      fetch(`http://203.161.49.218:1337/api/users?filters[email][$eq]=${encodeURIComponent(email)}`, {
+        method: 'GET',
+        headers: {
+          'Authorization': 'Bearer d68ab99a384e85007a4588d4f9c6cfcb438b2e1bf3298a057a93175310e642dfc7e8bd304d1e34cab68ad1e1b98a7745f60ddf0254f71c258f6bda92a8e3e9a6ffa3daa8ca4c4ccce8dff5435b9f4180e22de31961ca0a3729232633a9bb415b5ed03624662dd8b4b09551bd3b458ec051e5957c617955a69bdec568c1967d5b',
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => {
+        loader.style.display = 'none'; // Hide loader
+  
+        if (!response.ok) {
+          throw new Error('User not found or server error');
+        }
+  
+        return response.json();
+      })
+      .then(data => {
+        if (!data || data.data.length === 0) {
+          errorMessage.textContent = 'Login failed: Invalid credentials';
+          return;
+        }
+  
+        const user = data.data[0].attributes;
+  
+        // Debugging: Display entered and stored password for comparison
+        console.log('Stored password:', user.pwd);
+        console.log('Entered password:', password);
+  
+        if (user.pwd && user.pwd === password) {
+          // Redirect to dashboard if password matches
+          window.location.href = './pages/dashboard.php';
+        } else {
+          // Password mismatch
+          errorMessage.textContent = 'Login failed: Invalid credentials';
+        }
+      })
+      .catch(error => {
+        // Log error and show message to the user
+        console.error('Error:', error);
+        errorMessage.textContent = 'An error occurred during login: ' + error.message;
+        loader.style.display = 'none'; // Hide loader
+      });
     });
   </script>
+  
 </body>
 </html>
