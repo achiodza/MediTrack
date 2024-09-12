@@ -336,52 +336,39 @@
 
                         <!-- Contact Form -->
                         <h5>Contact Us</h5>
-<form id="contactForm">
+<form id="contactForm" onsubmit="sendMail(); return false;">
   <div class="mb-3">
     <label for="name" class="form-label">Name</label>
     <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
   </div>
+  
   <div class="mb-3">
     <label for="email" class="form-label">Email</label>
     <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
   </div>
+  
   <div class="mb-3">
     <label for="message" class="form-label">Message</label>
     <textarea class="form-control" id="message" rows="5" placeholder="Type your message here" required></textarea>
   </div>
+  
   <button type="submit" class="btn btn-primary">Submit</button>
   <div id="form-message"></div>
 </form>
 
-<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 <script>
-  (function() {
-    emailjs.init("service_ogc7l0l"); // Replace with your EmailJS user ID
-  })();
-
-  document.getElementById('contactForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent the default form submission
-
+  function sendMail() {
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
     const message = document.getElementById('message').value;
 
-    const templateParams = {
-      name: name,
-      email: email,
-      message: message,
-    };
+    const mailtoLink = `mailto:support@meditrack.com?subject=Contact%20Form%20Submission&body=Name: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0AMessage: ${encodeURIComponent(message)}`;
 
-    emailjs.send('service_ogc7l0l', 'template_m8wnqhq', templateParams)
-      .then(function(response) {
-        document.getElementById('form-message').innerHTML = 'Message sent successfully!';
-        console.log('SUCCESS!', response.status, response.text);
-      }, function(error) {
-        document.getElementById('form-message').innerHTML = 'Failed to send message. Please try again.';
-        console.log('FAILED...', error);
-      });
-  });
+    window.location.href = mailtoLink;
+    document.getElementById('form-message').innerHTML = 'Redirecting to your email client...';
+  }
 </script>
+
 
                         <!-- FAQs -->
                         <h5 class="mt-5">Frequently Asked Questions</h5>
