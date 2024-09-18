@@ -15,6 +15,7 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
     <title>MediTrack | Update Profile</title>
+    
 
     <meta name="description" content="Update your profile information." />
 
@@ -46,6 +47,7 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="../assets/js/config.js"></script>
+    
   </head>
 
   <body>
@@ -243,54 +245,89 @@
               <!-- Search -->
               <div class="navbar-nav align-items-center">
                 <div class="nav-item d-flex align-items-center position-relative"> <!-- Added position-relative -->
-                    <i class="bx bx-search bx-md"></i>
-                    <input type="text" id="search-bar" class="form-control border-0 shadow-none ps-1 ps-sm-2" placeholder="Search..." aria-label="Search..." />
-                    <div id="search-results" class="search-results"></div> <!-- Added class for styling -->
+                  <i class="bx bx-search bx-md"></i>
+                  <input type="text" id="search-bar" class="form-control border-0 shadow-none ps-1 ps-sm-2" placeholder="Search..." aria-label="Search..." />
+                  <div id="search-results" class="search-results"></div> <!-- Added class for styling -->
                 </div>
-            </div>
-            <!-- /Search -->
-            <script>
+              </div>
+              
+              <!-- /Search -->
+              <style>
+                /* Styling for the search results container */
+                #search-results {
+                  position: absolute;
+                  top: 100%; /* Place it below the search bar */
+                  left: 0;
+                  right: 0;
+                  background-color: white;
+                  border: 1px solid #ccc;
+                  max-height: 200px;
+                  overflow-y: auto;
+                  z-index: 1000;
+                }
+              
+                /* Styling for individual search results */
+                #search-results div {
+                  padding: 8px;
+                  cursor: pointer;
+                }
+              
+                #search-results div:hover {
+                  background-color: #f0f0f0;
+                }
+              </style>
+              
+              <script>
                 const searchBar = document.getElementById('search-bar');
                 const searchResults = document.getElementById('search-results');
+              
                 const index = [
-                    { title: 'Home', url: 'home.html', keywords: ['home', 'dashboard'] },
-                    { title: 'Support', url: 'support.html', keywords: ['support', 'help'] },
-                    { title: 'Clinic', url: 'clinic-page.html', keywords: ['clinic'] },
-                    { title: 'Archives', url: 'archives.html', keywords: ['archives'] },
-                    { title: 'Pharmacy', url: 'pharmacy-capturing-page.html', keywords: ['pharmacy'] },
-                    { title: 'Update Profile', url: 'update-profile.html', keywords: ['update profile', 'update', 'profile', 'account settings'] },
-                    { title: 'Samples', url: 'samples.html', keywords: ['samples', 'sample'] },
-                    { title: 'Clinic Processing', url: 'processing-page.html', keywords: ['processing', 'clinic', 'clinic processing'] },
-                    { title: 'Forgot Password', url: 'forgotpassword.html', keywords: ['forgot', 'password'] },
-                    { title: 'User Guide', url: 'user-guide.html', keywords: ['user', 'guide'] },
-                    { title: 'Privacy Policy', url: 'privacy-policy.html', keywords: ['privacy', 'policy'] },
-                    { title: 'Troubleshooting', url: 'troubleshooting.html', keywords: ['troubleshooting', 'help'] },
-                    { title: 'Analytics', url: 'home.html', keywords: ['analytics'] },
-                    // Add more pages and keywords to the index
+                  { title: 'Home', url: 'home.html', keywords: ['home', 'dashboard'] },
+                  { title: 'Support', url: 'support.html', keywords: ['support', 'help'] },
+                  { title: 'Clinic', url: 'clinic-page.html', keywords: ['clinic'] },
+                  { title: 'Archives', url: 'archives.html', keywords: ['archives'] },
+                  { title: 'Pharmacy', url: 'pharmacy-capturing-page.html', keywords: ['pharmacy'] },
+                  { title: 'Update Profile', url: 'update-profile.html', keywords: ['update profile', 'update', 'profile', 'account settings'] },
+                  { title: 'Samples', url: 'samples.html', keywords: ['samples', 'sample'] },
+                  { title: 'Clinic Processing', url: 'processing-page.html', keywords: ['processing', 'clinic', 'clinic processing'] },
+                  { title: 'Forgot Password', url: 'forgotpassword.html', keywords: ['forgot', 'password'] },
+                  { title: 'User Guide', url: 'user-guide.html', keywords: ['user', 'guide'] },
+                  { title: 'Privacy Policy', url: 'privacy-policy.html', keywords: ['privacy', 'policy'] },
+                  { title: 'Troubleshooting', url: 'troubleshooting.html', keywords: ['troubleshooting', 'help'] },
+                  { title: 'Analytics', url: 'home.html', keywords: ['analytics'] },
+                  // Add more pages and keywords to the index
                 ];
-            
+              
                 searchBar.addEventListener('keyup', (event) => {
-                    const query = event.target.value.toLowerCase();
-                    // Clear results if the search bar is empty
-                    if (query === '') {
-                        searchResults.innerHTML = '';
-                        return; // Exit the function early
-                    }
-                    const results = index.filter(page => {
-                        const keywords = page.keywords.join(' ').toLowerCase();
-                        return keywords.includes(query);
-                    });
+                  const query = event.target.value.toLowerCase();
+              
+                  // Clear results if the search bar is empty
+                  if (query === '') {
                     searchResults.innerHTML = '';
-                    results.forEach(page => {
-                        const resultDiv = document.createElement('div'); // Create a new div for each result
-                        const link = document.createElement('a');
-                        link.href = page.url;
-                        link.textContent = page.title;
-                        resultDiv.appendChild(link); // Append the link to the div
-                        searchResults.appendChild(resultDiv); // Append the div to the search results
-                    });
+                    return; // Exit the function early
+                  }
+              
+                  // Filter pages based on the query
+                  const results = index.filter(page => {
+                    const keywords = page.keywords.join(' ').toLowerCase();
+                    return keywords.includes(query);
+                  });
+              
+                  // Clear previous results
+                  searchResults.innerHTML = '';
+              
+                  // Display new results
+                  results.forEach(page => {
+                    const resultDiv = document.createElement('div'); // Create a new div for each result
+                    const link = document.createElement('a');
+                    link.href = page.url;
+                    link.textContent = page.title;
+                    resultDiv.appendChild(link); // Append the link to the div
+                    searchResults.appendChild(resultDiv); // Append the div to the search results
+                  });
                 });
-            </script>
+              </script>
+
              
               <!-- /Search -->
 
@@ -339,14 +376,14 @@
                   <div class="card mb-4">
                     <h5 class="card-header">Update Your Profile</h5>
                     <div class="card-body">
-                      <form action="/update-profile" method="POST">
+                      <form id="update-profile-form">
                         <div class="mb-3">
-                          <label for="name" class="form-label">Full Name</label>
+                          <label for="username" class="form-label">User Name</label>
                           <input
                             type="text"
                             class="form-control"
-                            id="name"
-                            name="name"
+                            id="username"
+                            name="username"
                             placeholder="Enter your full name"
                             required />
                         </div>
@@ -367,8 +404,7 @@
                             class="form-control"
                             id="password"
                             name="password"
-                            placeholder="Enter a new password"
-                            required />
+                            placeholder="Enter a new password" />
                         </div>
                         <div class="mb-3">
                           <label for="confirm-password" class="form-label">Confirm Password</label>
@@ -377,14 +413,107 @@
                             class="form-control"
                             id="confirm-password"
                             name="confirm_password"
-                            placeholder="Confirm your new password"
-                            required />
+                            placeholder="Confirm your new password" />
                         </div>
                         <button type="submit" class="btn btn-primary">Update Profile</button>
+                        <p id="success-message" class="text-success"></p>
+                        <p id="error-message" class="text-danger"></p>
                       </form>
                     </div>
                   </div>
                 </div>
+              </div>
+              
+              <script>
+                // Function to fetch and pre-fill current user data
+                async function loadUserProfile() {
+                  const token = localStorage.getItem('authToken');
+                  
+                  if (!token) {
+                    document.getElementById('error-message').textContent = 'No user is logged in';
+                    return;
+                  }
+              
+                  try {
+                    const response = await fetch('http://198.177.123.228:1337/api/users/me', {
+                      method: 'GET',
+                      headers: {
+                        Authorization: `Bearer ${token}`,
+                      },
+                    });
+              
+                    if (!response.ok) {
+                      throw new Error('Failed to fetch user data');
+                    }
+              
+                    const userData = await response.json();
+              
+                    // Pre-fill form with user data
+                    document.getElementById('username').value = userData.username || '';
+                    document.getElementById('email').value = userData.email || '';
+              
+                  } catch (error) {
+                    console.error('Error fetching user data:', error);
+                    document.getElementById('error-message').textContent = 'Error loading profile data';
+                  }
+                }
+              
+                // Function to handle form submission for profile update
+                document.getElementById('update-profile-form').addEventListener('submit', async function(event) {
+                  event.preventDefault(); // Prevent the form from submitting the default way
+              
+                  const token = localStorage.getItem('authToken');
+                  const username = document.getElementById('username').value;
+                  const email = document.getElementById('email').value;
+                  const password = document.getElementById('password').value;
+                  const confirmPassword = document.getElementById('confirm-password').value;
+              
+                  const successMessage = document.getElementById('success-message');
+                  const errorMessage = document.getElementById('error-message');
+              
+                  // Clear previous messages
+                  successMessage.textContent = '';
+                  errorMessage.textContent = '';
+              
+                  // Check if passwords match
+                  if (password && password !== confirmPassword) {
+                    errorMessage.textContent = 'Passwords do not match';
+                    return;
+                  }
+              
+                  try {
+                    const response = await fetch('http://198.177.123.228:1337/api/users/me', {
+                      method: 'PUT', // PUT request for updating user info
+                      headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`,
+                      },
+                      body: JSON.stringify({
+                        username: username,
+                        email: email,
+                        ...(password && { password: password }), // Only include password if it was provided
+                      }),
+                    });
+              
+                    if (!response.ok) {
+                      const errorData = await response.json();
+                      throw new Error(errorData.message || 'Failed to update profile');
+                    }
+              
+                    // Show success message and reload profile
+                    successMessage.textContent = 'Profile updated successfully!';
+                    loadUserProfile(); // Reload profile info after update
+              
+                  } catch (error) {
+                    console.error('Error updating profile:', error);
+                    errorMessage.textContent = 'Error updating profile: ' + error.message;
+                  }
+                });
+              
+                // Load the user profile when the page loads
+                window.onload = loadUserProfile;
+              </script>
+              
 
                 <!-- Optional: Add a Profile Summary or Additional Info -->
                 <div class="col-md-4">
@@ -393,10 +522,58 @@
                     <div class="card-body">
                       <div class="d-flex align-items-center">
                         <div class="ms-3">
-                          <h5 class="mb-0">John Doe</h5>
-                          <p class="text-muted mb-0">john.doe@example.com</p>
+                          <h5 class="mb-0" id="user-name">Loading...</h5>
+                          <p class="text-muted mb-0" id="user-email">Loading...</p>
                         </div>
                       </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- JavaScript to fetch user profile -->
+                <script>
+                  async function fetchUserProfile() {
+                    const token = localStorage.getItem('authToken'); // Get JWT token from localStorage
+                    const userNameElement = document.getElementById('user-name');
+                    const userEmailElement = document.getElementById('user-email');
+                
+                    if (!token) {
+                      // If no token found, show error or redirect to login
+                      userNameElement.textContent = 'No user logged in';
+                      userEmailElement.textContent = '';
+                      return;
+                    }
+                
+                    try {
+                      // Send request to Strapi to get user info
+                      const response = await fetch('http://198.177.123.228:1337/api/users/me', {
+                        method: 'GET',
+                        headers: {
+                          Authorization: `Bearer ${token}`, // Send token in Authorization header
+                        },
+                      });
+                
+                      if (!response.ok) {
+                        throw new Error('Failed to fetch user data');
+                      }
+                
+                      const userData = await response.json();
+                
+                      // Update the profile section with user data
+                      userNameElement.textContent = userData.username || 'No name';
+                      userEmailElement.textContent = userData.email || 'No email';
+                
+                    } catch (error) {
+                      console.error('Error fetching user data:', error);
+                      userNameElement.textContent = 'Error loading profile';
+                      userEmailElement.textContent = '';
+                    }
+                  }
+                
+                  // Call the function to fetch user profile on page load
+                  fetchUserProfile();
+                </script>
+                
                       <!-- Add more profile details if needed -->
                     </div>
                   </div>

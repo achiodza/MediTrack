@@ -240,54 +240,89 @@
               <!-- Search -->
               <div class="navbar-nav align-items-center">
                 <div class="nav-item d-flex align-items-center position-relative"> <!-- Added position-relative -->
-                    <i class="bx bx-search bx-md"></i>
-                    <input type="text" id="search-bar" class="form-control border-0 shadow-none ps-1 ps-sm-2" placeholder="Search..." aria-label="Search..." />
-                    <div id="search-results" class="search-results"></div> <!-- Added class for styling -->
+                  <i class="bx bx-search bx-md"></i>
+                  <input type="text" id="search-bar" class="form-control border-0 shadow-none ps-1 ps-sm-2" placeholder="Search..." aria-label="Search..." />
+                  <div id="search-results" class="search-results"></div> <!-- Added class for styling -->
                 </div>
-            </div>
-            <!-- /Search -->
-            <script>
+              </div>
+              
+              <!-- /Search -->
+              <style>
+                /* Styling for the search results container */
+                #search-results {
+                  position: absolute;
+                  top: 100%; /* Place it below the search bar */
+                  left: 0;
+                  right: 0;
+                  background-color: white;
+                  border: 1px solid #ccc;
+                  max-height: 200px;
+                  overflow-y: auto;
+                  z-index: 1000;
+                }
+              
+                /* Styling for individual search results */
+                #search-results div {
+                  padding: 8px;
+                  cursor: pointer;
+                }
+              
+                #search-results div:hover {
+                  background-color: #f0f0f0;
+                }
+              </style>
+              
+              <script>
                 const searchBar = document.getElementById('search-bar');
                 const searchResults = document.getElementById('search-results');
+              
                 const index = [
-                    { title: 'Home', url: 'home.html', keywords: ['home', 'dashboard'] },
-                    { title: 'Support', url: 'support.html', keywords: ['support', 'help'] },
-                    { title: 'Clinic', url: 'clinic-page.html', keywords: ['clinic'] },
-                    { title: 'Archives', url: 'archives.html', keywords: ['archives'] },
-                    { title: 'Pharmacy', url: 'pharmacy-capturing-page.html', keywords: ['pharmacy'] },
-                    { title: 'Update Profile', url: 'update-profile.html', keywords: ['update profile', 'update', 'profile', 'account settings'] },
-                    { title: 'Samples', url: 'samples.html', keywords: ['samples', 'sample'] },
-                    { title: 'Clinic Processing', url: 'processing-page.html', keywords: ['processing', 'clinic', 'clinic processing'] },
-                    { title: 'Forgot Password', url: 'forgotpassword.html', keywords: ['forgot', 'password'] },
-                    { title: 'User Guide', url: 'user-guide.html', keywords: ['user', 'guide'] },
-                    { title: 'Privacy Policy', url: 'privacy-policy.html', keywords: ['privacy', 'policy'] },
-                    { title: 'Troubleshooting', url: 'troubleshooting.html', keywords: ['troubleshooting', 'help'] },
-                    { title: 'Analytics', url: 'home.html', keywords: ['analytics'] },
-                    // Add more pages and keywords to the index
+                  { title: 'Home', url: 'home.html', keywords: ['home', 'dashboard'] },
+                  { title: 'Support', url: 'support.html', keywords: ['support', 'help'] },
+                  { title: 'Clinic', url: 'clinic-page.html', keywords: ['clinic'] },
+                  { title: 'Archives', url: 'archives.html', keywords: ['archives'] },
+                  { title: 'Pharmacy', url: 'pharmacy-capturing-page.html', keywords: ['pharmacy'] },
+                  { title: 'Update Profile', url: 'update-profile.html', keywords: ['update profile', 'update', 'profile', 'account settings'] },
+                  { title: 'Samples', url: 'samples.html', keywords: ['samples', 'sample'] },
+                  { title: 'Clinic Processing', url: 'processing-page.html', keywords: ['processing', 'clinic', 'clinic processing'] },
+                  { title: 'Forgot Password', url: 'forgotpassword.html', keywords: ['forgot', 'password'] },
+                  { title: 'User Guide', url: 'user-guide.html', keywords: ['user', 'guide'] },
+                  { title: 'Privacy Policy', url: 'privacy-policy.html', keywords: ['privacy', 'policy'] },
+                  { title: 'Troubleshooting', url: 'troubleshooting.html', keywords: ['troubleshooting', 'help'] },
+                  { title: 'Analytics', url: 'home.html', keywords: ['analytics'] },
+                  // Add more pages and keywords to the index
                 ];
-            
+              
                 searchBar.addEventListener('keyup', (event) => {
-                    const query = event.target.value.toLowerCase();
-                    // Clear results if the search bar is empty
-                    if (query === '') {
-                        searchResults.innerHTML = '';
-                        return; // Exit the function early
-                    }
-                    const results = index.filter(page => {
-                        const keywords = page.keywords.join(' ').toLowerCase();
-                        return keywords.includes(query);
-                    });
+                  const query = event.target.value.toLowerCase();
+              
+                  // Clear results if the search bar is empty
+                  if (query === '') {
                     searchResults.innerHTML = '';
-                    results.forEach(page => {
-                        const resultDiv = document.createElement('div'); // Create a new div for each result
-                        const link = document.createElement('a');
-                        link.href = page.url;
-                        link.textContent = page.title;
-                        resultDiv.appendChild(link); // Append the link to the div
-                        searchResults.appendChild(resultDiv); // Append the div to the search results
-                    });
+                    return; // Exit the function early
+                  }
+              
+                  // Filter pages based on the query
+                  const results = index.filter(page => {
+                    const keywords = page.keywords.join(' ').toLowerCase();
+                    return keywords.includes(query);
+                  });
+              
+                  // Clear previous results
+                  searchResults.innerHTML = '';
+              
+                  // Display new results
+                  results.forEach(page => {
+                    const resultDiv = document.createElement('div'); // Create a new div for each result
+                    const link = document.createElement('a');
+                    link.href = page.url;
+                    link.textContent = page.title;
+                    resultDiv.appendChild(link); // Append the link to the div
+                    searchResults.appendChild(resultDiv); // Append the div to the search results
+                  });
                 });
-            </script>
+              </script>
+
               <!-- /Search -->
 
               <ul class="navbar-nav flex-row align-items-center ms-auto">

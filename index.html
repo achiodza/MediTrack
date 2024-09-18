@@ -68,70 +68,67 @@
             <p class="text-center mb-4">
               <a href="/MediTrack/pages/forgotpassword.html">Forgot Password</a>
             </p>
-
+            
             <p class="text-center">
               <span>New on our platform?</span>
               <a href="/MediTrack/pages/auth-register.html">Create an account</a>
             </p>
-          </div>
-        </div>
-        <!-- /Register -->
-      </div>
-    </div>
-  </div>
-  <!-- /Content -->
-  
-  <!-- Core JS -->
-  <script src="assets/vendor/libs/jquery/jquery.js"></script>
-  <script src="assets/vendor/libs/popper/popper.js"></script>
-  <script src="assets/vendor/js/bootstrap.js"></script>
-  <script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-  <script src="assets/vendor/js/menu.js"></script>
-  
-  <!-- Main JS -->
-  <script src="assets/js/main.js"></script>
-  
-  <!-- JavaScript for login logic -->
-  <script>
-    document.getElementById('loginForm').addEventListener('submit', function(event) {
-      event.preventDefault();
-  
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      const errorMessage = document.getElementById('error-message');
-      const loader = document.getElementById('loader');
-  
-      loader.style.display = 'block'; // Show loader
-  
-      // API request to login
-      fetch('http://198.177.123.228:1337/api/auth/local', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          identifier: email, // Can be email or username
-          password: password
-        })
-      })
-      .then(response => response.json())
-      .then(data => {
-        loader.style.display = 'none'; // Hide loader
-  
-        if (data.user) {
-          // Successful login, redirect to dashboard
-          window.location.href = './pages/home.html'; 
-        } else {
-          // Show error message
-          errorMessage.textContent = 'Login failed: ' + (data.message || 'Invalid credentials');
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        errorMessage.textContent = 'An error occurred during login: ' + error.message;
-        loader.style.display = 'none'; // Hide loader
-      });
-    });
-  </script>
+            
+            <!-- Core JS -->
+            <script src="assets/vendor/libs/jquery/jquery.js"></script>
+            <script src="assets/vendor/libs/popper/popper.js"></script>
+            <script src="assets/vendor/js/bootstrap.js"></script>
+            <script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+            <script src="assets/vendor/js/menu.js"></script>
+            
+            <!-- Main JS -->
+            <script src="assets/js/main.js"></script>
+            
+            <!-- JavaScript for login logic -->
+            <script>
+              document.getElementById('loginForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+            
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const errorMessage = document.getElementById('error-message');
+                const loader = document.getElementById('loader');
+            
+                loader.style.display = 'block'; // Show loader
+            
+                // API request to login
+                fetch('http://198.177.123.228:1337/api/auth/local', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({
+                    identifier: email, // Can be email or username
+                    password: password
+                  })
+                })
+                .then(response => response.json())
+                .then(data => {
+                  loader.style.display = 'none'; // Hide loader
+            
+                  if (data.jwt) {
+                    // Successful login
+                    localStorage.setItem('authToken', data.jwt); // Store JWT token in localStorage
+            
+                    // Redirect to dashboard or home page
+                    window.location.href = './pages/home.html'; 
+                  } else {
+                    // Show error message
+                    errorMessage.textContent = 'Login failed: ' + (data.message[0].messages[0].message || 'Invalid credentials');
+                  }
+                })
+                .catch(error => {
+                  console.error('Error:', error);
+                  errorMessage.textContent = 'An error occurred during login: ' + error.message;
+                  loader.style.display = 'none'; // Hide loader
+                });
+              });
+            </script>
+            
 </body>
 </html>
