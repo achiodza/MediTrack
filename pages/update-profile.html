@@ -366,54 +366,22 @@
           <!-- Content wrapper -->
           <div class="content-wrapper">
             <!-- Content -->
-
             <div class="container-xxl flex-grow-1 container-p-y">
-
               <h4 class="fw-bold py-3 mb-4">Update Profile</h4>
-
               <div class="row">
-                <div class="col-md-8">
+                <!-- Update Profile Card -->
+                <div class="col-md-8"> <!-- Adjust column width as needed -->
                   <div class="card mb-4">
                     <h5 class="card-header">Update Your Profile</h5>
                     <div class="card-body">
                       <form id="update-profile-form">
                         <div class="mb-3">
                           <label for="username" class="form-label">User Name</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="username"
-                            name="username"
-                            placeholder="Enter your full name"
-                            required />
+                          <input type="text" class="form-control" id="username" name="username" placeholder="Enter your full name" required />
                         </div>
                         <div class="mb-3">
                           <label for="email" class="form-label">Email Address</label>
-                          <input
-                            type="email"
-                            class="form-control"
-                            id="email"
-                            name="email"
-                            placeholder="Enter your email address"
-                            required />
-                        </div>
-                        <div class="mb-3">
-                          <label for="password" class="form-label">New Password</label>
-                          <input
-                            type="password"
-                            class="form-control"
-                            id="password"
-                            name="password"
-                            placeholder="Enter a new password" />
-                        </div>
-                        <div class="mb-3">
-                          <label for="confirm-password" class="form-label">Confirm Password</label>
-                          <input
-                            type="password"
-                            class="form-control"
-                            id="confirm-password"
-                            name="confirm_password"
-                            placeholder="Confirm your new password" />
+                          <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email address" required />
                         </div>
                         <button type="submit" class="btn btn-primary">Update Profile</button>
                         <p id="success-message" class="text-success"></p>
@@ -422,101 +390,9 @@
                     </div>
                   </div>
                 </div>
-              </div>
-              
-              <script>
-                // Function to fetch and pre-fill current user data
-                async function loadUserProfile() {
-                  const token = localStorage.getItem('authToken');
-                  
-                  if (!token) {
-                    document.getElementById('error-message').textContent = 'No user is logged in';
-                    return;
-                  }
-              
-                  try {
-                    const response = await fetch('http://198.177.123.228:1337/api/users/me', {
-                      method: 'GET',
-                      headers: {
-                        Authorization: `Bearer ${token}`,
-                      },
-                    });
-              
-                    if (!response.ok) {
-                      throw new Error('Failed to fetch user data');
-                    }
-              
-                    const userData = await response.json();
-              
-                    // Pre-fill form with user data
-                    document.getElementById('username').value = userData.username || '';
-                    document.getElementById('email').value = userData.email || '';
-              
-                  } catch (error) {
-                    console.error('Error fetching user data:', error);
-                    document.getElementById('error-message').textContent = 'Error loading profile data';
-                  }
-                }
-              
-                // Function to handle form submission for profile update
-                document.getElementById('update-profile-form').addEventListener('submit', async function(event) {
-                  event.preventDefault(); // Prevent the form from submitting the default way
-              
-                  const token = localStorage.getItem('authToken');
-                  const username = document.getElementById('username').value;
-                  const email = document.getElementById('email').value;
-                  const password = document.getElementById('password').value;
-                  const confirmPassword = document.getElementById('confirm-password').value;
-              
-                  const successMessage = document.getElementById('success-message');
-                  const errorMessage = document.getElementById('error-message');
-              
-                  // Clear previous messages
-                  successMessage.textContent = '';
-                  errorMessage.textContent = '';
-              
-                  // Check if passwords match
-                  if (password && password !== confirmPassword) {
-                    errorMessage.textContent = 'Passwords do not match';
-                    return;
-                  }
-              
-                  try {
-                    const response = await fetch('http://198.177.123.228:1337/api/users/me', {
-                      method: 'PUT', // PUT request for updating user info
-                      headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${token}`,
-                      },
-                      body: JSON.stringify({
-                        username: username,
-                        email: email,
-                        ...(password && { password: password }), // Only include password if it was provided
-                      }),
-                    });
-              
-                    if (!response.ok) {
-                      const errorData = await response.json();
-                      throw new Error(errorData.message || 'Failed to update profile');
-                    }
-              
-                    // Show success message and reload profile
-                    successMessage.textContent = 'Profile updated successfully!';
-                    loadUserProfile(); // Reload profile info after update
-              
-                  } catch (error) {
-                    console.error('Error updating profile:', error);
-                    errorMessage.textContent = 'Error updating profile: ' + error.message;
-                  }
-                });
-              
-                // Load the user profile when the page loads
-                window.onload = loadUserProfile;
-              </script>
-              
-
-                <!-- Optional: Add a Profile Summary or Additional Info -->
-                <div class="col-md-4">
+            
+                <!-- Profile Summary Card -->
+                <div class="col-md-4"> <!-- Adjust column width as needed -->
                   <div class="card mb-4">
                     <h5 class="card-header">Profile Summary</h5>
                     <div class="card-body">
@@ -529,6 +405,99 @@
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+            
+              
+    <script> // Function to fetch and pre-fill current user data
+     // Function to fetch and pre-fill current user data
+async function loadUserProfile() {
+  const token = localStorage.getItem('authToken');
+  
+  if (!token) {
+    document.getElementById('error-message').textContent = 'No user is logged in';
+    return;
+  }
+
+  try {
+    const response = await fetch('http://198.177.123.228:1337/api/users/me', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch user data');
+    }
+
+    const userData = await response.json();
+
+    // Pre-fill form with user data
+    document.getElementById('username').value = userData.username || '';
+    document.getElementById('email').value = userData.email || '';
+
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    document.getElementById('error-message').textContent = 'Error loading profile data';
+  }
+}
+
+// Function to handle form submission for profile update
+document.getElementById('update-profile-form').addEventListener('submit', async function(event) {
+  event.preventDefault(); // Prevent the form from submitting the default way
+
+  const token = localStorage.getItem('authToken');
+  const username = document.getElementById('username').value;
+  const email = document.getElementById('email').value;
+
+  const successMessage = document.getElementById('success-message');
+  const errorMessage = document.getElementById('error-message');
+
+  // Clear previous messages
+  successMessage.textContent = '';
+  errorMessage.textContent = '';
+
+  try {
+    const response = await fetch('http://198.177.123.228:1337/api/users/me', {
+      method: 'PUT', // PUT request for updating user info
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        username: username,
+        email: email,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error('Error details:', errorData); // Log the error details
+      throw new Error(errorData.message || 'Failed to update profile');
+    }
+
+    const updatedUserData = await response.json();
+    console.log('Profile updated:', updatedUserData); // Log the successful update
+
+    // Show success message and reload profile
+    successMessage.textContent = 'Profile updated successfully!';
+    loadUserProfile(); // Reload profile info after update
+
+  } catch (error) {
+    console.error('Error updating profile:', error);
+    errorMessage.textContent = 'Error updating profile: ' + error.message;
+  }
+});
+
+// Load the user profile when the page loads
+window.onload = loadUserProfile;
+
+              </script>
+              
+
+                <!-- Optional: Add a Profile Summary or Additional Info -->
+                
                 
                 <!-- JavaScript to fetch user profile -->
                 <script>
@@ -596,9 +565,11 @@
                     MediTrack |
                     <a href="https://themeselection.com" target="_blank" class="footer-link">Infinity Lines of Code</a>
                   </div>
+                 
                 </div>
               </div>
             </footer>
+          
             <!-- / Footer -->
 
             <div class="content-backdrop fade"></div>
