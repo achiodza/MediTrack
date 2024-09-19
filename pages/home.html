@@ -410,27 +410,64 @@
                                 class="rounded" />
                             </div>
                             <div class="dropdown">
-                              <button
-                                class="btn p-0"
-                                type="button"
-                                id="cardOpt3"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false">
-                                <i class="bx bx-dots-vertical-rounded text-muted"></i>
-                              </button>
-                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
-                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                              </div>
+                              
                             </div>
                           </div>
-                          <p class="mb-1">Samples Received</p>
-                          <h4 class="card-title mb-3">20</h4>
-                          <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i> +7.80%</small>
+                          <p class="mb-1">Samples Received Since Inception</p>
+                          <h4 class="card-title mb-3" id="totalSamples">Loading...</h4>
+                          <small class="text-success fw-medium"><span id="samplesToday">Loading...</span> Received Today</small>
+                                              
                         </div>
                       </div>
                     </div>
+                    <script>
+                      document.addEventListener("DOMContentLoaded", async function () {
+                        const totalSamplesElement = document.getElementById("totalSamples");
+                        const samplesTodayElement = document.getElementById("samplesToday");
+                    
+                        try {
+                          // Fetch the data from the API
+                          const response = await fetch('http://198.177.123.228:1337/api/clinicreceives', {
+                            method: 'GET',
+                            headers: {
+                              'Authorization': 'Bearer 83fdd6ab07e87e390e9086df8edf28f77509b2a3fcc316bf471eb2b908e4e1eabc4a0ab9fdde97a7aff1c4afabb1c1697665185a0a00977659c9227010fcc95d18b5df85e7675c0f5b15c5b890542132fd6fb2c86ef2d0fb4b28e605d8761cdde07c3d16ea3b4072071ebabb6f76f0e10bf9864f2b53b082d776421348826677',
+                            }
+                          });
+                          
+                          if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                          }
+                    
+                          const data = await response.json();
+                          const samples = data.data;
+                    
+                          // Get current date in YYYY-MM-DD format
+                          const today = new Date().toISOString().split('T')[0];
+                    
+                          // Calculate total samples and samples received today
+                          let totalSamples = 0;
+                          let samplesToday = 0;
+                    
+                          samples.forEach(sample => {
+                            const createdDate = new Date(sample.attributes.createdAt).toISOString().split('T')[0];
+                    
+                            totalSamples++;
+                            if (createdDate === today) {
+                              samplesToday++;
+                            }
+                          });
+                    
+                          // Update the DOM with the total samples and today's samples
+                          totalSamplesElement.textContent = totalSamples;
+                          samplesTodayElement.textContent = samplesToday;
+                    
+                        } catch (error) {
+                          console.error('Error fetching samples:', error);
+                          totalSamplesElement.textContent = 'Error';
+                          samplesTodayElement.textContent = 'Error';
+                        }
+                      });
+                    </script>
                     <div class="col-lg-6 col-md-12 col-6 mb-6">
                       <div class="card h-100">
                         <div class="card-body">
@@ -441,35 +478,85 @@
                                 alt="wallet info"
                                 class="rounded" />
                             </div>
-                            <div class="dropdown">
-                              <button
-                                class="btn p-0"
-                                type="button"
-                                id="cardOpt6"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false">
-                                <i class="bx bx-dots-vertical-rounded text-muted"></i>
-                              </button>
-                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
-                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                              </div>
-                            </div>
+                            
                           </div>
                           <p class="mb-1">Samples Tested</p>
-                          <h4 class="card-title mb-3">9</h4>
-                          <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>
+                          <h4 class="card-title mb-3" id="totalTestedSamples">Loading...</h4>
+                          <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i> <span id="percentageChange">Loading...</span></small>
+                        
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
+                <script>
+                  document.addEventListener("DOMContentLoaded", async function () {
+                    const totalTestedSamplesElement = document.getElementById("totalTestedSamples");
+                    const percentageChangeElement = document.getElementById("percentageChange");
+                
+                    try {
+                      // Fetch the data from the API
+                      const response = await fetch('http://198.177.123.228:1337/api/clinicprocessings', {
+                        method: 'GET',
+                        headers: {
+                          'Authorization': 'Bearer 83fdd6ab07e87e390e9086df8edf28f77509b2a3fcc316bf471eb2b908e4e1eabc4a0ab9fdde97a7aff1c4afabb1c1697665185a0a00977659c9227010fcc95d18b5df85e7675c0f5b15c5b890542132fd6fb2c86ef2d0fb4b28e605d8761cdde07c3d16ea3b4072071ebabb6f76f0e10bf9864f2b53b082d776421348826677',
+                        }
+                      });
+                      
+                      if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                      }
+                
+                      const data = await response.json();
+                      const samplesTested = data.data;
+                
+                      // Get current date in YYYY-MM-DD format
+                      const today = new Date().toISOString().split('T')[0];
+                
+                      // Initialize counters
+                      let totalTestedSamples = 0;
+                      let samplesTestedToday = 0;
+                      let samplesTestedPreviousDay = 0;
+                
+                      // Get yesterday's date
+                      const yesterday = new Date();
+                      yesterday.setDate(yesterday.getDate() - 1);
+                      const yesterdayFormatted = yesterday.toISOString().split('T')[0];
+                
+                      // Loop through the samples and calculate totals
+                      samplesTested.forEach(sample => {
+                        const createdDate = new Date(sample.attributes.createdAt).toISOString().split('T')[0];
+                
+                        totalTestedSamples++;
+                        if (createdDate === today) {
+                          samplesTestedToday++;
+                        } else if (createdDate === yesterdayFormatted) {
+                          samplesTestedPreviousDay++;
+                        }
+                      });
+                
+                      // Calculate percentage change
+                      let percentageChange = 0;
+                      if (samplesTestedPreviousDay > 0) {
+                        percentageChange = ((samplesTestedToday - samplesTestedPreviousDay) / samplesTestedPreviousDay) * 100;
+                      }
+                
+                      // Update the DOM with the totals and percentage change
+                      totalTestedSamplesElement.textContent = totalTestedSamples;
+                      percentageChangeElement.textContent = `${percentageChange.toFixed(2)}%`;
+                
+                    } catch (error) {
+                      console.error('Error fetching samples:', error);
+                      totalTestedSamplesElement.textContent = 'Error';
+                      percentageChangeElement.textContent = 'Error';
+                    }
+                  });
+                </script>
                 <!-- Total Revenue -->
                 <div class="col-12 col-xxl-8 order-2 order-md-3 order-xxl-2 mb-6">
                   <div class="card">
                     <div class="row row-bordered g-0">
-                      <div class="col-lg-8">
+                      <div class="col-lg-12">
                         <div class="card-header d-flex align-items-center justify-content-between">
                           <div class="card-title mb-0">
                             <h5 class="m-0 me-2">Samples Tested Month on Month</h5>
@@ -493,60 +580,9 @@
                         </div>
                         <div id="totalRevenueChart" class="px-3"></div>
                       </div>
-                      <div class="col-lg-4 d-flex align-items-center">
-                        <div class="card-body px-xl-9">
-                          <div class="text-center mb-6">
-                            <div class="btn-group">
-                              <button type="button" class="btn btn-outline-primary">
-                                <script>
-                                  document.write(new Date().getFullYear() - 1);
-                                </script>
-                              </button>
-                              <button
-                                type="button"
-                                class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                <span class="visually-hidden">Toggle Dropdown</span>
-                              </button>
-                              <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="javascript:void(0);">2021</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0);">2020</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0);">2019</a></li>
-                              </ul>
-                            </div>
-                          </div>
-
-                          <div id="growthChart"></div>
-                          <div class="text-center fw-medium my-6"></div>
-
-                          <div class="d-flex gap-3 justify-content-between">
-                            <div class="d-flex">
-                              <div class="avatar me-2">
-                                <span class="avatar-initial rounded-2 bg-label-primary"
-                                  ><i class="bx bx-dollar bx-lg text-primary"></i
-                                ></span>
-                              </div>
-                              <div class="d-flex flex-column">
-                                <small>
-                                  <script>
-                                    document.write(new Date().getFullYear() - 1);
-                                  </script>
-                                </small>
-                                <!-- <h6 class="mb-0">$32.5k</h6> -->
-                              </div>
-                            </div>
-                            <div class="d-flex">
-                              <div class="avatar me-2">
-                                <span class="avatar-initial rounded-2 bg-label-info"
-                                  ><i class="bx bx-wallet bx-lg text-info"></i
-                                ></span>
-                              </div>
-                              
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      <!-- <div class="col-lg-4 d-flex align-items-center">
+                       
+                      </div> -->
                     </div>
                   </div>
                 </div>
@@ -560,28 +596,64 @@
                             <div class="avatar flex-shrink-0">
                               <img src="../assets/img/icons/unicons/paypal.png" alt="paypal" class="rounded" />
                             </div>
-                            <div class="dropdown">
-                              <button
-                                class="btn p-0"
-                                type="button"
-                                id="cardOpt4"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false">
-                                <i class="bx bx-dots-vertical-rounded text-muted"></i>
-                              </button>
-                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt4">
-                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                              </div>
-                            </div>
+                           
                           </div>
                           <p class="mb-1">Medicine in Pharmacy</p>
-                          <h4 class="card-title mb-3">400</h4>
-                          <small class="text-danger fw-medium"><i class="bx bx-down-arrow-alt"></i> </small>
+                      <h4 class="card-title mb-3" id="totalMedicinesInPharmacy">Loading...</h4>
+                      <small class="text-danger fw-medium"><i class="bx bx-down-arrow-alt"></i> <span id="outOfStockCount">Loading...</span> out of stock</small>
+                   
                         </div>
                       </div>
                     </div>
+
+                    
+                    
+                    <script>
+                      document.addEventListener("DOMContentLoaded", async function () {
+                        const totalMedicinesElement = document.getElementById("totalMedicinesInPharmacy");
+                        const outOfStockCountElement = document.getElementById("outOfStockCount");
+                    
+                        try {
+                          // Fetch the data from the API
+                          const response = await fetch('http://198.177.123.228:1337/api/pharmacyrecords', {
+                            method: 'GET',
+                            headers: {
+                              'Authorization': 'Bearer 83fdd6ab07e87e390e9086df8edf28f77509b2a3fcc316bf471eb2b908e4e1eabc4a0ab9fdde97a7aff1c4afabb1c1697665185a0a00977659c9227010fcc95d18b5df85e7675c0f5b15c5b890542132fd6fb2c86ef2d0fb4b28e605d8761cdde07c3d16ea3b4072071ebabb6f76f0e10bf9864f2b53b082d776421348826677',
+                            }
+                          });
+                    
+                          if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                          }
+                    
+                          const data = await response.json();
+                          const pharmacyRecords = data.data;
+                    
+                          // Initialize counters
+                          let totalMedicines = 0;
+                          let outOfStockCount = 0;
+                    
+                          // Loop through the pharmacy records and calculate totals
+                          pharmacyRecords.forEach(record => {
+                            totalMedicines++;
+                            if (!record.attributes.availability) {
+                              outOfStockCount++;
+                            }
+                          });
+                    
+                          // Update the DOM with the totals
+                          totalMedicinesElement.textContent = totalMedicines;
+                          outOfStockCountElement.textContent = outOfStockCount;
+                    
+                        } catch (error) {
+                          console.error('Error fetching pharmacy records:', error);
+                          totalMedicinesElement.textContent = 'Error';
+                          outOfStockCountElement.textContent = 'Error';
+                        }
+                      });
+                    </script>
+                    
+
                     <div class="col-6 mb-6">
                       <div class="card h-100">
                         <div class="card-body">
@@ -589,21 +661,7 @@
                             <div class="avatar flex-shrink-0">
                               <img src="../assets/img/icons/unicons/cc-primary.png" alt="Credit Card" class="rounded" />
                             </div>
-                            <div class="dropdown">
-                              <button
-                                class="btn p-0"
-                                type="button"
-                                id="cardOpt1"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false">
-                                <i class="bx bx-dots-vertical-rounded text-muted"></i>
-                              </button>
-                              <div class="dropdown-menu" aria-labelledby="cardOpt1">
-                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                              </div>
-                            </div>
+                            
                           </div>
                           <p class="mb-1">Transactions</p>
                           <h4 class="card-title mb-3">$14,857</h4>
