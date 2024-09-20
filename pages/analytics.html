@@ -379,58 +379,134 @@
 
                     
                     <div class="card-body pt-4">
-                      <form id="formAccountSettings" method="POST" onsubmit="return false">
-                       <div class="row g-6">
-
-
-                        <div class="col-md-6">
-                          <label for="drugName" class="form-label">Patient ID</label>
-                          <input
-                            class="form-control"
-                            type="text"
-                            id="patientID"
-                            name="patientID"
-                            placeholder="ID0004"
-                             />
-                        </div>
-
-
-                        <div class="col-md-6">
-                          <label for="infection-type" class="form-label">Select Infection Type:</label>
-                          <select id="infection-type" name="infection-type" class="form-control">
-                              <option value="Respiratory Infections">Respiratory Infections</option>
-                              <option value="Urinary Tract Infections">Urinary Tract Infections</option>
-                              <option value="Gastrointestinal System (Acute Gastroenteritis)">Gastrointestinal System</option>
-                              <option value="Skin And Soft Tissue">Skin And Soft Tissue</option>
-                              <option value="Central Nervous System">Central Nervous System</option>
-                              <option value="Cardiovascular System">Cardiovascular System</option>
-                              <option value="Blood Stream Infections">Blood Stream Infections</option>
-                              <option value="Reproductive System">Reproductive System</option>
-                              <option value="Bones and Joints">Bones and Joints</option>
-                              <option value="Ear, Nose And Throat">Ear, Nose And Throat</option>
-                          </select>
-                      </div>
-
-
-                      <div class="col-md-6">
-                        <label for="age" class="form-label">Age</label>
-                        <input
-                          class="form-control"
-                          type="text"
-                          id="age"
-                          name="age"
-                          value="16"
-                          readonly
-                           />
-                      </div>
-
-                  
-                    
-                        </div>
-                        <div class="mt-6">
-                          <button type="submit" class="btn btn-primary me-3">Fetch</button>
-                        </div>
-                      </form>
+                        <form id="formAccountSettings" method="POST" onsubmit="return false">
+                            <div class="row g-6">
+                              <!-- Patient ID input -->
+                              <div class="col-md-6">
+                                <label for="patientID" class="form-label">Patient ID</label>
+                                <input
+                                  class="form-control"
+                                  type="text"
+                                  id="patientID"
+                                  name="patientID"
+                                  placeholder="ID0004"
+                                />
+                              </div>
+                          
+                              <!-- Infection Type Dropdown -->
+                              <div class="col-md-6">
+                                <label for="infection-type" class="form-label">Select Infection Type:</label>
+                                <select id="infection-type" name="infection-type" class="form-control">
+                                  <option value="Respiratory Infections">Respiratory Infections</option>
+                                  <option value="Urinary Tract Infections">Urinary Tract Infections</option>
+                                  <option value="Gastrointestinal System">Gastrointestinal System</option>
+                                  <option value="Skin And Soft Tissue">Skin And Soft Tissue</option>
+                                  <option value="Central Nervous System">Central Nervous System</option>
+                                  <option value="Cardiovascular System">Cardiovascular System</option>
+                                  <option value="Blood Stream Infections">Blood Stream Infections</option>
+                                  <option value="Reproductive System">Reproductive System</option>
+                                  <option value="Bones and Joints">Bones and Joints</option>
+                                  <option value="Ear, Nose And Throat">Ear, Nose And Throat</option>
+                                </select>
+                              </div>
+                          
+                              <!-- Age Input (Read-only) -->
+                              <div class="col-md-6">
+                                <label for="age" class="form-label">Age</label>
+                                <input
+                                  class="form-control"
+                                  type="text"
+                                  id="age"
+                                  name="age"
+                                  value="16"
+                                  readonly
+                                />
+                              </div>
+                            </div>
+                          
+                            <!-- Fetch Button -->
+                            <div class="mt-6">
+                              <button type="submit" class="btn btn-primary me-3" onclick="fetchDrug()">Fetch</button>
+                            </div>
+                          
+                            <!-- Results Table -->
+                            <div id="result" class="mt-6"></div>
+                          </form>
+                          
+                          <script>
+                            // Data structure for bacterial infections, samples, and drugs
+                            const bacterialInfectionsData = [
+                              {
+                                condition: "Respiratory Infections",
+                                bacteria: ["Streptococcus pneumoniae", "Haemophilus influenzae", "Mycobacterium tuberculosis"],
+                                drugs: ["Amoxicillin", "Azithromycin", "Rifampicin", "Isoniazid"]
+                              },
+                              {
+                                condition: "Urinary Tract Infections",
+                                bacteria: ["Escherichia coli", "Klebsiella pneumoniae", "Proteus mirabilis"],
+                                drugs: ["Ciprofloxacin", "Nitrofurantoin", "Trimethoprim-Sulfamethoxazole"]
+                              },
+                              {
+                                condition: "Gastrointestinal System",
+                                bacteria: ["Salmonella spp", "Shigella spp", "Campylobacter jejuni"],
+                                drugs: ["Ciprofloxacin", "Azithromycin", "Metronidazole"]
+                              },
+                              // Add remaining conditions and drugs for growth
+                              // ...
+                            ];
+                          
+                            // Function to fetch the best drug based on infection type
+                            function fetchDrug() {
+                              const infectionType = document.getElementById('infection-type').value;  // Get selected infection type
+                              const patientID = document.getElementById('patientID').value;  // Get patient ID
+                              const age = document.getElementById('age').value;  // Get patient age
+                              
+                              // Find the infection type from the data array
+                              const infection = bacterialInfectionsData.find(
+                                infection => infection.condition === infectionType
+                              );
+                          
+                              if (infection) {
+                                // Generate the results table
+                                const resultTable = `
+                                  <table class="table table-bordered">
+                                    <thead>
+                                      <tr>
+                                        <th>Patient ID</th>
+                                        <th>Age</th>
+                                        <th>Infection Type</th>
+                                        <th>Bacteria</th>
+                                        <th>Recommended Drugs</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+                                        <td>${patientID}</td>
+                                        <td>${age}</td>
+                                        <td>${infection.condition}</td>
+                                        <td>${infection.bacteria.join(", ")}</td>
+                                        <td>${infection.drugs.join(", ")}</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                `;
+                          
+                                // Display the results in the 'result' div
+                                document.getElementById('result').innerHTML = resultTable;
+                              } else {
+                                // If infection type not found, display an error
+                                document.getElementById('result').innerHTML = `<p>Infection type not found!</p>`;
+                              }
+                            }
+                          
+                            /*
+                             * The `fetchDrug` function retrieves the infection type selected in the form, looks up the bacterial infection data,
+                             * and dynamically generates an HTML table with patient information, bacteria found, and recommended drugs.
+                             * If the infection type is not found, it displays an error message.
+                             * This allows room for growth as more conditions and bacteria can be added to the `bacterialInfectionsData` array.
+                             */
+                          </script>
+                          
                     </div>
 
                   </div>
