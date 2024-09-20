@@ -373,53 +373,52 @@
                     <h5 class="card-header">Clinic</h5>
           <div class="card-body">
             <form>
-
               <div class="mb-4 row">
                 <label for="html5-datetime-local-input" class="col-md-2 col-form-label">Datetime</label>
                 <div class="col-md-10">
-                  <input class="form-control" type="datetime-local" value="2021-06-18T12:30:00" id="html5-datetime-local-input" />
+                  <input class="form-control" type="datetime-local" id="html5-datetime-local-input" />
                 </div>
               </div>
             
               <div class="mb-4 row">
                 <label for="html5-text-input" class="col-md-2 col-form-label">Patient ID</label>
                 <div class="col-md-10">
-                  <input class="form-control" type="text" placeholder="eg ... MN200-01" id="html5-text-input" />
+                  <input class="form-control" type="text" id="patient-id-input" placeholder="eg ... MN200-01" />
                 </div>
               </div>
             
               <div class="mb-4 row">
                 <label for="html5-number-input" class="col-md-2 col-form-label">Age</label>
                 <div class="col-md-10">
-                  <input class="form-control" type="number" placeholder="18" id="html5-number-input" />
+                  <input class="form-control" type="number" id="age-input" placeholder="18" />
                 </div>
               </div>
             
               <div class="mb-4 row">
                 <label for="html5-text-input" class="col-md-2 col-form-label">Sex</label>
                 <div class="col-md-10">
-                  <input class="form-control" type="text" placeholder="Female/Male" id="html5-text-input" />
+                  <input class="form-control" type="text" id="sex-input" placeholder="Female/Male" />
                 </div>
               </div>
             
               <div class="mb-4 row">
                 <label for="html5-text-input" class="col-md-2 col-form-label">Ward</label>
                 <div class="col-md-10">
-                  <input class="form-control" type="text" placeholder="Ward" id="html5-text-input" />
+                  <input class="form-control" type="text" id="ward-input" placeholder="Ward" />
                 </div>
               </div>
             
               <div class="mb-4 row">
-                <label for="html5-text-input" class="col-md-2 col-form-label">Condition</label>
+                <label for="Condition" class="col-md-2 col-form-label">Condition</label>
                 <div class="col-md-10">
-                  <textarea class="form-control" id="Condition" placeholder="Enter Condition" rows="3"></textarea>
+                  <textarea class="form-control" id="condition-input" placeholder="Enter Condition" rows="3"></textarea>
                 </div>
               </div>
             
               <div class="mb-4 row">
                 <label for="html5-text-input" class="col-md-2 col-form-label">Sample ID</label>
                 <div class="col-md-10">
-                  <input class="form-control" type="text" placeholder="Enter Sample" id="html5-text-input" />
+                  <input class="form-control" type="text" id="sample-id-input" placeholder="Enter Sample" />
                 </div>
               </div>
             
@@ -446,9 +445,11 @@
               <div class="mb-4 row">
                 <label for="html5-text-input" class="col-md-2 col-form-label">Identified Organism</label>
                 <div class="col-md-10">
-                  <input class="form-control" type="text" placeholder="eg ...XD-556" id="html5-text-input" />
+                  <input class="form-control" type="text" id="identified-organism-input" placeholder="eg ...XD-556" />
                 </div>
               </div>
+
+            
             
               <hr /> <!-- Horizontal line -->
             
@@ -570,6 +571,39 @@
             <!-- Repeat the rows as necessary -->
             
             <script>
+             document.addEventListener("DOMContentLoaded", function() {
+    // Get the row data from localStorage
+    const rowData = JSON.parse(localStorage.getItem('editRowData'));
+
+    // Check if rowData exists before autofilling
+    if (rowData) {
+      // Convert the date format from 'DD/MM/YYYY HHMMhrs' to 'YYYY-MM-DDTHH:MM'
+      const formattedDate = convertToDateTimeLocalFormat(rowData.date);
+      
+      // Populate the fields with the data from localStorage
+      document.getElementById('html5-datetime-local-input').value = formattedDate; // Set the datetime-local input value
+      document.getElementById('patient-id-input').value = rowData.patientID;
+      document.getElementById('sample-id-input').value = rowData.sampleID;
+      document.getElementById('sample-select').value = rowData.sampleOrigin;
+      document.getElementById('identified-organism-input').value = rowData.organismID;
+    }
+    
+    // Function to convert the date string (from storage) to 'YYYY-MM-DDTHH:MM' format
+    function convertToDateTimeLocalFormat(dateString) {
+        // Example input: '12/06/2023 1200hrs'
+        const [datePart, timePart] = dateString.split(' ');
+        const [day, month, year] = datePart.split('/');
+        
+        // Extract hours and minutes from the time part
+        const hours = timePart.substring(0, 2);
+        const minutes = timePart.substring(2, 4);
+        
+        // Return in the format 'YYYY-MM-DDTHH:MM'
+        return `${year}-${month}-${day}T${hours}:${minutes}`;
+    }
+});
+
+
                 // Function to populate all "Suggestable Pharmacy Drug" dropdowns
                 function populatePharmacyDrugs() {
                     // Fetch data from the Strapi API with the Bearer token

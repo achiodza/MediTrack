@@ -377,92 +377,103 @@
 
 
 
-                    <div class="card">
-                      <h5 class="card-header">Samples Received</h5>
-                      <div class="table-responsive text-nowrap">
-
-
-                        <table class="table" id="dataTable">
-                          <thead class="table-light">
-                              <tr>
-                                  <th>Sample ID</th>
-                                  <th>Patient ID</th>
-                                  <th>Sample Type/Origin</th>
-                                  <th>Organism ID</th>
-                                  <th>Date</th>
-                                  <th>Actions</th>
-                              </tr>
-                          </thead>
-                          <tbody class="table-border-bottom-0">
-                              <!-- Rows will be populated dynamically -->
-                          </tbody>
+                  <div class="card">
+                    <h5 class="card-header">Samples Received</h5>
+                    <div class="table-responsive text-nowrap">
+                  
+                      <table class="table" id="dataTable">
+                        <thead class="table-light">
+                          <tr>
+                            <th>Sample ID</th>
+                            <th>Patient ID</th>
+                            <th>Sample Type/Origin</th>
+                            <th>Organism ID</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody class="table-border-bottom-0">
+                          <!-- Rows will be populated dynamically -->
+                        </tbody>
                       </table>
-
                       <script>
                         document.addEventListener("DOMContentLoaded", function() {
-                            const API_URL = 'http://198.177.123.228:1337/api/clinicreceives';
-                            const API_TOKEN = '83fdd6ab07e87e390e9086df8edf28f77509b2a3fcc316bf471eb2b908e4e1eabc4a0ab9fdde97a7aff1c4afabb1c1697665185a0a00977659c9227010fcc95d18b5df85e7675c0f5b15c5b890542132fd6fb2c86ef2d0fb4b28e605d8761cdde07c3d16ea3b4072071ebabb6f76f0e10bf9864f2b53b082d776421348826677';
-                
-                            fetch(API_URL, {
-                                method: 'GET',
-                                headers: {
-                                    'Authorization': `Bearer ${API_TOKEN}`
-                                }
-                            })
-                            .then(response => response.json())
-                            .then(data => populateTable(data.data))
-                            .catch(error => console.error('Error fetching data:', error));
-                
-                            function populateTable(data) {
-                                const tableBody = document.querySelector('#dataTable tbody');
-                                tableBody.innerHTML = '';
-                
-                                data.forEach((item, index) => {
-                                    const attributes = item.attributes;
-                                    const sampleID = `AO${index + 1}`;  // Generate Sample ID
-                                    const patientID = attributes.patientid;
-                                    const sampleOrigin = determineSampleOrigin(index); // Placeholder function to assign sample origin
-                                    const organismID = `XD-55${6 + index}`;  // Generate Organism ID
-                                    const date = formatDate(attributes.datetime);  // Format date
-                
-                                    const row = document.createElement('tr');
-                                    row.innerHTML = `
-                                        <td>${sampleID}</td>
-                                        <td>${patientID}</td>
-                                        <td>${sampleOrigin}</td>
-                                        <td>${organismID}</td>
-                                        <td>${date}</td>
-                                        <td>
-                                            <div class="dropdown">
-                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                    <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    `;
-                                    tableBody.appendChild(row);
-                                });
-                            }
-                
-                            function determineSampleOrigin(index) {
-                                const origins = ['Blood', 'Urine', 'Stool'];
-                                return origins[index % origins.length];  // Rotate through the sample origins
-                            }
-                
-                            function formatDate(dateString) {
-                                const date = new Date(dateString);
-                                const day = String(date.getDate()).padStart(2, '0');
-                                const month = String(date.getMonth() + 1).padStart(2, '0');
-                                const year = date.getFullYear();
-                                const hours = String(date.getHours()).padStart(2, '0');
-                                const minutes = String(date.getMinutes()).padStart(2, '0');
-                                return `${day}/${month}/${year} ${hours}${minutes}hrs`;
-                            }
-                        });
+    const API_URL = 'http://198.177.123.228:1337/api/clinicreceives';
+    const API_TOKEN = '83fdd6ab07e87e390e9086df8edf28f77509b2a3fcc316bf471eb2b908e4e1eabc4a0ab9fdde97a7aff1c4afabb1c1697665185a0a00977659c9227010fcc95d18b5df85e7675c0f5b15c5b890542132fd6fb2c86ef2d0fb4b28e605d8761cdde07c3d16ea3b4072071ebabb6f76f0e10bf9864f2b53b082d776421348826677';
+
+    fetch(API_URL, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${API_TOKEN}`
+        }
+    })
+    .then(response => response.json())
+    .then(data => populateTable(data.data))
+    .catch(error => console.error('Error fetching data:', error));
+
+    function populateTable(data) {
+        const tableBody = document.querySelector('#dataTable tbody');
+        tableBody.innerHTML = '';
+
+        data.forEach((item, index) => {
+            const attributes = item.attributes;
+            const sampleID = `AO${index + 1}`;  // Generate Sample ID
+            const patientID = attributes.patientid;
+            const sampleOrigin = determineSampleOrigin(index); // Placeholder function to assign sample origin
+            const organismID = `XD-55${6 + index}`;  // Generate Organism ID
+            const date = formatDate(attributes.datetime);  // Format date
+
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${sampleID}</td>
+                <td>${patientID}</td>
+                <td>${sampleOrigin}</td>
+                <td>${organismID}</td>
+                <td>${date}</td>
+                <td>
+                    <div class="dropdown">
+                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                            <i class="bx bx-dots-vertical-rounded"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item edit-btn" href="processing-page.html"><i class="bx bx-edit-alt me-1"></i>Send to Processing</a>
+                        </div>
+                    </div>
+                </td>
+            `;
+            tableBody.appendChild(row);
+
+            // Add event listener for the edit button
+            row.querySelector('.edit-btn').addEventListener('click', function() {
+                // Save row data to localStorage
+                const rowData = {
+                    sampleID,
+                    patientID,
+                    sampleOrigin,
+                    organismID,
+                    date
+                };
+                localStorage.setItem('editRowData', JSON.stringify(rowData));
+            });
+        });
+    }
+
+    function determineSampleOrigin(index) {
+        const origins = ['Blood', 'Urine', 'Stool'];
+        return origins[index % origins.length];  // Rotate through the sample origins
+    }
+
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        return `${day}/${month}/${year} ${hours}${minutes}hrs`;
+    }
+});
+
                     </script>
                         <hr class="my-6" />
                         <div class="card">
