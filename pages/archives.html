@@ -396,27 +396,33 @@
                         </table>
                         
                         <script>
-                          // Fetch data from Strapi backend
+                          // Fetch data from Strapi backend with Authorization token
                           async function fetchData() {
                             try {
-                              const response = await fetch('http://198.177.123.228:1337/api/archives'); // Adjust the URL to your Strapi instance
+                              const response = await fetch('http://198.177.123.228:1337/api/archives', {
+                                method: 'GET',
+                                headers: {
+                                  'Authorization': 'Bearer 83fdd6ab07e87e390e9086df8edf28f77509b2a3fcc316bf471eb2b908e4e1eabc4a0ab9fdde97a7aff1c4afabb1c1697665185a0a00977659c9227010fcc95d18b5df85e7675c0f5b15c5b890542132fd6fb2c86ef2d0fb4b28e605d8761cdde07c3d16ea3b4072071ebabb6f76f0e10bf9864f2b53b082d776421348826677'
+                                }
+                              });
+                        
                               const data = await response.json();
                         
-                              // Assuming the data is in the format: { data: [{ id, attributes: { patientId, sampleId, drugId, labScientist, date }}, ...] }
+                              // Assuming the data is in the format: { data: [{ id, attributes: { patientid, sampleid, medicine, labscientist, datetime }}, ...] }
                               const tableBody = document.getElementById('table-body');
                               tableBody.innerHTML = ''; // Clear any existing rows
                         
                               data.data.forEach(entry => {
                                 const { id, attributes } = entry;
-                                const { patientId, sampleId, drugId, labScientist, date } = attributes;
+                                const { patientid, sampleid, medicine, labscientist, datetime } = attributes;
                         
                                 const row = `
                                   <tr>
-                                    <td>${patientId}</td>
-                                    <td>${sampleId}</td>
-                                    <td>${drugId}</td>
-                                    <td>${labScientist}</td>
-                                    <td>${new Date(date).toLocaleString()}</td>
+                                    <td>${patientid}</td>
+                                    <td>${sampleid}</td>
+                                    <td>${medicine}</td>
+                                    <td>${labscientist}</td>
+                                    <td>${new Date(datetime).toLocaleString()}</td>
                                     <td>
                                       <div class="dropdown">
                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -446,7 +452,6 @@
                           document.addEventListener('DOMContentLoaded', fetchData);
                         </script>
                         
-                        
                         <script>
                           function editEntry(patientId) {
                             alert('Edit function called for Patient ID: ' + patientId);
@@ -460,6 +465,7 @@
                             }
                           }
                         </script>
+                        
                         
 
 

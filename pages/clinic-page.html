@@ -412,11 +412,30 @@
                   <input class="form-control" type="text" placeholder="Ward" id="ward-input" />
                 </div>
               </div>
-            
               <div class="mb-4 row">
                 <label for="condition-input" class="col-md-2 col-form-label">Condition</label>
                 <div class="col-md-10">
-                  <textarea class="form-control" id="condition-input" placeholder="Enter Condition" rows="3"></textarea>
+                  <select class="form-control" id="condition-input">
+                    <option value="">Select Infection Type</option>
+                    <option value="Respiratory Infections">Respiratory Infections</option>
+                    <option value="Urinary Tract Infections">Urinary Tract Infections</option>
+                    <option value="Gastrointestinal System (Acute Gastroenteritis)">Gastrointestinal System</option>
+                    <option value="Skin And Soft Tissue">Skin And Soft Tissue</option>
+                    <option value="Central Nervous System">Central Nervous System</option>
+                    <option value="Cardiovascular System">Cardiovascular System</option>
+                    <option value="Blood Stream Infections">Blood Stream Infections</option>
+                    <option value="Reproductive System">Reproductive System</option>
+                    <option value="Bones and Joints">Bones and Joints</option>
+                    <option value="Ear, Nose And Throat">Ear, Nose And Throat</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+              </div>
+            
+              <div class="mb-4 row">
+                <label for="condition-input" class="col-md-2 col-form-label">Clinical Data</label>
+                <div class="col-md-10">
+                  <textarea class="form-control" id="clinical-data" placeholder="Enter Any Clinical History Available" rows="3"></textarea>
                 </div>
               </div>
             
