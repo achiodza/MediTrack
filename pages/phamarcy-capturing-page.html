@@ -118,6 +118,7 @@
 
           <ul class="menu-inner py-1">
             <!-- Dashboards -->
+<<<<<<< HEAD
             <li class="menu-item  open">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-home-smile"></i>
@@ -148,18 +149,82 @@
                     <div class="text-truncate" data-i18n="eCommerce">Pharmacy</div>
                   </a>
                 </li>
+=======
+            <li class="menu-item active open">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-home-smile"></i>
+                <div class="text-truncate" data-i18n="Dashboards">Dashbord</div>
+               
+              </a>
+          
+              <ul class="menu-sub">
+                
+                
+                <li class="menu-item">
+                  <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                    <div class="text-truncate" data-i18n="Lab">Lab</div>
+                  </a>
+                  <ul class="menu-sub">
+                    <li class="menu-item active">
+                      <a href="home.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Analytics">Back To Dashbord</div>
+                      </a>
+                    </li>
+                    <li class="menu-item active">
+                      <a href="analytics.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Analytics">Analytics</div>
+                      </a>
+                    </li>
+                    
+                  
+                    <li class="menu-item active ">
+                      <a href="clinic-page.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Clinic">Clinic</div>
+                      </a>
+                    </li>
+                    <li class="menu-item active">
+                      <a href="phamarcy-capturing-page.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Pharmacy">Pharmacy</div>
+                      </a>
+                    </li>
+                    <li class="menu-item active">
+                      <a href="processing-page.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Clinic Processing">Clinic Processing</div>
+                      </a>
+                    </li>
+                    <li class="menu-item active">
+                      <a href="samples.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Samples">Samples</div>
+                      </a>
+                    </li>
+                    
+                    <li class="menu-item active">
+                      <a
+                        href="archives.html"
+                        class="menu-link">
+                        <div class="text-truncate" data-i18n="Archives">Archives</div>
+                      </a>
+                    </li>
+                  </ul>
+>>>>>>> develop
                 
 
             
            
             <!-- Pages -->
+<<<<<<< HEAD
             <li class="menu-item ">
+=======
+            <li class="menu-item">
+>>>>>>> develop
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
                 <div class="text-truncate" data-i18n="Account Settings">Account Settings</div>
               </a>
               <ul class="menu-sub">
                 
+<<<<<<< HEAD
               <li class="menu-item ">
                 <a href="auth-login-basic.html" class="menu-link" target="_blank">
                   <div class="text-truncate" data-i18n="Basic">Login</div>
@@ -183,6 +248,23 @@
 
           </li>
               </ul>
+=======
+             
+              <li class="menu-item active">
+                <a href="update-profile.html" class="menu-link">
+                  <div class="text-truncate" data-i18n="Basic">Update Profile</div>
+                </a>
+              </li>
+              <li class="menu-item active">
+                <a href="forgotpassword.html" class="menu-link">
+                  <div class="text-truncate" data-i18n="Basic">Reset Password</div>
+                </a>
+              </li>
+             
+
+          </li>
+              
+>>>>>>> develop
             
            
            
@@ -196,6 +278,7 @@
             </li>
             <!-- Misc -->
             
+<<<<<<< HEAD
             <li class="menu-item">
               <a
                 href="#"
@@ -209,12 +292,22 @@
               <a
                 href="#
                 target="_blank"
+=======
+          </ul>
+            
+            <li class="menu-item">
+              <a
+                href="support.html"
+>>>>>>> develop
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Support">Support</div>
               </a>
             </li>
+<<<<<<< HEAD
             
+=======
+>>>>>>> develop
           </ul>
         </aside>
         <!-- / Menu -->
@@ -235,6 +328,7 @@
             <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
               <!-- Search -->
               <div class="navbar-nav align-items-center">
+<<<<<<< HEAD
                 <div class="nav-item d-flex align-items-center">
                   <i class="bx bx-search bx-md"></i>
                   <input
@@ -244,10 +338,97 @@
                     aria-label="Search..." />
                 </div>
               </div>
+=======
+                <div class="nav-item d-flex align-items-center position-relative"> <!-- Added position-relative -->
+                  <i class="bx bx-search bx-md"></i>
+                  <input type="text" id="search-bar" class="form-control border-0 shadow-none ps-1 ps-sm-2" placeholder="Search..." aria-label="Search..." />
+                  <div id="search-results" class="search-results"></div> <!-- Added class for styling -->
+                </div>
+              </div>
+              
+              <!-- /Search -->
+              <style>
+                /* Styling for the search results container */
+                #search-results {
+                  position: absolute;
+                  top: 100%; /* Place it below the search bar */
+                  left: 0;
+                  right: 0;
+                  background-color: white;
+                  border: 1px solid #ccc;
+                  max-height: 200px;
+                  overflow-y: auto;
+                  z-index: 1000;
+                }
+              
+                /* Styling for individual search results */
+                #search-results div {
+                  padding: 8px;
+                  cursor: pointer;
+                }
+              
+                #search-results div:hover {
+                  background-color: #f0f0f0;
+                }
+              </style>
+              
+              <script>
+                const searchBar = document.getElementById('search-bar');
+                const searchResults = document.getElementById('search-results');
+              
+                const index = [
+                  { title: 'Home', url: 'home.html', keywords: ['home', 'dashboard'] },
+                  { title: 'Support', url: 'support.html', keywords: ['support', 'help'] },
+                  { title: 'Clinic', url: 'clinic-page.html', keywords: ['clinic'] },
+                  { title: 'Archives', url: 'archives.html', keywords: ['archives'] },
+                  { title: 'Pharmacy', url: 'pharmacy-capturing-page.html', keywords: ['pharmacy'] },
+                  { title: 'Update Profile', url: 'update-profile.html', keywords: ['update profile', 'update', 'profile', 'account settings'] },
+                  { title: 'Samples', url: 'samples.html', keywords: ['samples', 'sample'] },
+                  { title: 'Clinic Processing', url: 'processing-page.html', keywords: ['processing', 'clinic', 'clinic processing'] },
+                  { title: 'Forgot Password', url: 'forgotpassword.html', keywords: ['forgot', 'password'] },
+                  { title: 'User Guide', url: 'user-guide.html', keywords: ['user', 'guide'] },
+                  { title: 'Privacy Policy', url: 'privacy-policy.html', keywords: ['privacy', 'policy'] },
+                  { title: 'Troubleshooting', url: 'troubleshooting.html', keywords: ['troubleshooting', 'help'] },
+                  { title: 'Analytics', url: 'home.html', keywords: ['analytics'] },
+                  // Add more pages and keywords to the index
+                ];
+              
+                searchBar.addEventListener('keyup', (event) => {
+                  const query = event.target.value.toLowerCase();
+              
+                  // Clear results if the search bar is empty
+                  if (query === '') {
+                    searchResults.innerHTML = '';
+                    return; // Exit the function early
+                  }
+              
+                  // Filter pages based on the query
+                  const results = index.filter(page => {
+                    const keywords = page.keywords.join(' ').toLowerCase();
+                    return keywords.includes(query);
+                  });
+              
+                  // Clear previous results
+                  searchResults.innerHTML = '';
+              
+                  // Display new results
+                  results.forEach(page => {
+                    const resultDiv = document.createElement('div'); // Create a new div for each result
+                    const link = document.createElement('a');
+                    link.href = page.url;
+                    link.textContent = page.title;
+                    resultDiv.appendChild(link); // Append the link to the div
+                    searchResults.appendChild(resultDiv); // Append the div to the search results
+                  });
+                });
+              </script>
+             
+>>>>>>> develop
               <!-- /Search -->
 
               <ul class="navbar-nav flex-row align-items-center ms-auto">
                 <!-- Place this tag where you want the button to render. -->
+<<<<<<< HEAD
                 <li class="nav-item lh-1 me-4">
                   <a
                     class="github-button"
@@ -314,6 +495,28 @@
                         <i class="bx bx-power-off bx-md me-3"></i><span>Log Out</span>
                       </a>
                     </li>
+=======
+                <script>
+                  function updateClock() {
+                    const now = new Date();
+                    const hours = now.getHours().toString().padStart(2, '0');
+                    const minutes = now.getMinutes().toString().padStart(2, '0');
+                    const seconds = now.getSeconds().toString().padStart(2, '0');
+                    const timeString = `${hours}:${minutes}:${seconds}`;
+                    
+                    document.getElementById('clock').textContent = timeString;
+                  }
+                  
+                  // Update the clock every second
+                  setInterval(updateClock, 1000);
+                  
+                  // Initial call to display the clock immediately
+                  updateClock();
+                </script>
+                <div class="clock" id="clock" style="color: blue;"></div>
+               
+               
+>>>>>>> develop
                   </ul>
                 </li>
                 <!--/ User -->
@@ -338,12 +541,17 @@
 
                     
                     <div class="card-body pt-4">
+<<<<<<< HEAD
                       <form id="formAccountSettings" method="POST" onsubmit="return false">
+=======
+                      <form id="csvForm">
+>>>>>>> develop
                        <div class="row g-6">
 
 
                         <div class="col-md-6">
                           <label for="email" class="form-label">Upload Drug Batch File</label>
+<<<<<<< HEAD
                           <input class="form-control" type="file" id="formFile" autofocus />
                         </div>
 
@@ -371,6 +579,68 @@
                             type="datetime-local"
                             value="2021-06-18T12:30:00"
                             id="html5-datetime-local-input" />
+=======
+                          <input class="form-control" type="file" id="csvFile" accept=".csv" required autofocus />
+                        </div>
+                        <script>
+                          document.getElementById('csvForm').addEventListener('submit', function(event) {
+                              event.preventDefault();
+                  
+                              const fileInput = document.getElementById('csvFile');
+                              const file = fileInput.files[0];
+                  
+                              if (file) {
+                                  const reader = new FileReader();
+                                  
+                                  reader.onload = function(e) {
+                                      const text = e.target.result;
+                                      const rows = text.split('\n');
+                                      const headers = rows[0].split(',');
+                  
+                                      rows.slice(1).forEach(row => {
+                                          const data = row.split(',');
+                  
+                                          // Create data object based on CSV headers
+                                          const payload = {
+                                              medicine: data[headers.indexOf('medicine')],
+                                              availability: data[headers.indexOf('availability')].trim().toLowerCase() === 'true',
+                                              datestocked: data[headers.indexOf('datestocked')]
+                                          };
+                  
+                                          // Send the data to Strapi
+                                          fetch('http://198.177.123.228:1337/api/pharmacyrecords', {
+                                              method: 'POST',
+                                              headers: {
+                                                  'Authorization': 'Bearer 83fdd6ab07e87e390e9086df8edf28f77509b2a3fcc316bf471eb2b908e4e1eabc4a0ab9fdde97a7aff1c4afabb1c1697665185a0a00977659c9227010fcc95d18b5df85e7675c0f5b15c5b890542132fd6fb2c86ef2d0fb4b28e605d8761cdde07c3d16ea3b4072071ebabb6f76f0e10bf9864f2b53b082d776421348826677',
+                                                  'Content-Type': 'application/json'
+                                              },
+                                              body: JSON.stringify({ data: payload })
+                                          })
+                                          .then(response => response.json())
+                                          .then(data => {
+                                              console.log('Successfully added:', data);
+                                              alert(`Record for ${payload.data} was successfully submitted!`);
+                                          })
+                                          .catch(error => {
+                                              console.error('Error:', error);
+                                              alert('There was an error submitting the record.');
+                                          });
+                                      });
+                                  };
+                  
+                                  reader.readAsText(file);
+                              } else {
+                                  alert('Please select a CSV file.');
+                              }
+                          });
+                      </script>              
+
+                         
+
+                          <div class="col-md-6">
+                            <label for="organization" class="form-label">Date Stocked</label>
+                            <input class="form-control" type="datetime-local" value="" id="html5-datetime-local-input" />
+>>>>>>> develop
                           </div>
                   
                         </div>
@@ -387,6 +657,7 @@
 
 
                     <div class="card">
+<<<<<<< HEAD
                       <h5 class="card-header">Drug Records</h5>
                       <div class="table-responsive text-nowrap">
 
@@ -497,6 +768,85 @@
 
 
                       </div>
+=======
+                      <h5 class="card-header">Available Drugs and Records</h5>
+                      <div class="table-responsive text-nowrap">
+                        <table class="table">
+                          <thead class="table-light">
+                              <tr>
+                                  <th>Drug ID</th>
+                                  <th>Drug Name</th>
+                                  <th>Quantity</th>
+                                  <th>Date Stocked</th>
+                                  <th>Days Since Stocked</th>
+                              </tr>
+                          </thead>
+                          <tbody id="drugTableBody" class="table-border-bottom-0">
+                              <!-- Rows will be dynamically inserted here -->
+                          </tbody>
+                      </table>
+                  </div>
+              
+                
+                  <script>
+                    // Function to calculate the number of days since the drug was stocked
+                    function calculateDaysSinceStocked(datestocked) {
+                        const dateStocked = new Date(datestocked);
+                        const currentDate = new Date();
+                        const diffTime = Math.abs(currentDate - dateStocked);
+                        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // Convert milliseconds to days
+                        return diffDays;
+                    }
+            
+                    // Function to fetch drug data and populate the table
+                    async function fetchAndDisplayDrugs() {
+                        try {
+                            const response = await fetch('http://198.177.123.228:1337/api/pharmacyrecords', {
+                                headers: {
+                                    'Authorization': 'Bearer 83fdd6ab07e87e390e9086df8edf28f77509b2a3fcc316bf471eb2b908e4e1eabc4a0ab9fdde97a7aff1c4afabb1c1697665185a0a00977659c9227010fcc95d18b5df85e7675c0f5b15c5b890542132fd6fb2c86ef2d0fb4b28e605d8761cdde07c3d16ea3b4072071ebabb6f76f0e10bf9864f2b53b082d776421348826677',
+                                    'Content-Type': 'application/json'
+                                }
+                            });
+                            
+                            if (!response.ok) {
+                                throw new Error('Failed to fetch drug data');
+                            }
+            
+                            const data = await response.json();
+                            const records = data.data;
+                            const tbody = document.getElementById('drugTableBody');
+                            tbody.innerHTML = ''; // Clear the existing content
+            
+                            records.forEach((record, index) => {
+                                const drug = record.attributes;
+                                const daysSinceStocked = calculateDaysSinceStocked(drug.datestocked);
+            
+                                const row = `
+                                    <tr>
+                                        <td>${index + 1}</td>
+                                        <td>${drug.medicine}</td>
+                                        <td>${Math.floor(Math.random() * 500) + 100} units</td> <!-- Random quantity for demo -->
+                                        <td>${drug.datestocked}</td>
+                                        <td>${daysSinceStocked} days</td>
+                                    </tr>
+                                `;
+            
+                                tbody.insertAdjacentHTML('beforeend', row);
+                            });
+            
+                        } catch (error) {
+                            console.error('Error fetching drug data:', error);
+                        }
+                    }
+            
+                    // Fetch and display the drug data on page load
+                    window.onload = fetchAndDisplayDrugs;
+                </script>
+                
+                       
+
+                     
+>>>>>>> develop
                     </div>
 
 
@@ -521,7 +871,11 @@
                       document.write(new Date().getFullYear());
                     </script>
                     MediTrack |
+<<<<<<< HEAD
                     <a href="https://themeselection.com" target="_blank" class="footer-link">Infinity Lines of Code</a>
+=======
+                    <a href="https://infinitylinesofcode.com" target="_blank" class="footer-link">Infinity Lines of Code</a>
+>>>>>>> develop
                   </div>
                  
                 </div>
@@ -544,6 +898,12 @@
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
+<<<<<<< HEAD
+=======
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"></script>
+
+>>>>>>> develop
 
     <script src="../assets/vendor/libs/jquery/jquery.js"></script>
     <script src="../assets/vendor/libs/popper/popper.js"></script>

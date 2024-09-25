@@ -121,6 +121,7 @@
             <li class="menu-item active open">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-home-smile"></i>
+<<<<<<< HEAD
                 <div class="text-truncate" data-i18n="Dashboards">Home</div>
                
               </a>
@@ -148,18 +149,79 @@
                     <div class="text-truncate" data-i18n="eCommerce">Pharmacy</div>
                   </a>
                 </li>
+=======
+                <div class="text-truncate" data-i18n="Dashboards">Dashbord</div>
+               
+              </a>
+          
+              <ul class="menu-sub">
+                
+                
+                <li class="menu-item">
+                  <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                    <div class="text-truncate" data-i18n="Lab">Lab</div>
+                  </a>
+                  <ul class="menu-sub">
+                    <li class="menu-item active">
+                      <a href="home.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Analytics">Back To Dashbord</div>
+                      </a>
+                    </li>
+                    <li class="menu-item active">
+                      <a href="analytics.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Analytics">Analytics</div>
+                      </a>
+                    </li>
+                    
+                  
+                    <li class="menu-item active ">
+                      <a href="clinic-page.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Clinic">Clinic</div>
+                      </a>
+                    </li>
+                    <li class="menu-item active">
+                      <a href="phamarcy-capturing-page.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Pharmacy">Pharmacy</div>
+                      </a>
+                    </li>
+                    <li class="menu-item active">
+                      <a href="processing-page.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Clinic Processing">Clinic Processing</div>
+                      </a>
+                    </li>
+                    <li class="menu-item active">
+                      <a href="samples.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Samples">Samples</div>
+                      </a>
+                    </li>
+                    
+                    <li class="menu-item active">
+                      <a
+                        href="archives.html"
+                        class="menu-link">
+                        <div class="text-truncate" data-i18n="Archives">Archives</div>
+                      </a>
+                    </li>
+                  </ul>
+>>>>>>> develop
                 
 
             
            
             <!-- Pages -->
+<<<<<<< HEAD
             <li class="menu-item active">
+=======
+            <li class="menu-item">
+>>>>>>> develop
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
                 <div class="text-truncate" data-i18n="Account Settings">Account Settings</div>
               </a>
               <ul class="menu-sub">
                 
+<<<<<<< HEAD
               <li class="menu-item active">
                 <a href="auth-login-basic.html" class="menu-link" target="_blank">
                   <div class="text-truncate" data-i18n="Basic">Login</div>
@@ -183,6 +245,23 @@
 
           </li>
               </ul>
+=======
+              
+              <li class="menu-item active">
+                <a href="update-profile.html" class="menu-link">
+                  <div class="text-truncate" data-i18n="Basic">Update Profile</div>
+                </a>
+              </li>
+              <li class="menu-item active">
+                <a href="forgotpassword.html" class="menu-link">
+                  <div class="text-truncate" data-i18n="Basic">Reset Password</div>
+                </a>
+              </li>
+              
+
+          </li>
+              
+>>>>>>> develop
             
            
            
@@ -196,6 +275,7 @@
             </li>
             <!-- Misc -->
             
+<<<<<<< HEAD
             <li class="menu-item">
               <a
                 href="https://demos.themeselection.com/MediTrack-bootstrap-html-admin-template/documentation/"
@@ -209,12 +289,23 @@
               <a
                 href="https://github.com/themeselection/MediTrack-html-admin-template-free/issues"
                 target="_blank"
+=======
+          </ul>
+            
+            <li class="menu-item">
+              <a
+                href="support.html"
+>>>>>>> develop
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Support">Support</div>
               </a>
+<<<<<<< HEAD
             </li>
             
+=======
+            </li>    
+>>>>>>> develop
           </ul>
         </aside>
         <!-- / Menu -->
@@ -235,6 +326,7 @@
             <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
               <!-- Search -->
               <div class="navbar-nav align-items-center">
+<<<<<<< HEAD
                 <div class="nav-item d-flex align-items-center">
                   <i class="bx bx-search bx-md"></i>
                   <input
@@ -244,10 +336,97 @@
                     aria-label="Search..." />
                 </div>
               </div>
+=======
+                <div class="nav-item d-flex align-items-center position-relative"> <!-- Added position-relative -->
+                  <i class="bx bx-search bx-md"></i>
+                  <input type="text" id="search-bar" class="form-control border-0 shadow-none ps-1 ps-sm-2" placeholder="Search..." aria-label="Search..." />
+                  <div id="search-results" class="search-results"></div> <!-- Added class for styling -->
+                </div>
+              </div>
+              
+              <!-- /Search -->
+              <style>
+                /* Styling for the search results container */
+                #search-results {
+                  position: absolute;
+                  top: 100%; /* Place it below the search bar */
+                  left: 0;
+                  right: 0;
+                  background-color: white;
+                  border: 1px solid #ccc;
+                  max-height: 200px;
+                  overflow-y: auto;
+                  z-index: 1000;
+                }
+              
+                /* Styling for individual search results */
+                #search-results div {
+                  padding: 8px;
+                  cursor: pointer;
+                }
+              
+                #search-results div:hover {
+                  background-color: #f0f0f0;
+                }
+              </style>
+              
+              <script>
+                const searchBar = document.getElementById('search-bar');
+                const searchResults = document.getElementById('search-results');
+              
+                const index = [
+                  { title: 'Home', url: 'home.html', keywords: ['home', 'dashboard'] },
+                  { title: 'Support', url: 'support.html', keywords: ['support', 'help'] },
+                  { title: 'Clinic', url: 'clinic-page.html', keywords: ['clinic'] },
+                  { title: 'Archives', url: 'archives.html', keywords: ['archives'] },
+                  { title: 'Pharmacy', url: 'pharmacy-capturing-page.html', keywords: ['pharmacy'] },
+                  { title: 'Update Profile', url: 'update-profile.html', keywords: ['update profile', 'update', 'profile', 'account settings'] },
+                  { title: 'Samples', url: 'samples.html', keywords: ['samples', 'sample'] },
+                  { title: 'Clinic Processing', url: 'processing-page.html', keywords: ['processing', 'clinic', 'clinic processing'] },
+                  { title: 'Forgot Password', url: 'forgotpassword.html', keywords: ['forgot', 'password'] },
+                  { title: 'User Guide', url: 'user-guide.html', keywords: ['user', 'guide'] },
+                  { title: 'Privacy Policy', url: 'privacy-policy.html', keywords: ['privacy', 'policy'] },
+                  { title: 'Troubleshooting', url: 'troubleshooting.html', keywords: ['troubleshooting', 'help'] },
+                  { title: 'Analytics', url: 'home.html', keywords: ['analytics'] },
+                  // Add more pages and keywords to the index
+                ];
+              
+                searchBar.addEventListener('keyup', (event) => {
+                  const query = event.target.value.toLowerCase();
+              
+                  // Clear results if the search bar is empty
+                  if (query === '') {
+                    searchResults.innerHTML = '';
+                    return; // Exit the function early
+                  }
+              
+                  // Filter pages based on the query
+                  const results = index.filter(page => {
+                    const keywords = page.keywords.join(' ').toLowerCase();
+                    return keywords.includes(query);
+                  });
+              
+                  // Clear previous results
+                  searchResults.innerHTML = '';
+              
+                  // Display new results
+                  results.forEach(page => {
+                    const resultDiv = document.createElement('div'); // Create a new div for each result
+                    const link = document.createElement('a');
+                    link.href = page.url;
+                    link.textContent = page.title;
+                    resultDiv.appendChild(link); // Append the link to the div
+                    searchResults.appendChild(resultDiv); // Append the div to the search results
+                  });
+                });
+              </script>
+
+>>>>>>> develop
               <!-- /Search -->
 
               <ul class="navbar-nav flex-row align-items-center ms-auto">
                 <!-- Place this tag where you want the button to render. -->
+<<<<<<< HEAD
                 <li class="nav-item lh-1 me-4">
                   <a
                     class="github-button"
@@ -314,6 +493,28 @@
                         <i class="bx bx-power-off bx-md me-3"></i><span>Log Out</span>
                       </a>
                     </li>
+=======
+                <script>
+                  function updateClock() {
+                    const now = new Date();
+                    const hours = now.getHours().toString().padStart(2, '0');
+                    const minutes = now.getMinutes().toString().padStart(2, '0');
+                    const seconds = now.getSeconds().toString().padStart(2, '0');
+                    const timeString = `${hours}:${minutes}:${seconds}`;
+                    
+                    document.getElementById('clock').textContent = timeString;
+                  }
+                  
+                  // Update the clock every second
+                  setInterval(updateClock, 1000);
+                  
+                  // Initial call to display the clock immediately
+                  updateClock();
+                </script>
+                <div class="clock" id="clock" style="color: blue;"></div>
+               
+               
+>>>>>>> develop
                   </ul>
                 </li>
                 <!--/ User -->
@@ -329,6 +530,7 @@
   
             <div class="container-xxl flex-grow-1 container-p-y">
               <div class="row g-6">
+<<<<<<< HEAD
                 <div class="col-md-8">
                   <div class="card">
                     <h5 class="card-header">Clinic</h5>
@@ -431,10 +633,323 @@
 
 
                 </form>
+=======
+                <div class="col-md-12">
+                  <div class="card">
+                    <h5 class="card-header">Lab Processing Results Capturing</h5>
+          <div class="card-body">
+            <form>
+              <div class="mb-4 row">
+                <label for="html5-datetime-local-input" class="col-md-2 col-form-label">Datetime</label>
+                <div class="col-md-10">
+                  <input class="form-control" type="text" id="html5-datetime-local-input" readonly/>
+                </div>
+              </div>
+            
+              <div class="mb-4 row">
+                <label for="html5-text-input" class="col-md-2 col-form-label">Patient ID</label>
+                <div class="col-md-10">
+                  <input class="form-control" type="text" id="patient-id-input" placeholder="eg ... MN200-01" readonly/>
+                </div>
+              </div>
+            
+              <div class="mb-4 row">
+                <label for="html5-number-input" class="col-md-2 col-form-label">Age</label>
+                <div class="col-md-10">
+                  <input class="form-control" type="text" id="age-input" placeholder="18" readonly/>
+                </div>
+              </div>
+            
+              <div class="mb-4 row">
+                <label for="html5-text-input" class="col-md-2 col-form-label">Sex</label>
+                <div class="col-md-10">
+                  <input class="form-control" type="text" id="sex-input" placeholder="Female/Male" readonly/>
+                </div>
+              </div>
+            
+              <div class="mb-4 row">
+                <label for="ward-input" class="col-md-2 col-form-label">Ward</label>
+                <div class="col-md-10">
+                  <input class="form-control" type="text" id="ward-input" placeholder="Ward" readonly/>
+                </div>
+              </div>
+              <div class="mb-4 row">
+                <label for="condition-input" class="col-md-2 col-form-label">Infection Type</label>
+                <div class="col-md-10">
+                  <input class="form-control" type="text" placeholder="Infection Type" id="condition-input" readonly/>
+                </div>
+              </div>
+            
+              <div class="mb-4 row">
+                <label for="Condition" class="col-md-2 col-form-label">Clinical Data</label>
+                <div class="col-md-10">
+                  <textarea class="form-control" id="clinicaldata-input" placeholder="Enter Condition" rows="3" readonly></textarea>
+                </div>
+              </div>
+            <!-- New Data Here -->
+              <div class="mb-4 row">
+                <label for="sampleId-input" class="col-md-2 col-form-label">Sample ID</label>
+                <div class="col-md-10">
+                  <input class="form-control" type="text" id="sample-id-input" placeholder="Enter Sample" readonly/>
+                </div>
+              </div>
+            
+              <div class="mb-4 row">
+                <label for="sample-select" class="col-md-2 col-form-label">Sample Origin</label>
+                <div class="col-md-10">
+                  <select class="form-control" id="sample-select">
+                    <option value="">Select Sample Type/Origin</option>
+                    <option value="Blood">Blood</option>
+                    <option value="Urine">Urine</option>
+                    <option value="Stool">Stool</option>
+                    <option value="Rectal swab">Rectal swab</option>
+                    <option value="Throat Swab">Throat Swab</option>
+                    <option value="Aspirates">Aspirates</option>
+                    <option value="CSF">CSF</option>
+                    <option value="High Vaginal Swab">High Vaginal Swab</option>
+                    <option value="Wound swab">Wound swab</option>
+                    <option value="Biopsy">Biopsy</option>
+                    <option value="Sputum">Sputum</option>
+                  </select>
+                </div>
+              </div>
+            
+              <div class="mb-4 row">
+                <label for="html5-text-input" class="col-md-2 col-form-label">Identified Organism</label>
+                <div class="col-md-10">
+                  <input class="form-control" type="text" id="identified-organism-input" placeholder="eg ...XD-556" />
+                </div>
+              </div>
+
+            
+            
+              <hr /> <!-- Horizontal line -->
+            
+              <!-- Repeated rows start here -->
+              <!-- Row 1 -->
+              <div class="mb-4 row">
+                <div class="col-md-4">
+                    <label for="drug-select-1">Drugs used</label>
+                    <select class="form-control" id="drug-select-1">
+                        <option value="">Select Drug</option>
+                        <option value="Drug1">Drug1</option>
+                        <option value="Drug2">Drug2</option>
+                        <!-- Add more drug options here -->
+                    </select>
+                </div>
+            
+                <div class="col-md-4">
+                    <label for="susceptibility-select-1">Susceptibility Profile</label>
+                    <select class="form-control" id="susceptibility-select-1">
+                        <option value="Susceptible">Susceptible</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Resistant">Resistant</option>
+                    </select>
+                </div>
+            
+                <div class="col-md-4">
+                    <label for="pharmacy-select-1">Suggestable Pharmacy Drug</label>
+                    <select class="form-control pharmacy-select" id="pharmacy-select-1">
+                        <option value="">Select Drug from Pharmacy</option>
+                        <!-- Options to be populated dynamically from pharmacy endpoint -->
+                    </select>
+                </div>
+            </div>
+            <div class="mb-4 row">
+              <div class="col-md-4">
+                  <label for="drug-select-2">Drugs used</label>
+                  <select class="form-control" id="drug-select-2">
+                      <option value="">Select Drug</option>
+                      <option value="Drug1">Drug1</option>
+                      <option value="Drug2">Drug2</option>
+                      <!-- Add more drug options here -->
+                  </select>
+              </div>
+          
+              <div class="col-md-4">
+                  <label for="susceptibility-select-2">Susceptibility Profile</label>
+                  <select class="form-control" id="susceptibility-select-2">
+                      <option value="Susceptible">Susceptible</option>
+                      <option value="Intermediate">Intermediate</option>
+                      <option value="Resistant">Resistant</option>
+                  </select>
+              </div>
+          
+              <div class="col-md-4">
+                  <label for="pharmacy-select-2">Suggestable Pharmacy Drug</label>
+                  <select class="form-control pharmacy-select" id="pharmacy-select-2">
+                      <option value="">Select Drug from Pharmacy</option>
+                      <!-- Options to be populated dynamically from pharmacy endpoint -->
+                  </select>
+              </div>
+          </div>
+          <div class="mb-4 row">
+            <div class="col-md-4">
+                <label for="drug-select-3">Drugs used</label>
+                <select class="form-control" id="drug-select-3">
+                    <option value="">Select Drug</option>
+                    <option value="Drug1">Drug1</option>
+                    <option value="Drug2">Drug2</option>
+                    <!-- Add more drug options here -->
+                </select>
+            </div>
+        
+            <div class="col-md-4">
+                <label for="susceptibility-select-3">Susceptibility Profile</label>
+                <select class="form-control" id="susceptibility-select-3">
+                    <option value="Susceptible">Susceptible</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Resistant">Resistant</option>
+                </select>
+            </div>
+        
+            <div class="col-md-4">
+                <label for="pharmacy-select-3">Suggestable Pharmacy Drug</label>
+                <select class="form-control pharmacy-select" id="pharmacy-select-3">
+                    <option value="">Select Drug from Pharmacy</option>
+                    <!-- Options to be populated dynamically from pharmacy endpoint -->
+                </select>
+            </div>
+        </div>
+        <div class="mb-4 row">
+          <div class="col-md-4">
+              <label for="drug-select-4">Drugs used</label>
+              <select class="form-control" id="drug-select-4">
+                  <option value="">Select Drug</option>
+                  <option value="Drug1">Drug1</option>
+                  <option value="Drug2">Drug2</option>
+                  <!-- Add more drug options here -->
+              </select>
+          </div>
+      
+          <div class="col-md-4">
+              <label for="susceptibility-select-4">Susceptibility Profile</label>
+              <select class="form-control" id="susceptibility-select-4">
+                  <option value="Susceptible">Susceptible</option>
+                  <option value="Intermediate">Intermediate</option>
+                  <option value="Resistant">Resistant</option>
+              </select>
+          </div>
+      
+          <div class="col-md-4">
+              <label for="pharmacy-select-4">Suggestable Pharmacy Drug</label>
+              <select class="form-control pharmacy-select" id="pharmacy-select-4">
+                  <option value="">Select Drug from Pharmacy</option>
+                  <!-- Options to be populated dynamically from pharmacy endpoint -->
+              </select>
+          </div>
+      </div>
+            
+            <!-- Repeat the rows as necessary -->
+            
+            <script>
+             document.addEventListener("DOMContentLoaded", function() {
+    // Get the row data from localStorage
+    const rowData = JSON.parse(localStorage.getItem('editRowData'));
+              console.log(rowData);
+    // Check if rowData exists before autofilling
+    if (rowData) {
+      // Convert the date format from 'DD/MM/YYYY HHMMhrs' to 'YYYY-MM-DDTHH:MM'
+      const formattedDate = convertToDateTimeLocalFormat(rowData.date);
+      
+      // Populate the fields with the data from localStorage
+      document.getElementById('html5-datetime-local-input').value = rowData.date; // Set the datetime-local input value
+      document.getElementById('patient-id-input').value = rowData.patientID;
+      document.getElementById('sample-id-input').value = rowData.patientID; 
+      document.getElementById('clinicaldata-input').value = rowData.clinicaldata;
+      document.getElementById('ward-input').value = rowData.ward;
+      document.getElementById('sex-input').value = rowData.sex;
+      document.getElementById('age-input').value = rowData.age;
+      document.getElementById('condition-input').value = rowData.condition;
+      //document.getElementById('identified-organism-input').value = rowData.sex;
+    }
+    
+    // Function to convert the date string (from storage) to 'YYYY-MM-DDTHH:MM' format
+    function convertToDateTimeLocalFormat(dateString) {
+        // Example input: '12/06/2023 1200hrs'
+        const [datePart, timePart] = dateString.split(' ');
+        const [day, month, year] = datePart.split('/');
+        
+        // Extract hours and minutes from the time part
+        const hours = timePart.substring(0, 2);
+        const minutes = timePart.substring(2, 4);
+        
+        // Return in the format 'YYYY-MM-DDTHH:MM'
+        return `${year}-${month}-${day}T${hours}:${minutes}`;
+    }
+});
+
+
+                // Function to populate all "Suggestable Pharmacy Drug" dropdowns
+                function populatePharmacyDrugs() {
+                    // Fetch data from the Strapi API with the Bearer token
+                    fetch('http://198.177.123.228:1337/api/pharmacyrecords', {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer 83fdd6ab07e87e390e9086df8edf28f77509b2a3fcc316bf471eb2b908e4e1eabc4a0ab9fdde97a7aff1c4afabb1c1697665185a0a00977659c9227010fcc95d18b5df85e7675c0f5b15c5b890542132fd6fb2c86ef2d0fb4b28e605d8761cdde07c3d16ea3b4072071ebabb6f76f0e10bf9864f2b53b082d776421348826677',
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response.json();  // Convert response to JSON
+                    })
+                    .then(data => {
+                        console.log("API Response:", data);  // Log the response to check its structure
+            
+                        // Get all dropdowns with the class 'pharmacy-select'
+                        const pharmacyDropdowns = document.querySelectorAll('.pharmacy-select');
+            
+                        // Strapi typically returns data inside 'data' with 'attributes'
+                        const records = data.data; // Access the 'data' array
+            
+                        // Check if there are records returned
+                        if (!records || records.length === 0) {
+                            console.error("No data found in the API response.");
+                            return;
+                        }
+            
+                        // Iterate over each dropdown and populate with the same data
+                        pharmacyDropdowns.forEach(selectElement => {
+                            records.forEach(record => {
+                                // Ensure that 'attributes' and 'medicine' exist
+                                if (record.attributes && record.attributes.medicine) {
+                                    const medicine = record.attributes.medicine; // Access the 'medicine' field
+            
+                                    // Create a new option element
+                                    const option = document.createElement('option');
+                                    option.value = medicine;  // Set the value of the option
+                                    option.textContent = medicine;  // Set the display text
+                                    selectElement.appendChild(option);  // Append the option to the dropdown
+                                } else {
+                                    console.error("Medicine field is missing in the record:", record);
+                                }
+                            });
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error fetching pharmacy drug data:', error);  // Handle errors
+                    });
+                }
+            
+                // Call the function to populate the dropdown when the page loads
+                window.onload = populatePharmacyDrugs;
+            </script>
+            
+              <!-- Repeated rows end here -->
+            
+              <button type="submit" class="btn btn-primary">Send</button>
+            
+            </form>
+            
+>>>>>>> develop
              </div>
 
            </div>
          </div>
+<<<<<<< HEAD
   
 
                 <div class="col-md-4">
@@ -458,6 +973,87 @@
                     </div>
                   </div>
                 </div>
+=======
+         <script>
+          document.addEventListener("DOMContentLoaded", function () {
+              // Function to handle form submission
+              document.querySelector("form").addEventListener("submit", function (event) {
+                  event.preventDefault(); // Prevent the default form submission behavior
+          
+                  // Prepare the data to be sent in the POST request
+                  const formData = {
+                      data: {
+                          datetime: document.getElementById('html5-datetime-local-input').value,
+                          patientid: document.getElementById('patient-id-input').value,
+                          sex: document.getElementById('sex-input').value,
+                          age: document.getElementById('age-input').value,
+                          ward: document.getElementById('ward-input').value,
+                          condition: document.getElementById('condition-input').value,
+                          sampleid: document.getElementById('sample-id-input').value,
+                          sampleorigin: document.getElementById('sample-select').value,
+                          organismid: document.getElementById('identified-organism-input').value,
+                          processingdata: [
+                              {
+                                  drugused: document.getElementById('drug-select-1').value,
+                                  sucprofile: document.getElementById('susceptibility-select-1').value,
+                                  pharmacySuggestion: document.getElementById('pharmacy-select-1').value,
+                              },
+                              {
+                                  drugused: document.getElementById('drug-select-2').value,
+                                  sucprofile: document.getElementById('susceptibility-select-2').value,
+                                  pharmacySuggestion: document.getElementById('pharmacy-select-2').value,
+                              },
+                              {
+                                  drugused: document.getElementById('drug-select-3').value,
+                                  sucprofile: document.getElementById('susceptibility-select-3').value,
+                                  pharmacySuggestion: document.getElementById('pharmacy-select-3').value,
+                              },
+                              {
+                                  drugused: document.getElementById('drug-select-4').value,
+                                  sucprofile: document.getElementById('susceptibility-select-4').value,
+                                  pharmacySuggestion: document.getElementById('pharmacy-select-4').value,
+                              }
+                          ]
+                      }
+                  };
+          
+                  // Send a POST request to Strapi
+                  fetch('http://198.177.123.228:1337/api/clinicprocessings', {
+                      method: 'POST',
+                      headers: {
+                          'Authorization': 'Bearer 83fdd6ab07e87e390e9086df8edf28f77509b2a3fcc316bf471eb2b908e4e1eabc4a0ab9fdde97a7aff1c4afabb1c1697665185a0a00977659c9227010fcc95d18b5df85e7675c0f5b15c5b890542132fd6fb2c86ef2d0fb4b28e605d8761cdde07c3d16ea3b4072071ebabb6f76f0e10bf9864f2b53b082d776421348826677',
+                          'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify(formData)
+                  })
+                      .then(response => {
+                          if (!response.ok) {
+                              throw new Error(`HTTP error! status: ${response.status}`);
+                          }
+                          return response.json(); // Convert response to JSON
+                      })
+                      .then(data => {
+                          console.log("Form submitted successfully:", data);
+                          alert("Form successfully submitted!"); 
+          
+                          // Clear the form fields after successful submission
+                          document.querySelector("form").reset();
+          
+                          // Reset dynamically populated dropdowns (e.g., suggestable pharmacy drug)
+                          document.querySelectorAll('.pharmacy-select').forEach(select => {
+                              select.value = ""; // Reset select field to default option
+                          });
+                      })
+                      .catch(error => {
+                          console.error('Error submitting the form:', error);
+                      });
+              });
+          });
+          </script>
+          
+
+               
+>>>>>>> develop
   
                
               </div>
@@ -477,7 +1073,11 @@
                       document.write(new Date().getFullYear());
                     </script>
                     MediTrack |
+<<<<<<< HEAD
                     <a href="https://themeselection.com" target="_blank" class="footer-link">Infinity Lines of Code</a>
+=======
+                    <a href="https://infinitylinesofcode.com" target="_blank" class="footer-link">Infinity Lines of Code</a>
+>>>>>>> develop
                   </div>
                   
                 </div>
