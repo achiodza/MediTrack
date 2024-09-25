@@ -370,55 +370,61 @@
               <div class="row g-6">
                 <div class="col-md-12">
                   <div class="card">
-                    <h5 class="card-header">Clinic</h5>
+                    <h5 class="card-header">Lab Processing Results Capturing</h5>
           <div class="card-body">
             <form>
               <div class="mb-4 row">
                 <label for="html5-datetime-local-input" class="col-md-2 col-form-label">Datetime</label>
                 <div class="col-md-10">
-                  <input class="form-control" type="datetime-local" id="html5-datetime-local-input" />
+                  <input class="form-control" type="text" id="html5-datetime-local-input" readonly/>
                 </div>
               </div>
             
               <div class="mb-4 row">
                 <label for="html5-text-input" class="col-md-2 col-form-label">Patient ID</label>
                 <div class="col-md-10">
-                  <input class="form-control" type="text" id="patient-id-input" placeholder="eg ... MN200-01" />
+                  <input class="form-control" type="text" id="patient-id-input" placeholder="eg ... MN200-01" readonly/>
                 </div>
               </div>
             
               <div class="mb-4 row">
                 <label for="html5-number-input" class="col-md-2 col-form-label">Age</label>
                 <div class="col-md-10">
-                  <input class="form-control" type="number" id="age-input" placeholder="18" />
+                  <input class="form-control" type="text" id="age-input" placeholder="18" readonly/>
                 </div>
               </div>
             
               <div class="mb-4 row">
                 <label for="html5-text-input" class="col-md-2 col-form-label">Sex</label>
                 <div class="col-md-10">
-                  <input class="form-control" type="text" id="sex-input" placeholder="Female/Male" />
+                  <input class="form-control" type="text" id="sex-input" placeholder="Female/Male" readonly/>
                 </div>
               </div>
             
               <div class="mb-4 row">
-                <label for="html5-text-input" class="col-md-2 col-form-label">Ward</label>
+                <label for="ward-input" class="col-md-2 col-form-label">Ward</label>
                 <div class="col-md-10">
-                  <input class="form-control" type="text" id="ward-input" placeholder="Ward" />
+                  <input class="form-control" type="text" id="ward-input" placeholder="Ward" readonly/>
+                </div>
+              </div>
+              <div class="mb-4 row">
+                <label for="condition-input" class="col-md-2 col-form-label">Infection Type</label>
+                <div class="col-md-10">
+                  <input class="form-control" type="text" placeholder="Infection Type" id="condition-input" readonly/>
                 </div>
               </div>
             
               <div class="mb-4 row">
-                <label for="Condition" class="col-md-2 col-form-label">Condition</label>
+                <label for="Condition" class="col-md-2 col-form-label">Clinical Data</label>
                 <div class="col-md-10">
-                  <textarea class="form-control" id="condition-input" placeholder="Enter Condition" rows="3"></textarea>
+                  <textarea class="form-control" id="clinicaldata-input" placeholder="Enter Condition" rows="3" readonly></textarea>
                 </div>
               </div>
-            
+            <!-- New Data Here -->
               <div class="mb-4 row">
-                <label for="html5-text-input" class="col-md-2 col-form-label">Sample ID</label>
+                <label for="sampleId-input" class="col-md-2 col-form-label">Sample ID</label>
                 <div class="col-md-10">
-                  <input class="form-control" type="text" id="sample-id-input" placeholder="Enter Sample" />
+                  <input class="form-control" type="text" id="sample-id-input" placeholder="Enter Sample" readonly/>
                 </div>
               </div>
             
@@ -574,18 +580,22 @@
              document.addEventListener("DOMContentLoaded", function() {
     // Get the row data from localStorage
     const rowData = JSON.parse(localStorage.getItem('editRowData'));
-
+              console.log(rowData);
     // Check if rowData exists before autofilling
     if (rowData) {
       // Convert the date format from 'DD/MM/YYYY HHMMhrs' to 'YYYY-MM-DDTHH:MM'
       const formattedDate = convertToDateTimeLocalFormat(rowData.date);
       
       // Populate the fields with the data from localStorage
-      document.getElementById('html5-datetime-local-input').value = formattedDate; // Set the datetime-local input value
+      document.getElementById('html5-datetime-local-input').value = rowData.date; // Set the datetime-local input value
       document.getElementById('patient-id-input').value = rowData.patientID;
-      document.getElementById('sample-id-input').value = rowData.sampleID;
-      document.getElementById('sample-select').value = rowData.sampleOrigin;
-      document.getElementById('identified-organism-input').value = rowData.organismID;
+      document.getElementById('sample-id-input').value = rowData.patientID; 
+      document.getElementById('clinicaldata-input').value = rowData.clinicaldata;
+      document.getElementById('ward-input').value = rowData.ward;
+      document.getElementById('sex-input').value = rowData.sex;
+      document.getElementById('age-input').value = rowData.age;
+      document.getElementById('condition-input').value = rowData.condition;
+      //document.getElementById('identified-organism-input').value = rowData.sex;
     }
     
     // Function to convert the date string (from storage) to 'YYYY-MM-DDTHH:MM' format
@@ -672,7 +682,83 @@
 
            </div>
          </div>
-  
+         <script>
+          document.addEventListener("DOMContentLoaded", function () {
+              // Function to handle form submission
+              document.querySelector("form").addEventListener("submit", function (event) {
+                  event.preventDefault(); // Prevent the default form submission behavior
+          
+                  // Prepare the data to be sent in the POST request
+                  const formData = {
+                      data: {
+                          datetime: document.getElementById('html5-datetime-local-input').value,
+                          patientid: document.getElementById('patient-id-input').value,
+                          sex: document.getElementById('sex-input').value,
+                          age: document.getElementById('age-input').value,
+                          ward: document.getElementById('ward-input').value,
+                          condition: document.getElementById('condition-input').value,
+                          sampleid: document.getElementById('sample-id-input').value,
+                          sampleorigin: document.getElementById('sample-select').value,
+                          organismid: document.getElementById('identified-organism-input').value,
+                          processingdata: [
+                              {
+                                  drugused: document.getElementById('drug-select-1').value,
+                                  sucprofile: document.getElementById('susceptibility-select-1').value,
+                                  pharmacySuggestion: document.getElementById('pharmacy-select-1').value,
+                              },
+                              {
+                                  drugused: document.getElementById('drug-select-2').value,
+                                  sucprofile: document.getElementById('susceptibility-select-2').value,
+                                  pharmacySuggestion: document.getElementById('pharmacy-select-2').value,
+                              },
+                              {
+                                  drugused: document.getElementById('drug-select-3').value,
+                                  sucprofile: document.getElementById('susceptibility-select-3').value,
+                                  pharmacySuggestion: document.getElementById('pharmacy-select-3').value,
+                              },
+                              {
+                                  drugused: document.getElementById('drug-select-4').value,
+                                  sucprofile: document.getElementById('susceptibility-select-4').value,
+                                  pharmacySuggestion: document.getElementById('pharmacy-select-4').value,
+                              }
+                          ]
+                      }
+                  };
+          
+                  // Send a POST request to Strapi
+                  fetch('http://198.177.123.228:1337/api/clinicprocessings', {
+                      method: 'POST',
+                      headers: {
+                          'Authorization': 'Bearer 83fdd6ab07e87e390e9086df8edf28f77509b2a3fcc316bf471eb2b908e4e1eabc4a0ab9fdde97a7aff1c4afabb1c1697665185a0a00977659c9227010fcc95d18b5df85e7675c0f5b15c5b890542132fd6fb2c86ef2d0fb4b28e605d8761cdde07c3d16ea3b4072071ebabb6f76f0e10bf9864f2b53b082d776421348826677',
+                          'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify(formData)
+                  })
+                      .then(response => {
+                          if (!response.ok) {
+                              throw new Error(`HTTP error! status: ${response.status}`);
+                          }
+                          return response.json(); // Convert response to JSON
+                      })
+                      .then(data => {
+                          console.log("Form submitted successfully:", data);
+                          alert("Form successfully submitted!"); 
+          
+                          // Clear the form fields after successful submission
+                          document.querySelector("form").reset();
+          
+                          // Reset dynamically populated dropdowns (e.g., suggestable pharmacy drug)
+                          document.querySelectorAll('.pharmacy-select').forEach(select => {
+                              select.value = ""; // Reset select field to default option
+                          });
+                      })
+                      .catch(error => {
+                          console.error('Error submitting the form:', error);
+                      });
+              });
+          });
+          </script>
+          
 
                
   
