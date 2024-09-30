@@ -58,6 +58,16 @@
                 </div>
               </div>
               <div class="mb-6">
+                <label for="userType" class="form-label">User Type</label>
+                  <select class="form-control" id="userType" name="userType" required>
+                    <option value="">Select User Type</option>
+                    <option value="clinician">Clinician</option>
+                    <option value="laboratory_scientist">Laboratory Scientist</option>
+                    <option value="pharmacy">Pharmacy</option>
+                  </select>
+              </div>
+              </div>
+              <div class="mb-6">
                 <button class="btn btn-primary d-grid w-100" type="submit">Login</button>
               </div>
               <p id="error-message" class="text-danger text-center"></p> <!-- Error message -->
