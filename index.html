@@ -95,50 +95,88 @@
             <script src="assets/js/main.js"></script>
             
             <!-- JavaScript for login logic -->
-            <script>
-              document.getElementById('loginForm').addEventListener('submit', function(event) {
-                event.preventDefault();
-            
-                const email = document.getElementById('email').value;
-                const password = document.getElementById('password').value;
-                const errorMessage = document.getElementById('error-message');
-                const loader = document.getElementById('loader');
-            
-                loader.style.display = 'block'; // Show loader
-            
-                // API request to login
-                fetch('http://198.177.123.228:1337/api/auth/local', {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify({
-                    identifier: email, // Can be email or username
-                    password: password
+           <!-- JavaScript for login logic -->
+           <script>
+            document.getElementById('loginForm').addEventListener('submit', function(event) {
+              event.preventDefault();
+          
+              const email = document.getElementById('email').value;
+              const password = document.getElementById('password').value;
+              const userType = document.getElementById('userType').value;
+              const errorMessage = document.getElementById('error-message');
+              const loader = document.getElementById('loader');
+          
+              loader.style.display = 'block'; // Show loader
+          
+              // API request to login
+              fetch('http://198.177.123.228:1337/api/auth/local', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  identifier: email, // Can be email or username
+                  password: password
+                })
+              })
+              .then(response => response.json())
+              .then(data => {
+                loader.style.display = 'none'; // Hide loader
+          
+                if (data.jwt) {
+                  // Successful login, get user profile to check user type
+                  fetch('http://198.177.123.228:1337/api/users/me', {
+                    method: 'GET',
+                    headers: {
+                      'Authorization': `Bearer ${data.jwt}`
+                    }
                   })
-                })
-                .then(response => response.json())
-                .then(data => {
-                  loader.style.display = 'none'; // Hide loader
-            
-                  if (data.jwt) {
-                    // Successful login
-                    localStorage.setItem('authToken', data.jwt); // Store JWT token in localStorage
-            
-                    // Redirect to dashboard or home page
-                    window.location.href = './pages/home.html'; 
-                  } else {
-                    // Show error message
-                    errorMessage.textContent = 'Login failed: ' + (data.message[0].messages[0].message || 'Invalid credentials');
-                  }
-                })
-                .catch(error => {
-                  console.error('Error:', error);
-                  errorMessage.textContent = 'An error occurred during login: ' + error.message;
-                  loader.style.display = 'none'; // Hide loader
-                });
+                  .then(response => response.json())
+                  .then(user => {
+                    // Check if the selected userType matches the user's actual type
+                    if (user.department === userType) {
+                      // Store JWT token in localStorage
+                      localStorage.setItem('authToken', data.jwt);
+          
+                      // Redirect based on user type
+                      let redirectUrl = '';
+                      switch (userType) {
+                        case 'clinician':
+                          redirectUrl = './clinician/home.html';
+                          break;
+                        case 'laboratory_scientist':
+                          redirectUrl = './labscientist/home.html';
+                          break;
+                        case 'pharmacy':
+                          redirectUrl = './mishonga/home.html';
+                          break;
+                        default:
+                          errorMessage.textContent = 'Invalid user type. Please try again.';
+                          return;
+                      }
+          
+                      // Redirect to the appropriate dashboard or home page
+                      window.location.href = redirectUrl;
+                    } else {
+                      errorMessage.textContent = 'User type mismatch. Please select the correct user type.';
+                    }
+                  })
+                  .catch(error => {
+                    console.error('Error fetching user profile:', error);
+                    errorMessage.textContent = 'Failed to verify user type. Please try again.';
+                  });
+                } else {
+                  // Show error message
+                  errorMessage.textContent = 'Login failed: ' + (data.message[0].messages[0].message || 'Invalid credentials');
+                }
+              })
+              .catch(error => {
+                console.error('Error:', error);
+                errorMessage.textContent = 'An error occurred during login: ' + error.message;
+                loader.style.display = 'none'; // Hide loader
               });
-            </script>
-            
+            });
+          </script>
+          
 </body>
 </html>

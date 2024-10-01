@@ -81,6 +81,15 @@
                                 <span class="input-group-text cursor-pointer" id="togglePassword"><i class="bx bx-hide"></i></span>
                             </div>
                         </div>
+                        <div class="mb-6">
+                            <label for="userType" class="form-label">User Type</label>
+                              <select class="form-control" id="userType" name="userType" required>
+                                <option value="">Select User Type</option>
+                                <option value="clinician">Clinician</option>
+                                <option value="laboratory_scientist">Laboratory Scientist</option>
+                                <option value="pharmacy">Pharmacy</option>
+                              </select>
+                          </div>
 
                         <div class="my-8">
                             <div class="form-check mb-0 ms-2">
@@ -117,33 +126,35 @@
 <script src="../assets/vendor/js/menu.js"></script>
 
 <script>
-    document.getElementById('formAuthentication').addEventListener('submit', function (e) {
-        e.preventDefault();
+   document.getElementById('formAuthentication').addEventListener('submit', function (e) {
+    e.preventDefault();
 
-        const username = document.getElementById('username').value;
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        const termsAccepted = document.getElementById('terms-conditions').checked;
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const userType = document.getElementById('userType').value; // Get the selected user type
+    const termsAccepted = document.getElementById('terms-conditions').checked;
 
-        if (!termsAccepted) {
-            alert('You must accept the privacy policy & terms to register.');
-            return;
-        }
+    if (!termsAccepted) {
+        alert('You must accept the privacy policy & terms to register.');
+        return;
+    }
 
-        axios.post('http://198.177.123.228:1337/api/auth/local/register', {
-            username: username,
-            email: email,
-            password: password
-        })
-        .then(function (response) {
-            console.log('User created successfully:', response.data);
-            window.location.href = 'home.html'; // Redirect to home page after successful registration
-        })
-        .catch(function (error) {
-            console.error('An error occurred:', error.response);
-            alert('Registration failed: ' + error.response.data.error.message);
-        });
+    axios.post('http://198.177.123.228:1337/api/auth/local/register', {
+        username: username,
+        email: email,
+        password: password,
+        department: userType // Send userType as department to the Strapi backend
+    })
+    .then(function (response) {
+        console.log('User created successfully:', response.data);
+        window.location.href = 'home.html'; // Redirect to home page after successful registration
+    })
+    .catch(function (error) {
+        console.error('An error occurred:', error.response);
+        alert('Registration failed: ' + error.response.data.error.message);
     });
+});
 
     // Toggle password visibility
     document.getElementById('togglePassword').addEventListener('click', function () {
@@ -155,6 +166,7 @@
         this.firstChild.classList.toggle('bx-hide');
         this.firstChild.classList.toggle('bx-show');
     });
+
 </script>
 </body>
 </html>
