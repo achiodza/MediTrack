@@ -60,7 +60,7 @@
               <div class="mb-6">
                 <label for="userType" class="form-label">User Type</label>
                   <select class="form-control" id="userType" name="userType" required>
-                    <option value="">Select User Type</option>
+                    <option value="_">Select User Type</option>
                     <option value="clinician">Clinician</option>
                     <option value="laboratory_scientist">Laboratory Scientist</option>
                     <option value="pharmacy">Pharmacy</option>
@@ -76,13 +76,10 @@
             
             <!-- Forgot Password Link -->
             <p class="text-center mb-4">
-              <a href="./pages/forgotpassword.html">Forgot Password</a>
+              <a href="#">Forgot Password</a>
             </p>
             
-            <p class="text-center">
-              <span>New on our platform?</span>
-              <a href="./pages/auth-register.html">Create an account</a>
-            </p>
+            
             
             <!-- Core JS -->
             <script src="assets/vendor/libs/jquery/jquery.js"></script>
@@ -149,6 +146,9 @@
                           break;
                         case 'pharmacy':
                           redirectUrl = './mishonga/home.html';
+                          break;
+                        case '_':
+                          redirectUrl = './makuruwani/home.html';
                           break;
                         default:
                           errorMessage.textContent = 'Invalid user type. Please try again.';
