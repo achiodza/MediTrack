@@ -298,214 +298,190 @@
           <!-- Content wrapper -->
           <div class="content-wrapper">
             <!-- Content -->
-  
             <div class="container-xxl flex-grow-1 container-p-y">
-
               <div class="card">
-
-              <div class="row g-6">
-                <div class="col-md-12">
-                  <div class="card">
-                    <h5 class="card-header">Analysis</h5>
-
-                    
-                    <div class="card-body pt-4">
+                <div class="row g-6">
+                  <div class="col-md-12">
+                    <div class="card">
+                      <h5 class="card-header">Analysis</h5>
+                      <div class="card-body pt-4">
                         <form id="formAccountSettings" method="POST" onsubmit="return false">
-                            <div class="row g-6">
-                              <!-- Patient ID input -->
-                              <div class="col-md-6">
-                                <label for="patientID" class="form-label">Patient ID</label>
-                                <input
-                                  class="form-control"
-                                  type="text"
-                                  id="patientID"
-                                  name="patientID"
-                                  placeholder="ID0004"
-                                />
-                              </div>
-                          
-                              <!-- Infection Type Dropdown -->
-                              <div class="col-md-6">
-                                <label for="infection-type" class="form-label">Select Infection Type:</label>
-                                <select id="infection-type" name="infection-type" class="form-control">
-                                  <option value="Respiratory Infections">Respiratory Infections</option>
-                                  <option value="Urinary Tract Infections">Urinary Tract Infections</option>
-                                  <option value="Gastrointestinal System">Gastrointestinal System</option>
-                                  <option value="Skin And Soft Tissue">Skin And Soft Tissue</option>
-                                  <option value="Central Nervous System">Central Nervous System</option>
-                                  <option value="Cardiovascular System">Cardiovascular System</option>
-                                  <option value="Blood Stream Infections">Blood Stream Infections</option>
-                                  <option value="Reproductive System">Reproductive System</option>
-                                  <option value="Bones and Joints">Bones and Joints</option>
-                                  <option value="Ear, Nose And Throat">Ear, Nose And Throat</option>
-                                </select>
-                              </div>
-                          
-                              <!-- Age Input (Read-only) -->
-                              <div class="col-md-6">
-                                <label for="age" class="form-label">Age</label>
-                                <input
-                                  class="form-control"
-                                  type="text"
-                                  id="age"
-                                  name="age"
-                                  value="16"
-                                  readonly
-                                />
-                              </div>
+                          <div class="row g-6">
+                            <!-- Start Date input -->
+                            <div class="col-md-6">
+                              <label for="start-date" class="form-label">Start Date</label>
+                              <input class="form-control" type="date" id="start-date" name="start-date" />
                             </div>
-                          
+          
+                            <!-- End Date input -->
+                            <div class="col-md-6">
+                              <label for="end-date" class="form-label">End Date</label>
+                              <input class="form-control" type="date" id="end-date" name="end-date" />
+                            </div>
+          
+                            <!-- Patient ID input -->
+                            <div class="col-md-6">
+                              <label for="patientID" class="form-label">Patient ID</label>
+                              <input class="form-control" type="text" id="patientID" name="patientID" placeholder="ID0004" />
+                            </div>
+          
+                            <!-- Infection Type Dropdown -->
+                            <div class="col-md-6">
+                              <label for="infection-type" class="form-label">Select Infection Type:</label>
+                              <select id="infection-type" name="infection-type" class="form-control">
+                                <option value="">Select Infection Type</option>
+                                <option value="Respiratory Infections">Respiratory Infections</option>
+                                <option value="Urinary Tract Infections">Urinary Tract Infections</option>
+                                <option value="Gastrointestinal System">Gastrointestinal System</option>
+                                <option value="Skin And Soft Tissue">Skin And Soft Tissue</option>
+                                <option value="Central Nervous System">Central Nervous System</option>
+                                <option value="Cardiovascular System">Cardiovascular System</option>
+                                <option value="Blood Stream Infections">Blood Stream Infections</option>
+                                <option value="Reproductive System">Reproductive System</option>
+                                <option value="Bones and Joints">Bones and Joints</option>
+                                <option value="Ear, Nose And Throat">Ear, Nose And Throat</option>
+                              </select>
+                            </div>
+          
+                            <!-- Age Input -->
+                            <div class="col-md-6">
+                              <label for="age" class="form-label">Age</label>
+                              <input class="form-control" type="number" id="age" name="age" placeholder="Enter Age" />
+                            </div>
+          
                             <!-- Fetch Button -->
                             <div class="mt-6">
                               <button type="submit" class="btn btn-primary me-3" onclick="fetchDrug()">Fetch</button>
                             </div>
-                          
-                            <!-- Results Table -->
-                            <div id="result" class="mt-6"></div>
-                          </form>
-                          
-                          <script>
-                            // Data structure for bacterial infections, samples, and drugs
-                            const bacterialInfectionsData = [
-                              {
-                                condition: "Respiratory Infections",
-                                bacteria: ["Streptococcus pneumoniae", "Haemophilus influenzae", "Mycobacterium tuberculosis"],
-                                drugs: ["Amoxicillin", "Azithromycin", "Rifampicin", "Isoniazid"]
-                              },
-                              {
-                                condition: "Urinary Tract Infections",
-                                bacteria: ["Escherichia coli", "Klebsiella pneumoniae", "Proteus mirabilis"],
-                                drugs: ["Ciprofloxacin", "Nitrofurantoin", "Trimethoprim-Sulfamethoxazole"]
-                              },
-                              {
-                                condition: "Gastrointestinal System",
-                                bacteria: ["Salmonella spp", "Shigella spp", "Campylobacter jejuni"],
-                                drugs: ["Ciprofloxacin", "Azithromycin", "Metronidazole"]
-                              },
-                              // Add remaining conditions and drugs for growth
-                              // ...
-                            ];
-                          
-                            // Function to fetch the best drug based on infection type
-                            function fetchDrug() {
-                              const infectionType = document.getElementById('infection-type').value;  // Get selected infection type
-                              const patientID = document.getElementById('patientID').value;  // Get patient ID
-                              const age = document.getElementById('age').value;  // Get patient age
-                              
-                              // Find the infection type from the data array
-                              const infection = bacterialInfectionsData.find(
-                                infection => infection.condition === infectionType
-                              );
-                          
-                              if (infection) {
-                                // Generate the results table
-                                const resultTable = `
-                                  <table class="table table-bordered">
+                          </div>
+                        </form>
+          
+                        <!-- Result Div -->
+                        <div id="result"></div>
+          
+                        <script>
+                          async function fetchDrug() {
+                            const infectionType = document.getElementById('infection-type').value;
+                            const patientID = document.getElementById('patientID').value;
+                            const startDate = document.getElementById('start-date').value;
+                            const endDate = document.getElementById('end-date').value;
+                            const age = document.getElementById('age').value;
+          
+                            // Construct the query parameters for the Strapi API dynamically
+                            const queryParams = new URLSearchParams();
+          
+                            if (infectionType) {
+                              queryParams.append('filters[condition][$eq]', infectionType);
+                            }
+                            if (patientID) {
+                              queryParams.append('filters[patientID][$eq]', patientID);
+                            }
+                            if (startDate) {
+                              queryParams.append('filters[date][$gte]', startDate);
+                            }
+                            if (endDate) {
+                              queryParams.append('filters[date][$lte]', endDate);
+                            }
+                            if (age) {
+                              queryParams.append('filters[age][$eq]', age);
+                            }
+          
+                            // Check if at least one query parameter is present
+                            if (queryParams.toString() === '') {
+                              document.getElementById('result').innerHTML = '<p>Please fill in at least one filter field.</p>';
+                              return;
+                            }
+          
+                            try {
+                              // Fetch data from Strapi API with dynamic filters and authorization token
+                              const response = await fetch(`http://198.177.123.228:1337/api/clinicprocessing?populate=*&${queryParams}`, {
+                                headers: {
+                                  'Authorization': 'Bearer 83fdd6ab07e87e390e9086df8edf28f77509b2a3fcc316bf471eb2b908e4e1eabc4a0ab9fdde97a7aff1c4afabb1c1697665185a0a00977659c9227010fcc95d18b5df85e7675c0f5b15c5b890542132fd6fb2c86ef2d0fb4b28e605d8761cdde07c3d16ea3b4072071ebabb6f76f0e10bf9864f2b53b082d776421348826677'
+                                }
+                              });
+                              const data = await response.json();
+          
+                              if (data && data.data.length > 0) {
+                                // Create a map to count infections by type and age
+                                const infectionCounts = {};
+                                const results = [];
+          
+                                data.data.forEach(item => {
+                                  const infection = item.attributes;
+                                  const date = infection.date;
+          
+                                  if (!infectionCounts[infection.condition]) {
+                                    infectionCounts[infection.condition] = 0;
+                                  }
+                                  infectionCounts[infection.condition] += 1;
+          
+                                  results.push({
+                                    patientID: infection.patientID,
+                                    age: infection.age,
+                                    condition: infection.condition,
+                                    bacteria: infection.bacteria,
+                                    drugs: infection.drugs,
+                                    date
+                                  });
+                                });
+          
+                                // Generate the historical count and detailed result table
+                                let resultTable = `
+                                  <table class="table">
                                     <thead>
                                       <tr>
+                                        <th>Date</th>
                                         <th>Patient ID</th>
                                         <th>Age</th>
                                         <th>Infection Type</th>
                                         <th>Bacteria</th>
                                         <th>Recommended Drugs</th>
+                                        <th>Count</th>
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      <tr>
-                                        <td>${patientID}</td>
-                                        <td>${age}</td>
-                                        <td>${infection.condition}</td>
-                                        <td>${infection.bacteria.join(", ")}</td>
-                                        <td>${infection.drugs.join(", ")}</td>
-                                      </tr>
+                                `;
+          
+                                results.forEach(result => {
+                                  resultTable += `
+                                    <tr>
+                                      <td>${result.date}</td>
+                                      <td>${result.patientID}</td>
+                                      <td>${result.age}</td>
+                                      <td>${result.condition}</td>
+                                      <td>${result.bacteria.join(", ")}</td>
+                                      <td>${result.drugs.join(", ")}</td>
+                                      <td>${infectionCounts[result.condition]}</td>
+                                    </tr>
+                                  `;
+                                });
+          
+                                resultTable += `
                                     </tbody>
                                   </table>
                                 `;
-                          
+          
                                 // Display the results in the 'result' div
                                 document.getElementById('result').innerHTML = resultTable;
                               } else {
-                                // If infection type not found, display an error
-                                document.getElementById('result').innerHTML = `<p>Infection type not found!</p>`;
+                                document.getElementById('result').innerHTML = '<p>No data found for the selected filters!</p>';
                               }
+                            } catch (error) {
+                              console.error('Error fetching data:', error);
+                              document.getElementById('result').innerHTML = '<p>Error fetching data. Please try again later.</p>';
                             }
-                          
-                            /*
-                             * The `fetchDrug` function retrieves the infection type selected in the form, looks up the bacterial infection data,
-                             * and dynamically generates an HTML table with patient information, bacteria found, and recommended drugs.
-                             * If the infection type is not found, it displays an error message.
-                             * This allows room for growth as more conditions and bacteria can be added to the `bacterialInfectionsData` array.
-                             */
-                          </script>
-                          
-                    </div>
-
-                  </div>
-
-                  <hr class="my-6" />
-
-
-
-                    <div class="card">
-                      <h5 class="card-header">Condition Treatment</h5>
- 
-                      <div class="table-responsive text-nowrap" style="max-height: 300px; overflow-y: auto;">
-                          <table class="table">
-                              <thead class="table-light">
-                                  <tr>
-                                      <th>Drug Name</th>
-                                      <th>Effectiveness Score</th>
-                                      <th>Available In Phamary</th>
-                                      <th>Approval</th>
-                                  </tr>
-                              </thead>
-                              <tbody class="table-border-bottom-0">
-                                  <tr>
-                                      <td>Paracetamol</td>
-                                      <td>5</td>
-                                      <td>Available</td>
-                                      <td>
-                                          <div class="dropdown">
-                                              <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                  <i class="bx bx-dots-vertical-rounded"></i>
-                                              </button>
-                                              <div class="dropdown-menu">
-                                                  <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Approved</a>
-                                                  <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Cancel</a>
-                                              </div>
-                                          </div>
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td>Xenox</td>
-                                      <td>4</td>
-                                      <td>Available</td>
-                                      <td>
-                                          <div class="dropdown">
-                                              <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                  <i class="bx bx-dots-vertical-rounded"></i>
-                                              </button>
-                                              <div class="dropdown-menu">
-                                                  <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                  <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Cancel</a>
-                                              </div>
-                                          </div>
-                                      </td>
-                                  </tr>
-                              </tbody>
-                          </table>
+                          }
+                        </script>
                       </div>
-          
                     </div>
-
-
-           </div>
-         </div>
-    
-               
-              </div>
+                  </div>
+                </div>
               </div>
             </div>
+          </div>
+          
+          
+          
          
             <!-- / Content -->
   
