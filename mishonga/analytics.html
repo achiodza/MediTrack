@@ -320,7 +320,6 @@
 
           <!-- / Navbar -->
 
-          <!-- Content wrapper -->
           <div class="content-wrapper">
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
@@ -391,67 +390,62 @@
                             const startDate = document.getElementById('start-date').value;
                             const endDate = document.getElementById('end-date').value;
                             const age = document.getElementById('age').value;
-          
+                        
                             // Construct the query parameters for the Strapi API dynamically
                             const queryParams = new URLSearchParams();
-          
+                        
                             if (infectionType) {
                               queryParams.append('filters[condition][$eq]', infectionType);
                             }
                             if (patientID) {
-                              queryParams.append('filters[patientID][$eq]', patientID);
+                              queryParams.append('filters[patientid][$eq]', patientID);
                             }
                             if (startDate) {
-                              queryParams.append('filters[date][$gte]', startDate);
+                              queryParams.append('filters[datetime][$gte]', startDate);
                             }
                             if (endDate) {
-                              queryParams.append('filters[date][$lte]', endDate);
+                              queryParams.append('filters[datetime][$lte]', endDate);
                             }
                             if (age) {
                               queryParams.append('filters[age][$eq]', age);
                             }
-          
-                            // Check if at least one query parameter is present
-                            if (queryParams.toString() === '') {
-                              document.getElementById('result').innerHTML = '<p>Please fill in at least one filter field.</p>';
-                              return;
-                            }
-          
+                        
                             try {
                               // Fetch data from Strapi API with dynamic filters and authorization token
-                              const response = await fetch(`http://198.177.123.228:1337/api/clinicprocessing?populate=*&${queryParams}`, {
+                              const response = await fetch(`http://198.177.123.228:1337/api/clinicprocessings?populate=*&${queryParams}`, {
                                 headers: {
                                   'Authorization': 'Bearer 83fdd6ab07e87e390e9086df8edf28f77509b2a3fcc316bf471eb2b908e4e1eabc4a0ab9fdde97a7aff1c4afabb1c1697665185a0a00977659c9227010fcc95d18b5df85e7675c0f5b15c5b890542132fd6fb2c86ef2d0fb4b28e605d8761cdde07c3d16ea3b4072071ebabb6f76f0e10bf9864f2b53b082d776421348826677'
                                 }
                               });
                               const data = await response.json();
-          
+                        
                               if (data && data.data.length > 0) {
-                                // Create a map to count infections by type and age
+                                // Create a map to count infections by type
                                 const infectionCounts = {};
                                 const results = [];
-          
+                        
                                 data.data.forEach(item => {
                                   const infection = item.attributes;
-                                  const date = infection.date;
-          
+                                  const drugs = infection.processingdata.map(p => p.drugused);
+                                  const date = infection.datetime;
+                        
                                   if (!infectionCounts[infection.condition]) {
                                     infectionCounts[infection.condition] = 0;
                                   }
                                   infectionCounts[infection.condition] += 1;
-          
+                        
                                   results.push({
-                                    patientID: infection.patientID,
+                                    date,
+                                    patientID: infection.patientid,
                                     age: infection.age,
                                     condition: infection.condition,
-                                    bacteria: infection.bacteria,
-                                    drugs: infection.drugs,
-                                    date
+                                    drugs
                                   });
                                 });
-          
-                                // Generate the historical count and detailed result table
+                        
+                                // Generate the table for results and infection counts
                                 let resultTable = `
+                                <br>
                                   <table class="table">
                                     <thead>
                                       <tr>
@@ -459,14 +453,13 @@
                                         <th>Patient ID</th>
                                         <th>Age</th>
                                         <th>Infection Type</th>
-                                        <th>Bacteria</th>
                                         <th>Recommended Drugs</th>
                                         <th>Count</th>
                                       </tr>
                                     </thead>
                                     <tbody>
                                 `;
-          
+                        
                                 results.forEach(result => {
                                   resultTable += `
                                     <tr>
@@ -474,19 +467,18 @@
                                       <td>${result.patientID}</td>
                                       <td>${result.age}</td>
                                       <td>${result.condition}</td>
-                                      <td>${result.bacteria.join(", ")}</td>
                                       <td>${result.drugs.join(", ")}</td>
                                       <td>${infectionCounts[result.condition]}</td>
                                     </tr>
                                   `;
                                 });
-          
+                        
                                 resultTable += `
                                     </tbody>
                                   </table>
                                 `;
-          
-                                // Display the results in the 'result' div
+                        
+                                // Display the results
                                 document.getElementById('result').innerHTML = resultTable;
                               } else {
                                 document.getElementById('result').innerHTML = '<p>No data found for the selected filters!</p>';
@@ -497,6 +489,7 @@
                             }
                           }
                         </script>
+                        
                       </div>
                     </div>
                   </div>
@@ -523,23 +516,7 @@
                     PathoGuide |
                     <a href="https://infinitylinesofcode.com" target="_blank" class="footer-link">Infinity Lines of Code</a>
                   </div>
-                  <div class="d-none d-lg-inline-block">
-                    
-  
-                    <a
-                      href=""
-                      target="_blank"
-                      class="footer-link me-4"
-                      >Documentation</a
-                    >
-  
-                    <a
-                      href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                      target="_blank"
-                      class="footer-link"
-                      >Support</a
-                    >
-                  </div>
+                  
                 </div>
               </div>
             </footer>

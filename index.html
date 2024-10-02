@@ -102,15 +102,16 @@
            <script>
             document.getElementById('loginForm').addEventListener('submit', function(event) {
               event.preventDefault();
-          
+            
               const email = document.getElementById('email').value;
               const password = document.getElementById('password').value;
               const userType = document.getElementById('userType').value;
               const errorMessage = document.getElementById('error-message');
               const loader = document.getElementById('loader');
-          
+            
               loader.style.display = 'block'; // Show loader
-          
+              errorMessage.textContent = ''; // Clear previous error message
+            
               // API request to login
               fetch('http://198.177.123.228:1337/api/auth/local', {
                 method: 'POST',
@@ -125,7 +126,7 @@
               .then(response => response.json())
               .then(data => {
                 loader.style.display = 'none'; // Hide loader
-          
+            
                 if (data.jwt) {
                   // Successful login, get user profile to check user type
                   fetch('http://198.177.123.228:1337/api/users/me', {
@@ -140,7 +141,7 @@
                     if (user.department === userType) {
                       // Store JWT token in localStorage
                       localStorage.setItem('authToken', data.jwt);
-          
+            
                       // Redirect based on user type
                       let redirectUrl = '';
                       switch (userType) {
@@ -157,32 +158,37 @@
                           redirectUrl = './makuruwani/home.html';
                           break;
                         default:
-                          errorMessage.textContent = 'Invalid user type. Please try again.';
+                          errorMessage.textContent = 'Please select a valid user type.';
                           return;
                       }
-          
+            
                       // Redirect to the appropriate dashboard or home page
                       window.location.href = redirectUrl;
                     } else {
-                      errorMessage.textContent = 'User type mismatch. Please select the correct user type.';
+                      errorMessage.textContent = 'The selected user type does not match your account. Please try again.';
                     }
                   })
                   .catch(error => {
                     console.error('Error fetching user profile:', error);
-                    errorMessage.textContent = 'Failed to verify user type. Please try again.';
+                    errorMessage.textContent = 'There was an issue verifying your account. Please try again later.';
                   });
                 } else {
-                  // Show error message
-                  errorMessage.textContent = 'Login failed: ' + (data.message[0].messages[0].message || 'Invalid credentials');
+                  // Handle invalid login
+                  if (data.message && data.message[0] && data.message[0].messages && data.message[0].messages[0].message) {
+                    errorMessage.textContent = 'Invalid email or password. Please try again.';
+                  } else {
+                    errorMessage.textContent = 'Login failed. Please check your credentials and try again.';
+                  }
                 }
               })
               .catch(error => {
                 console.error('Error:', error);
-                errorMessage.textContent = 'An error occurred during login: ' + error.message;
+                errorMessage.textContent = 'Unable to log in at this time. Please try again later.';
                 loader.style.display = 'none'; // Hide loader
               });
             });
-          </script>
+            </script>
+            
           
 </body>
 </html>
