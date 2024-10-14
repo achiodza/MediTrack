@@ -624,61 +624,70 @@
 
 
                 // Function to populate all "Suggestable Pharmacy Drug" dropdowns
-                function populatePharmacyDrugs() {
-                    // Fetch data from the Strapi API with the Bearer token
-                    fetch('http://198.177.123.228:1337/api/pharmacyrecords', {
-                        method: 'GET',
-                        headers: {
-                            'Authorization': 'Bearer 83fdd6ab07e87e390e9086df8edf28f77509b2a3fcc316bf471eb2b908e4e1eabc4a0ab9fdde97a7aff1c4afabb1c1697665185a0a00977659c9227010fcc95d18b5df85e7675c0f5b15c5b890542132fd6fb2c86ef2d0fb4b28e605d8761cdde07c3d16ea3b4072071ebabb6f76f0e10bf9864f2b53b082d776421348826677',
-                            'Content-Type': 'application/json'
-                        }
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error(`HTTP error! status: ${response.status}`);
-                        }
-                        return response.json();  // Convert response to JSON
-                    })
-                    .then(data => {
-                        console.log("API Response:", data);  // Log the response to check its structure
-            
-                        // Get all dropdowns with the class 'pharmacy-select'
-                        const pharmacyDropdowns = document.querySelectorAll('.pharmacy-select');
-            
-                        // Strapi typically returns data inside 'data' with 'attributes'
-                        const records = data.data; // Access the 'data' array
-            
-                        // Check if there are records returned
-                        if (!records || records.length === 0) {
-                            console.error("No data found in the API response.");
-                            return;
-                        }
-            
-                        // Iterate over each dropdown and populate with the same data
-                        pharmacyDropdowns.forEach(selectElement => {
-                            records.forEach(record => {
-                                // Ensure that 'attributes' and 'medicine' exist
-                                if (record.attributes && record.attributes.medicine) {
-                                    const medicine = record.attributes.medicine; // Access the 'medicine' field
-            
-                                    // Create a new option element
-                                    const option = document.createElement('option');
-                                    option.value = medicine;  // Set the value of the option
-                                    option.textContent = medicine;  // Set the display text
-                                    selectElement.appendChild(option);  // Append the option to the dropdown
-                                } else {
-                                    console.error("Medicine field is missing in the record:", record);
-                                }
-                            });
-                        });
-                    })
-                    .catch(error => {
-                        console.error('Error fetching pharmacy drug data:', error);  // Handle errors
-                    });
+    async function populatePharmacyDrugs(page = 1, allRecords = []) {
+        try {
+            const limit = 100; // You can adjust this to fetch more records at once
+            const response = await fetch(`http://198.177.123.228:1337/api/pharmacyrecords?pagination[page]=${page}&pagination[pageSize]=${limit}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer 83fdd6ab07e87e390e9086df8edf28f77509b2a3fcc316bf471eb2b908e4e1eabc4a0ab9fdde97a7aff1c4afabb1c1697665185a0a00977659c9227010fcc95d18b5df85e7675c0f5b15c5b890542132fd6fb2c86ef2d0fb4b28e605d8761cdde07c3d16ea3b4072071ebabb6f76f0e10bf9864f2b53b082d776421348826677',
+                    'Content-Type': 'application/json'
                 }
+            });
             
-                // Call the function to populate the dropdown when the page loads
-                window.onload = populatePharmacyDrugs;
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json(); // Convert response to JSON
+            const records = data.data; // Access the 'data' array
+
+            // Combine fetched records with allRecords
+            allRecords = [...allRecords, ...records];
+
+            // Check if more pages exist and recursively fetch the next page
+            if (data.meta.pagination.page < data.meta.pagination.pageCount) {
+                await populatePharmacyDrugs(page + 1, allRecords); // Fetch next page
+            } else {
+                // Once all records are fetched, sort them alphabetically
+                allRecords.sort((a, b) => a.attributes.medicine.localeCompare(b.attributes.medicine));
+
+                // Populate the dropdown with the sorted data
+                const pharmacyDropdowns = document.querySelectorAll('.pharmacy-select');
+                
+                pharmacyDropdowns.forEach(selectElement => {
+                    // Clear existing options
+                    selectElement.innerHTML = ''; 
+
+                    // Add a placeholder option
+                    const placeholderOption = document.createElement('option');
+                    placeholderOption.textContent = 'Select a drug'; // Placeholder text
+                    placeholderOption.value = ''; // Empty value
+                    placeholderOption.disabled = true; // Disable the option
+                    placeholderOption.selected = true; // Make it selected by default
+                    selectElement.appendChild(placeholderOption); // Append placeholder
+
+                    // Add the actual drug options
+                    allRecords.forEach(record => {
+                        if (record.attributes && record.attributes.medicine) {
+                            const medicine = record.attributes.medicine; // Access the 'medicine' field
+
+                            // Create a new option element
+                            const option = document.createElement('option');
+                            option.value = medicine; // Set the value of the option
+                            option.textContent = medicine; // Set the display text
+                            selectElement.appendChild(option); // Append the option to the dropdown
+                        }
+                    });
+                });
+            }
+        } catch (error) {
+            console.error('Error fetching pharmacy drug data:', error); // Handle errors
+        }
+    }
+
+    // Call the function to populate the dropdown when the page loads
+    window.onload = () => populatePharmacyDrugs();
             </script>
             
               <!-- Repeated rows end here -->

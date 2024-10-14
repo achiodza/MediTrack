@@ -424,77 +424,87 @@
                       <h5 class="card-header">Available Drugs and Records</h5>
                       <div class="table-responsive text-nowrap">
                         <table class="table">
-                          <thead class="table-light">
-                              <tr>
-                                  <th>Drug ID</th>
-                                  <th>Drug Name</th>
-                                  <th>Quantity</th>
-                                  <th>Date Stocked</th>
-                                  <th>Days Since Stocked</th>
-                              </tr>
-                          </thead>
-                          <tbody id="drugTableBody" class="table-border-bottom-0">
-                              <!-- Rows will be dynamically inserted here -->
-                          </tbody>
-                      </table>
-                  </div>
-              
-                
-                  <script>
-                    // Function to calculate the number of days since the drug was stocked
-                    function calculateDaysSinceStocked(datestocked) {
-                        const dateStocked = new Date(datestocked);
-                        const currentDate = new Date();
-                        const diffTime = Math.abs(currentDate - dateStocked);
-                        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // Convert milliseconds to days
-                        return diffDays;
-                    }
-            
-                    // Function to fetch drug data and populate the table
-                    async function fetchAndDisplayDrugs() {
-                        try {
-                            const response = await fetch('http://198.177.123.228:1337/api/pharmacyrecords', {
-                                headers: {
-                                    'Authorization': 'Bearer 83fdd6ab07e87e390e9086df8edf28f77509b2a3fcc316bf471eb2b908e4e1eabc4a0ab9fdde97a7aff1c4afabb1c1697665185a0a00977659c9227010fcc95d18b5df85e7675c0f5b15c5b890542132fd6fb2c86ef2d0fb4b28e605d8761cdde07c3d16ea3b4072071ebabb6f76f0e10bf9864f2b53b082d776421348826677',
-                                    'Content-Type': 'application/json'
-                                }
-                            });
-                            
-                            if (!response.ok) {
-                                throw new Error('Failed to fetch drug data');
-                            }
-            
-                            const data = await response.json();
-                            const records = data.data;
-                            const tbody = document.getElementById('drugTableBody');
-                            tbody.innerHTML = ''; // Clear the existing content
-            
-                            records.forEach((record, index) => {
-                                const drug = record.attributes;
-                                const daysSinceStocked = calculateDaysSinceStocked(drug.datestocked);
-            
-                                const row = `
-                                    <tr>
-                                        <td>${index + 1}</td>
-                                        <td>${drug.medicine}</td>
-                                        <td>${Math.floor(Math.random() * 500) + 100} units</td> <!-- Random quantity for demo -->
-                                        <td>${drug.datestocked}</td>
-                                        <td>${daysSinceStocked} days</td>
-                                    </tr>
-                                `;
-            
-                                tbody.insertAdjacentHTML('beforeend', row);
-                            });
-            
-                        } catch (error) {
-                            console.error('Error fetching drug data:', error);
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Drug ID</th>
+                                    <th>Drug Name</th>
+                                    <th>Quantity</th>
+                                    <th>Date Stocked</th>
+                                    <th>Days Since Stocked</th>
+                                </tr>
+                            </thead>
+                            <tbody id="drugTableBody" class="table-border-bottom-0">
+                                <!-- Rows will be dynamically inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <script>
+                        // Function to calculate the number of days since the drug was stocked
+                        function calculateDaysSinceStocked(datestocked) {
+                            const dateStocked = new Date(datestocked);
+                            const currentDate = new Date();
+                            const diffTime = Math.abs(currentDate - dateStocked);
+                            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // Convert milliseconds to days
+                            return diffDays;
                         }
-                    }
-            
-                    // Fetch and display the drug data on page load
-                    window.onload = fetchAndDisplayDrugs;
-                </script>
-                
+                    
+                        // Function to fetch drug data, including pagination if needed
+                        async function fetchAndDisplayDrugs(page = 1) {
+                            const limit = 100; // You can adjust the limit to fetch more records at once
+                            const url = `http://198.177.123.228:1337/api/pharmacyrecords?pagination[page]=${page}&pagination[pageSize]=${limit}`;
+                    
+                            try {
+                                const response = await fetch(url, {
+                                    headers: {
+                                        'Authorization': 'Bearer 83fdd6ab07e87e390e9086df8edf28f77509b2a3fcc316bf471eb2b908e4e1eabc4a0ab9fdde97a7aff1c4afabb1c1697665185a0a00977659c9227010fcc95d18b5df85e7675c0f5b15c5b890542132fd6fb2c86ef2d0fb4b28e605d8761cdde07c3d16ea3b4072071ebabb6f76f0e10bf9864f2b53b082d776421348826677',
+                                        'Content-Type': 'application/json'
+                                    }
+                                });
+                    
+                                if (!response.ok) {
+                                    throw new Error('Failed to fetch drug data');
+                                }
+                    
+                                const data = await response.json();
+                                const records = data.data;
+                                const tbody = document.getElementById('drugTableBody');
+                    
+                                // Sort drugs alphabetically by 'medicine' name
+                                records.sort((a, b) => a.attributes.medicine.localeCompare(b.attributes.medicine));
+                    
+                                // Populate the table with sorted data
+                                records.forEach((record, index) => {
+                                    const drug = record.attributes;
+                                    const daysSinceStocked = calculateDaysSinceStocked(drug.datestocked);
+                    
+                                    const row = `
+                                        <tr>
+                                            <td>${index + 1}</td>
+                                            <td>${drug.medicine}</td>
+                                            <td>${Math.floor(Math.random() * 500) + 100} units</td> <!-- Random quantity for demo -->
+                                            <td>${drug.datestocked}</td>
+                                            <td>${daysSinceStocked} days</td>
+                                        </tr>
+                                    `;
+                    
+                                    tbody.insertAdjacentHTML('beforeend', row);
+                                });
+                    
+                                // If pagination exists and there are more pages, fetch the next page
+                                if (data.meta.pagination.page < data.meta.pagination.pageCount) {
+                                    await fetchAndDisplayDrugs(page + 1); // Fetch the next page
+                                }
+                    
+                            } catch (error) {
+                                console.error('Error fetching drug data:', error);
+                            }
+                        }
+                    
+                        // Fetch and display the drug data on page load
+                        window.onload = () => fetchAndDisplayDrugs();
+                    </script>
+                    
                        
 
                      
