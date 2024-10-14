@@ -386,7 +386,7 @@
               <div class="mb-4 row">
                 <label for="sampleId-input" class="col-md-2 col-form-label">Sample ID</label>
                 <div class="col-md-10">
-                  <input class="form-control" type="text" id="sample-id-input" placeholder="Enter Sample" readonly/>
+                  <input class="form-control" type="text" id="sample-id-input" placeholder="Enter Sample"/>
                 </div>
               </div>
             
@@ -589,207 +589,169 @@
             
             <!-- Repeat the rows as necessary -->
             
-            <script>
-             document.addEventListener("DOMContentLoaded", function() {
-    // Get the row data from localStorage
-    const rowData = JSON.parse(localStorage.getItem('editRowData'));
-              console.log(rowData);
-    // Check if rowData exists before autofilling
-    if (rowData) {
-      // Convert the date format from 'DD/MM/YYYY HHMMhrs' to 'YYYY-MM-DDTHH:MM'
-      const formattedDate = convertToDateTimeLocalFormat(rowData.date);
-      
-      // Populate the fields with the data from localStorage
-      document.getElementById('html5-datetime-local-input').value = rowData.date; // Set the datetime-local input value
-      document.getElementById('patient-id-input').value = rowData.patientID;
-      document.getElementById('sample-id-input').value = rowData.patientID; 
-      document.getElementById('clinicaldata-input').value = rowData.clinicaldata;
-      document.getElementById('ward-input').value = rowData.ward;
-      document.getElementById('sex-input').value = rowData.sex;
-      document.getElementById('age-input').value = rowData.age;
-      document.getElementById('condition-input').value = rowData.condition;
-      //document.getElementById('identified-organism-input').value = rowData.sex;
-    }
-    
-    // Function to convert the date string (from storage) to 'YYYY-MM-DDTHH:MM' format
-    function convertToDateTimeLocalFormat(dateString) {
-        // Example input: '12/06/2023 1200hrs'
-        const [datePart, timePart] = dateString.split(' ');
-        const [day, month, year] = datePart.split('/');
-        
-        // Extract hours and minutes from the time part
-        const hours = timePart.substring(0, 2);
-        const minutes = timePart.substring(2, 4);
-        
-        // Return in the format 'YYYY-MM-DDTHH:MM'
-        return `${year}-${month}-${day}T${hours}:${minutes}`;
-    }
-});
-
-
-                 // Function to populate all "Suggestable Pharmacy Drug" dropdowns
-    async function populatePharmacyDrugs(page = 1, allRecords = []) {
-        try {
-            const limit = 100; // You can adjust this to fetch more records at once
-            const response = await fetch(`http://198.177.123.228:1337/api/pharmacyrecords?pagination[page]=${page}&pagination[pageSize]=${limit}`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer 83fdd6ab07e87e390e9086df8edf28f77509b2a3fcc316bf471eb2b908e4e1eabc4a0ab9fdde97a7aff1c4afabb1c1697665185a0a00977659c9227010fcc95d18b5df85e7675c0f5b15c5b890542132fd6fb2c86ef2d0fb4b28e605d8761cdde07c3d16ea3b4072071ebabb6f76f0e10bf9864f2b53b082d776421348826677',
-                    'Content-Type': 'application/json'
-                }
-            });
             
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const data = await response.json(); // Convert response to JSON
-            const records = data.data; // Access the 'data' array
-
-            // Combine fetched records with allRecords
-            allRecords = [...allRecords, ...records];
-
-            // Check if more pages exist and recursively fetch the next page
-            if (data.meta.pagination.page < data.meta.pagination.pageCount) {
-                await populatePharmacyDrugs(page + 1, allRecords); // Fetch next page
-            } else {
-                // Once all records are fetched, sort them alphabetically
-                allRecords.sort((a, b) => a.attributes.medicine.localeCompare(b.attributes.medicine));
-
-                // Populate the dropdown with the sorted data
-                const pharmacyDropdowns = document.querySelectorAll('.pharmacy-select');
-                
-                pharmacyDropdowns.forEach(selectElement => {
-                    // Clear existing options
-                    selectElement.innerHTML = ''; 
-
-                    // Add a placeholder option
-                    const placeholderOption = document.createElement('option');
-                    placeholderOption.textContent = 'Select a drug'; // Placeholder text
-                    placeholderOption.value = ''; // Empty value
-                    placeholderOption.disabled = true; // Disable the option
-                    placeholderOption.selected = true; // Make it selected by default
-                    selectElement.appendChild(placeholderOption); // Append placeholder
-
-                    // Add the actual drug options
-                    allRecords.forEach(record => {
-                        if (record.attributes && record.attributes.medicine) {
-                            const medicine = record.attributes.medicine; // Access the 'medicine' field
-
-                            // Create a new option element
-                            const option = document.createElement('option');
-                            option.value = medicine; // Set the value of the option
-                            option.textContent = medicine; // Set the display text
-                            selectElement.appendChild(option); // Append the option to the dropdown
-                        }
-                    });
-                });
-            }
-        } catch (error) {
-            console.error('Error fetching pharmacy drug data:', error); // Handle errors
-        }
-    }
-
-    // Call the function to populate the dropdown when the page loads
-    window.onload = () => populatePharmacyDrugs();
-            </script>
-            
-              <!-- Repeated rows end here -->
             
               <button type="submit" class="btn btn-primary">Send</button>
             
             </form>
+            <script>
+              document.addEventListener("DOMContentLoaded", function () {
+                  // Get the row data from localStorage
+                  const rowData = JSON.parse(localStorage.getItem('editRowData'));
+                  console.log(rowData);
+          
+                  // Check if rowData exists before autofilling
+                  if (rowData) {
+                      // Populate the fields with the data from localStorage directly (without any date conversions)
+                      document.getElementById('html5-datetime-local-input').value = rowData.date;  // No conversion, direct value
+                      document.getElementById('patient-id-input').value = rowData.patientID;
+                      document.getElementById('clinicaldata-input').value = rowData.clinicaldata;
+                      document.getElementById('ward-input').value = rowData.ward;
+                      document.getElementById('sex-input').value = rowData.sex;
+                      document.getElementById('age-input').value = rowData.age;
+                      document.getElementById('condition-input').value = rowData.condition;
+                  }
+              });
+          
+              async function populatePharmacyDrugs(page = 1, allRecords = []) {
+                  try {
+                      const limit = 100;
+                      const response = await fetch(`http://198.177.123.228:1337/api/pharmacyrecords?pagination[page]=${page}&pagination[pageSize]=${limit}`, {
+                          method: 'GET',
+                          headers: {
+                              'Authorization': 'Bearer 83fdd6ab07e87e390e9086df8edf28f77509b2a3fcc316bf471eb2b908e4e1eabc4a0ab9fdde97a7aff1c4afabb1c1697665185a0a00977659c9227010fcc95d18b5df85e7675c0f5b15c5b890542132fd6fb2c86ef2d0fb4b28e605d8761cdde07c3d16ea3b4072071ebabb6f76f0e10bf9864f2b53b082d776421348826677',
+                              'Content-Type': 'application/json'
+                          }
+                      });
+          
+                      if (!response.ok) {
+                          throw new Error(`HTTP error! status: ${response.status}`);
+                      }
+          
+                      const data = await response.json();
+                      const records = data.data;
+          
+                      allRecords = [...allRecords, ...records];
+          
+                      if (data.meta.pagination.page < data.meta.pagination.pageCount) {
+                          await populatePharmacyDrugs(page + 1, allRecords);
+                      } else {
+                          allRecords.sort((a, b) => a.attributes.medicine.localeCompare(b.attributes.medicine));
+          
+                          const pharmacyDropdowns = document.querySelectorAll('.pharmacy-select');
+          
+                          pharmacyDropdowns.forEach(selectElement => {
+                              selectElement.innerHTML = '';
+                              const placeholderOption = document.createElement('option');
+                              placeholderOption.textContent = 'Select a drug';
+                              placeholderOption.value = '';
+                              placeholderOption.disabled = true;
+                              placeholderOption.selected = true;
+                              selectElement.appendChild(placeholderOption);
+          
+                              allRecords.forEach(record => {
+                                  if (record.attributes && record.attributes.medicine) {
+                                      const medicine = record.attributes.medicine;
+                                      const option = document.createElement('option');
+                                      option.value = medicine;
+                                      option.textContent = medicine;
+                                      selectElement.appendChild(option);
+                                  }
+                              });
+                          });
+                      }
+                  } catch (error) {
+                      console.error('Error fetching pharmacy drug data:', error);
+                  }
+              }
+          
+              window.onload = () => populatePharmacyDrugs();
+          
+              document.addEventListener("DOMContentLoaded", function () {
+                  document.querySelector("form").addEventListener("submit", async function (event) {
+                      event.preventDefault();
+          
+                      const formData = {
+                          data: {
+                              datetime: document.getElementById('html5-datetime-local-input').value,  // Direct value, no conversion
+                              patientid: document.getElementById('patient-id-input').value,
+                              sex: document.getElementById('sex-input').value,
+                              age: document.getElementById('age-input').value,
+                              ward: document.getElementById('ward-input').value,
+                              condition: document.getElementById('condition-input').value,
+                              sampleid: document.getElementById('sample-id-input').value,
+                              sampleorigin: document.getElementById('sample-select').value,
+                              organismid: document.getElementById('identified-organism-input').value,
+                              processingdata: [
+                                  {
+                                      drugused: document.getElementById('drug-select-1').value,
+                                      sucprofile: document.getElementById('susceptibility-select-1').value,
+                                      pharmacySuggestion: document.getElementById('pharmacy-select-1').value,
+                                      comment: document.getElementById('comment-input-1').value,
+                                  },
+                                  {
+                                      drugused: document.getElementById('drug-select-2').value,
+                                      sucprofile: document.getElementById('susceptibility-select-2').value,
+                                      pharmacySuggestion: document.getElementById('pharmacy-select-2').value,
+                                      comment: document.getElementById('comment-input-2').value,
+                                  },
+                                  {
+                                      drugused: document.getElementById('drug-select-3').value,
+                                      sucprofile: document.getElementById('susceptibility-select-3').value,
+                                      pharmacySuggestion: document.getElementById('pharmacy-select-3').value,
+                                      comment: document.getElementById('comment-input-3').value,
+                                  },
+                                  {
+                                      drugused: document.getElementById('drug-select-4').value,
+                                      sucprofile: document.getElementById('susceptibility-select-4').value,
+                                      pharmacySuggestion: document.getElementById('pharmacy-select-4').value,
+                                      comment: document.getElementById('comment-input-4').value,
+                                  },
+                                  {
+                                      drugused: document.getElementById('drug-select-5').value,
+                                      sucprofile: document.getElementById('susceptibility-select-5').value,
+                                      pharmacySuggestion: document.getElementById('pharmacy-select-5').value,
+                                      comment: document.getElementById('comment-input-5').value,
+                                  },
+                                  // Add more drugs as necessary...
+                              ]
+                          }
+                      };
+          
+                      try {
+                          const response = await fetch('http://198.177.123.228:1337/api/clinicprocessings', {
+                              method: 'POST',
+                              headers: {
+                                  'Authorization': 'Bearer 83fdd6ab07e87e390e9086df8edf28f77509b2a3fcc316bf471eb2b908e4e1eabc4a0ab9fdde97a7aff1c4afabb1c1697665185a0a00977659c9227010fcc95d18b5df85e7675c0f5b15c5b890542132fd6fb2c86ef2d0fb4b28e605d8761cdde07c3d16ea3b4072071ebabb6f76f0e10bf9864f2b53b082d776421348826677',
+                                  'Content-Type': 'application/json'
+                              },
+                              body: JSON.stringify(formData)
+                          });
+          
+                          if (!response.ok) {
+                              throw new Error(`HTTP error! status: ${response.status}`);
+                          }
+          
+                          const data = await response.json();
+                          console.log("Form submitted successfully:", data);
+                          alert("Form successfully submitted!");
+                          document.querySelector("form").reset();
+                      } catch (error) {
+                          console.error('Error submitting the form:', error);
+                          alert("Form submission failed. Please try again.");
+                      }
+                  });
+              });
+          </script>
+          
+            
+               <!-- Rep
             
              </div>
 
            </div>
          </div>
-         <script>
-          document.addEventListener("DOMContentLoaded", function () {
-              // Function to handle form submission
-              document.querySelector("form").addEventListener("submit", function (event) {
-                  event.preventDefault(); // Prevent the default form submission behavior
-          
-                  // Prepare the data to be sent in the POST request
-                  const formData = {
-                      data: {
-                          datetime: document.getElementById('html5-datetime-local-input').value,
-                          patientid: document.getElementById('patient-id-input').value,
-                          sex: document.getElementById('sex-input').value,
-                          age: document.getElementById('age-input').value,
-                          ward: document.getElementById('ward-input').value,
-                          condition: document.getElementById('condition-input').value,
-                          sampleid: document.getElementById('sample-id-input').value,
-                          sampleorigin: document.getElementById('sample-select').value,
-                          organismid: document.getElementById('identified-organism-input').value,
-                          processingdata: [
-                              {
-                                  drugused: document.getElementById('drug-select-1').value,
-                                  sucprofile: document.getElementById('susceptibility-select-1').value,
-                                  pharmacySuggestion: document.getElementById('pharmacy-select-1').value,
-                                  comment: document.getElementById('comment-input-1').value,
-                              },
-                              {
-                                  drugused: document.getElementById('drug-select-2').value,
-                                  sucprofile: document.getElementById('susceptibility-select-2').value,
-                                  pharmacySuggestion: document.getElementById('pharmacy-select-2').value,
-                                  comment: document.getElementById('comment-input-2').value,
-                              },
-                              {
-                                  drugused: document.getElementById('drug-select-3').value,
-                                  sucprofile: document.getElementById('susceptibility-select-3').value,
-                                  pharmacySuggestion: document.getElementById('pharmacy-select-3').value,
-                                  comment: document.getElementById('comment-input-3').value,
-                              },
-                              {
-                                  drugused: document.getElementById('drug-select-4').value,
-                                  sucprofile: document.getElementById('susceptibility-select-4').value,
-                                  pharmacySuggestion: document.getElementById('pharmacy-select-4').value,
-                                  comment: document.getElementById('comment-input-4').value,
-                              },
-                              {
-                                  drugused: document.getElementById('drug-select-5').value,
-                                  sucprofile: document.getElementById('susceptibility-select-5').value,
-                                  pharmacySuggestion: document.getElementById('pharmacy-select-5').value,
-                                  comment: document.getElementById('comment-input-5').value,
-                              }
-                          ]
-                      }
-                  };
-          
-                  // Send a POST request to Strapi
-                  fetch('http://198.177.123.228:1337/api/clinicprocessings', {
-                      method: 'POST',
-                      headers: {
-                          'Authorization': 'Bearer 83fdd6ab07e87e390e9086df8edf28f77509b2a3fcc316bf471eb2b908e4e1eabc4a0ab9fdde97a7aff1c4afabb1c1697665185a0a00977659c9227010fcc95d18b5df85e7675c0f5b15c5b890542132fd6fb2c86ef2d0fb4b28e605d8761cdde07c3d16ea3b4072071ebabb6f76f0e10bf9864f2b53b082d776421348826677',
-                          'Content-Type': 'application/json'
-                      },
-                      body: JSON.stringify(formData)
-                  })
-                      .then(response => {
-                          if (!response.ok) {
-                              throw new Error(`HTTP error! status: ${response.status}`);
-                          }
-                          return response.json(); // Convert response to JSON
-                      })
-                      .then(data => {
-                          console.log("Form submitted successfully:", data);
-                          alert("Form successfully submitted!"); 
-          
-                          // Clear the form fields after successful submission
-                          document.querySelector("form").reset();
-          
-                          // Reset dynamically populated dropdowns (e.g., suggestable pharmacy drug)
-                          document.querySelectorAll('.pharmacy-select').forEach(select => {
-                              select.value = ""; // Reset select field to default option
-                          });
-                      })
-                      .catch(error => {
-                          console.error('Error submitting the form:', error);
-                      });
-              });
-          });
-          </script>
+        
           
 
                

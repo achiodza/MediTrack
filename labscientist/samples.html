@@ -339,7 +339,7 @@
                         <table class="table" id="dataTable">
                           <thead class="table-light">
                             <tr>
-                              <th>Sample ID</th>
+                              
                               <th>Patient ID</th>
                               <th>Age</th>
                               <th>Ward</th>
@@ -385,7 +385,7 @@
             
                                 const row = document.createElement('tr');
                                 row.innerHTML = `
-                                  <td>${attributes.sampleid}</td>
+                                  
                                   <td>${patientID}</td>
                                   <td>${age}</td>
                                   <td>${ward}</td>
@@ -409,7 +409,7 @@
                                 // Add event listener for the edit button
                                 row.querySelector('.edit-btn').addEventListener('click', function() {
                                   const rowData = {
-                                    sampleid: attributes.sampleid,
+                                    
                                     patientID,
                                     date,
                                     age,
@@ -437,7 +437,7 @@
                         });
                         </script>
             
-                        <hr class="my-6" />
+                        <hr class="my-7" />
                         <div class="card">
                           <h5 class="card-header">Samples Processed Records</h5>
                           <div class="table-responsive text-nowrap">
@@ -449,7 +449,7 @@
                                   <th>Sample Origin</th>
                                   <th>Identified Organism</th>
                                   <th>Date</th>
-                                  <th>Actions</th>
+                                 
                                 </tr>
                               </thead>
                               <tbody id="table-body-processed" class="table-border-bottom-0">
@@ -487,17 +487,7 @@
                                         <td>${item.attributes.sampleorigin}</td>
                                         <td>${item.attributes.organismid}</td>
                                         <td>${item.attributes.datetime}</td>
-                                        <td>
-                                          <div class="dropdown">
-                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                              <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                              <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Process</a>
-                                              <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
-                                            </div>
-                                          </div>
-                                        </td>
+                                       
                                       </tr>
                                     `;
                                     tableBody.insertAdjacentHTML('beforeend', row);
