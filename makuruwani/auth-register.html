@@ -119,7 +119,7 @@ document.getElementById('formAuthentication').addEventListener('submit', functio
     const password = document.getElementById('password').value;
     const userType = document.getElementById('userType').value;
 
-    axios.post('http://198.177.123.228:1337/api/auth/local/register', {
+    axios.post('https://pathoguide.co.zw/strapi/api/auth/local/register', {
         username: username,
         email: email,
         password: password,

@@ -115,7 +115,7 @@
               errorMessage.textContent = ''; // Clear previous error message
             
               // API request to login
-              fetch('http://198.177.123.228:1337/api/auth/local', {
+              fetch('https://pathoguide.co.zw/strapi/api/auth/local', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json'
@@ -131,7 +131,7 @@
             
                 if (data.jwt) {
                   // Successful login, get user profile to check user type
-                  fetch('http://198.177.123.228:1337/api/users/me', {
+                  fetch('https://pathoguide.co.zw/strapi/api/users/me', {
                     method: 'GET',
                     headers: {
                       'Authorization': `Bearer ${data.jwt}`
