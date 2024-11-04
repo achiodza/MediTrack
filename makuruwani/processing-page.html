@@ -14,7 +14,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>PathoGuide | Processing</title>
+    <title>Pathoguide | Processing</title>
 
     <meta name="description" content="" />
 
@@ -62,6 +62,7 @@
               </span>
               <span class="app-brand-text demo menu-text fw-bold ms-2" style="font-size: 1.5rem;">PathoGuide</span>
             </a>
+
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
               <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
             </a>
@@ -178,14 +179,14 @@
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Support">Support</div>
               </a>
-            </li>   
+            </li> 
             <li class="menu-item">
               <a href="../index.html" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-log-out"></i> <!-- Logout icon added -->
                 <div class="text-truncate" data-i18n="Basic">Logout</div>
               </a>
             </li>
-             
+               
           </ul>
         </aside>
         <!-- / Menu -->
@@ -385,7 +386,7 @@
               <div class="mb-4 row">
                 <label for="sampleId-input" class="col-md-2 col-form-label">Sample ID</label>
                 <div class="col-md-10">
-                  <input class="form-control" type="text" id="sample-id-input" placeholder="Enter Sample" />
+                  <input class="form-control" type="text" id="sample-id-input" placeholder="Enter Sample"/>
                 </div>
               </div>
             
@@ -393,6 +394,7 @@
                 <label for="sample-select" class="col-md-2 col-form-label">Sample Origin</label>
                 <div class="col-md-10">
                   <select class="form-control" id="sample-select">
+                    <option value="">Select Sample Type/Origin</option>
                     <option value="Blood">Bb</option>
                     <option value="Urine">Bv</option>
                     <option value="Stool">Bg</option>
@@ -416,18 +418,17 @@
             
               <!-- Repeated rows start here -->
               <!-- Row 1 -->
-              <div class="mb-4 row">
-                <div class="col-md-3">
-                    <label for="drug-select-1">Drugs used</label>
-                    <select class="form-control" id="drug-select-1">
-                        <option value="">Select Drug</option>
-                        <option value="Drug1">Drug1</option>
-                        <option value="Drug2">Drug2</option>
-                        <!-- Add more drug options here -->
-                    </select>
-                </div>
+              <div class="mb-3 row">
+                <div class="col-md-4">
+                  <label for="pharmacy-select-1">Suggestable Pharmacy Drug</label>
+                  <select class="form-control pharmacy-select" id="pharmacy-select-1">
+                      <option value="">Select Drug from Pharmacy</option>
+                      <!-- Options to be populated dynamically from pharmacy endpoint -->
+                  </select>
+              </div>
+               
             
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <label for="susceptibility-select-1">Susceptibility Profile</label>
                     <select class="form-control" id="susceptibility-select-1">
                         <option value="Susceptible">Susceptible</option>
@@ -436,32 +437,25 @@
                     </select>
                 </div>
             
-                <div class="col-md-3">
-                    <label for="pharmacy-select-1">Suggestable Pharmacy Drug</label>
-                    <select class="form-control pharmacy-select" id="pharmacy-select-1">
-                        <option value="">Select Drug from Pharmacy</option>
-                        <!-- Options to be populated dynamically from pharmacy endpoint -->
-                    </select>
-                </div>
+                
             
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <label for="comment-input-1">Comments</label>
                     <textarea class="form-control" id="comment-input-1" placeholder="Enter any additional comments"></textarea>
                 </div>
             </div>
             
-            <div class="mb-4 row">
-                <div class="col-md-3">
-                    <label for="drug-select-2">Drugs used</label>
-                    <select class="form-control" id="drug-select-2">
-                        <option value="">Select Drug</option>
-                        <option value="Drug1">Drug1</option>
-                        <option value="Drug2">Drug2</option>
-                        <!-- Add more drug options here -->
-                    </select>
-                </div>
+            <div class="mb-3 row">
+              <div class="col-md-4">
+                <label for="pharmacy-select-2">Suggestable Pharmacy Drug</label>
+                <select class="form-control pharmacy-select" id="pharmacy-select-2">
+                    <option value="">Select Drug from Pharmacy</option>
+                    <!-- Options to be populated dynamically from pharmacy endpoint -->
+                </select>
+            </div>
+                
             
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <label for="susceptibility-select-2">Susceptibility Profile</label>
                     <select class="form-control" id="susceptibility-select-2">
                         <option value="Susceptible">Susceptible</option>
@@ -470,31 +464,24 @@
                     </select>
                 </div>
             
-                <div class="col-md-3">
-                    <label for="pharmacy-select-2">Suggestable Pharmacy Drug</label>
-                    <select class="form-control pharmacy-select" id="pharmacy-select-2">
-                        <option value="">Select Drug from Pharmacy</option>
-                        <!-- Options to be populated dynamically from pharmacy endpoint -->
-                    </select>
-                </div>
+                
             
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <label for="comment-input-2">Comments</label>
                     <textarea class="form-control" id="comment-input-2" placeholder="Enter any additional comments"></textarea>
                 </div>
             </div>
-            <div class="mb-4 row">
-              <div class="col-md-3">
-                  <label for="drug-select-2">Drugs used</label>
-                  <select class="form-control" id="drug-select-2">
-                      <option value="">Select Drug</option>
-                      <option value="Drug1">Drug1</option>
-                      <option value="Drug2">Drug2</option>
-                      <!-- Add more drug options here -->
-                  </select>
-              </div>
+            <div class="mb-3 row">
+              <div class="col-md-4">
+                <label for="pharmacy-select-3">Suggestable Pharmacy Drug</label>
+                <select class="form-control pharmacy-select" id="pharmacy-select-3">
+                    <option value="">Select Drug from Pharmacy</option>
+                    <!-- Options to be populated dynamically from pharmacy endpoint -->
+                </select>
+            </div>
+              
           
-              <div class="col-md-3">
+              <div class="col-md-4">
                   <label for="susceptibility-select-3">Susceptibility Profile</label>
                   <select class="form-control" id="susceptibility-select-3">
                       <option value="Susceptible">Susceptible</option>
@@ -503,31 +490,24 @@
                   </select>
               </div>
           
-              <div class="col-md-3">
-                  <label for="pharmacy-select-3">Suggestable Pharmacy Drug</label>
-                  <select class="form-control pharmacy-select" id="pharmacy-select-3">
-                      <option value="">Select Drug from Pharmacy</option>
-                      <!-- Options to be populated dynamically from pharmacy endpoint -->
-                  </select>
-              </div>
+              
           
-              <div class="col-md-3">
+              <div class="col-md-4">
                   <label for="comment-input-3">Comments</label>
                   <textarea class="form-control" id="comment-input-3" placeholder="Enter any additional comments"></textarea>
               </div>
           </div>
-          <div class="mb-4 row">
-            <div class="col-md-3">
-                <label for="drug-select-4">Drugs used</label>
-                <select class="form-control" id="drug-select-4">
-                    <option value="">Select Drug</option>
-                    <option value="Drug1">Drug1</option>
-                    <option value="Drug2">Drug2</option>
-                    <!-- Add more drug options here -->
-                </select>
-            </div>
+          <div class="mb-3 row">
+            <div class="col-md-4">
+              <label for="pharmacy-select-4">Suggestable Pharmacy Drug</label>
+              <select class="form-control pharmacy-select" id="pharmacy-select-4">
+                  <option value="">Select Drug from Pharmacy</option>
+                  <!-- Options to be populated dynamically from pharmacy endpoint -->
+              </select>
+          </div>
+            
         
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <label for="susceptibility-select-4">Susceptibility Profile</label>
                 <select class="form-control" id="susceptibility-select-4">
                     <option value="Susceptible">Susceptible</option>
@@ -536,31 +516,24 @@
                 </select>
             </div>
         
-            <div class="col-md-3">
-                <label for="pharmacy-select-4">Suggestable Pharmacy Drug</label>
-                <select class="form-control pharmacy-select" id="pharmacy-select-4">
-                    <option value="">Select Drug from Pharmacy</option>
-                    <!-- Options to be populated dynamically from pharmacy endpoint -->
-                </select>
-            </div>
+            
         
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <label for="comment-input-4">Comments</label>
                 <textarea class="form-control" id="comment-input-4" placeholder="Enter any additional comments"></textarea>
             </div>
         </div>
-        <div class="mb-4 row">
-          <div class="col-md-3">
-              <label for="drug-select-5">Drugs used</label>
-              <select class="form-control" id="drug-select-5">
-                  <option value="">Select Drug</option>
-                  <option value="Drug1">Drug1</option>
-                  <option value="Drug2">Drug2</option>
-                  <!-- Add more drug options here -->
-              </select>
-          </div>
+        <div class="mb-3 row">
+          <div class="col-md-4">
+            <label for="pharmacy-select-5">Suggestable Pharmacy Drug</label>
+            <select class="form-control pharmacy-select" id="pharmacy-select-5">
+                <option value="">Select Drug from Pharmacy</option>
+                <!-- Options to be populated dynamically from pharmacy endpoint -->
+            </select>
+        </div>
+          
       
-          <div class="col-md-3">
+          <div class="col-md-4">
               <label for="susceptibility-select-5">Susceptibility Profile</label>
               <select class="form-control" id="susceptibility-select-5">
                   <option value="Susceptible">Susceptible</option>
@@ -569,25 +542,19 @@
               </select>
           </div>
       
-          <div class="col-md-3">
-              <label for="pharmacy-select-5">Suggestable Pharmacy Drug</label>
-              <select class="form-control pharmacy-select" id="pharmacy-select-5">
-                  <option value="">Select Drug from Pharmacy</option>
-                  <!-- Options to be populated dynamically from pharmacy endpoint -->
-              </select>
-          </div>
+          
       
-          <div class="col-md-3">
+          <div class="col-md-4">
               <label for="comment-input-5">Comments</label>
               <textarea class="form-control" id="comment-input-5" placeholder="Enter any additional comments"></textarea>
           </div>
       </div>
             
+            <!-- Continue similarly for other rows -->
+            
             <!-- Repeat the rows as necessary -->
             
-           
             
-              <!-- Repeated rows end here -->
             
               <button type="submit" class="btn btn-primary">Send</button>
             
@@ -682,33 +649,33 @@
                               organismid: document.getElementById('identified-organism-input').value,
                               processingdata: [
                                   {
-                                      drugused: document.getElementById('drug-select-1').value,
-                                      sucprofile: document.getElementById('susceptibility-select-1').value,
                                       pharmacySuggestion: document.getElementById('pharmacy-select-1').value,
+                                      sucprofile: document.getElementById('susceptibility-select-1').value,
+                                      
                                       comment: document.getElementById('comment-input-1').value,
                                   },
                                   {
-                                      drugused: document.getElementById('drug-select-2').value,
-                                      sucprofile: document.getElementById('susceptibility-select-2').value,
                                       pharmacySuggestion: document.getElementById('pharmacy-select-2').value,
+                                      sucprofile: document.getElementById('susceptibility-select-2').value,
+                                      
                                       comment: document.getElementById('comment-input-2').value,
                                   },
                                   {
-                                      drugused: document.getElementById('drug-select-3').value,
-                                      sucprofile: document.getElementById('susceptibility-select-3').value,
                                       pharmacySuggestion: document.getElementById('pharmacy-select-3').value,
+                                      sucprofile: document.getElementById('susceptibility-select-3').value,
+                                      
                                       comment: document.getElementById('comment-input-3').value,
                                   },
                                   {
-                                      drugused: document.getElementById('drug-select-4').value,
-                                      sucprofile: document.getElementById('susceptibility-select-4').value,
                                       pharmacySuggestion: document.getElementById('pharmacy-select-4').value,
+                                      sucprofile: document.getElementById('susceptibility-select-4').value,
+                                      
                                       comment: document.getElementById('comment-input-4').value,
                                   },
                                   {
-                                      drugused: document.getElementById('drug-select-5').value,
-                                      sucprofile: document.getElementById('susceptibility-select-5').value,
                                       pharmacySuggestion: document.getElementById('pharmacy-select-5').value,
+                                      sucprofile: document.getElementById('susceptibility-select-5').value,
+                                     
                                       comment: document.getElementById('comment-input-5').value,
                                   },
                                   // Add more drugs as necessary...
@@ -741,7 +708,9 @@
                   });
               });
           </script>
-              
+          
+            
+               <!-- Rep
             
              </div>
 
