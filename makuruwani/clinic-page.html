@@ -406,7 +406,7 @@
             <script>
               document.getElementById('clinicForm').addEventListener('submit', async function(event) {
                 event.preventDefault();
-            
+                
                 // Gather form data
                 const datetime = document.getElementById('datetime-input').value;
                 const patientId = document.getElementById('patient-id-input').value;
@@ -414,7 +414,8 @@
                 const sex = document.getElementById('sex-input').value;
                 const ward = document.getElementById('ward-input').value;
                 const condition = document.getElementById('condition-input').value;
-            
+                const clinicaldata = document.getElementById('clinical-data').value;
+                
                 // Create the data object
                 const data = {
                   data: {
@@ -423,10 +424,11 @@
                     age: parseInt(age, 10),
                     sex: sex,
                     ward: ward,
-                    condition: condition
+                    condition: condition,
+                    clinicaldata: clinicaldata
                   }
                 };
-            
+                
                 // Send data to the API
                 try {
                   const response = await fetch('https://pathoguide.co.zw/strapi/api/clinicreceives', {
@@ -437,11 +439,14 @@
                     },
                     body: JSON.stringify(data)
                   });
-            
+                  
                   if (response.ok) {
                     alert('Data submitted successfully');
+                    // Redirect to samples.html after successful submission
+                    window.location.href = 'samples.html';
                   } else {
-                    alert('Failed to submit data');
+                    const errorData = await response.json();
+                    alert(`Failed to submit data: ${errorData.message || 'Unknown error'}`);
                   }
                 } catch (error) {
                   console.error('Error:', error);
@@ -449,6 +454,7 @@
                 }
               });
             </script>
+            
             
              </div>
 
