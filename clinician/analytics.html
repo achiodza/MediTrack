@@ -391,7 +391,7 @@
                         
                             try {
                               // Fetch data from Strapi API with dynamic filters and authorization token
-                              const response = await fetch(`http://pathoguide.co.zw/strapi/api/clinicprocessings?populate=*&${queryParams}`, {
+                              const response = await fetch(`http://pathoguide.co.zw:1338/api/clinicprocessings?populate=*&${queryParams}`, {
                                 headers: {
                                   'Authorization': 'Bearer 83fdd6ab07e87e390e9086df8edf28f77509b2a3fcc316bf471eb2b908e4e1eabc4a0ab9fdde97a7aff1c4afabb1c1697665185a0a00977659c9227010fcc95d18b5df85e7675c0f5b15c5b890542132fd6fb2c86ef2d0fb4b28e605d8761cdde07c3d16ea3b4072071ebabb6f76f0e10bf9864f2b53b082d776421348826677'
                                 }
